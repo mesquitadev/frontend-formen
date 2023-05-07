@@ -1,9 +1,5 @@
 import Head from 'next/head';
 import {
-  Accordion,
-  AccordionButton,
-  AccordionItem,
-  AccordionPanel,
   Box,
   Button,
   ButtonGroup,
@@ -29,25 +25,13 @@ import {
   useColorModeValue as mode,
   useDisclosure,
 } from '@chakra-ui/react';
-import React, { useState } from 'react';
+import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import {
-  AiOutlineMinusCircle,
-  AiOutlinePlusCircle,
-  AiOutlineShoppingCart,
-} from 'react-icons/ai';
+import { AiOutlineShoppingCart, AiOutlineInstagram } from 'react-icons/ai';
 import { SiHive, SiMarketo, SiMicrosoft } from 'react-icons/si';
-import { FaWhatsapp } from 'react-icons/fa';
-import { Copyright, SocialMediaLinks, Testimonial } from '@/Components';
 import { FiMenu, FiUser } from 'react-icons/fi';
-import Slider from 'react-slick';
-import {
-  BiLeftArrowAlt,
-  BiRightArrowAlt,
-  BiChevronRight,
-  BiChevronLeft,
-} from 'react-icons/bi';
+import { BiChevronRight } from 'react-icons/bi';
 import { PricingCard } from '@/Components/PricingCard';
 import { PerolaIcon } from '@/Components/icons';
 
@@ -171,7 +155,7 @@ export default function Home() {
               objectFit: 'cover',
             }}
           >
-            <source src="/familia-2.mp4" type="video/mp4" />
+            <source src="/familia-2.webm" type="video/webm" />
           </video>
 
           <Container
@@ -334,10 +318,6 @@ export default function Home() {
               <Img
                 htmlWidth="207px"
                 htmlHeight="233px"
-                // height={{
-                //   md: '320px',
-                // }}
-                // objectFit="cover"
                 src="/world.png"
                 alt="Imagem dos advogados especialistas em revisão de veículos apreendidos do escritório Carvalho & Brum."
               />
@@ -676,68 +656,100 @@ export default function Home() {
         </Flex>
       </Flex>
 
-      <Box
-        as="footer"
-        role="contentinfo"
-        mx="auto"
-        px={{ base: '4', md: '8' }}
-        py={8}
-        bgColor="#13213A"
-      >
-        <Container maxW="container.lg">
-          <SimpleGrid
-            columns={{
-              base: 1,
-              md: 3,
-            }}
-            spacing="4"
+      <Flex bgColor="primary.darkest" color="white">
+        <Container maxW="container.lg" as="footer" role="contentinfo">
+          <Stack
+            spacing="8"
+            direction={{ base: 'column', md: 'row' }}
+            justify="space-between"
+            py={{ base: '12', md: '16' }}
           >
-            <Stack align="center">
+            <Stack spacing={{ base: '6', md: '8' }} align="start">
               <Image
-                alt="Logomarca do escritório Carvalho e Brum"
+                alt="Logomarca da Pax União"
                 src="/logo-pax.png"
-                width={226}
-                height={69}
+                width={176}
+                height={176}
               />
-              <Stack direction="row">
-                <ChakraLink as={Link} href="#">
-                  <Text color="white" fontSize="15px">
-                    Termos de Privacidade
-                  </Text>
-                </ChakraLink>
-                <ChakraLink as={Link} href="#">
-                  <Text color="white" fontSize="15px">
-                    Termos de Uso
-                  </Text>
-                </ChakraLink>
+            </Stack>
+            <Stack
+              direction={{ base: 'column-reverse', md: 'column', lg: 'row' }}
+              spacing={{ base: '12', md: '8' }}
+              color="white"
+            >
+              <Stack direction="row" spacing="8">
+                <Stack spacing="4" minW="36" flex="1">
+                  <Stack spacing="3" shouldWrapChildren>
+                    <Button variant="link">Início</Button>
+                    <Button variant="link">Sobre Nós</Button>
+                    <Button variant="link">Complexo</Button>
+                  </Stack>
+                </Stack>
+                <Stack spacing="4" minW="36" flex="1">
+                  <Stack spacing="3" shouldWrapChildren>
+                    <Button variant="link">Blog</Button>
+                    <Button variant="link">Serviços</Button>
+                    <Button variant="link">Planos</Button>
+                  </Stack>
+                </Stack>
+                <Stack spacing="4" minW="36" flex="1">
+                  <Stack spacing="3" shouldWrapChildren>
+                    <Button variant="link">Contato</Button>
+                    <Button variant="link">Acessoria de Imprensa</Button>
+                  </Stack>
+                </Stack>
+                <ButtonGroup variant="ghost">
+                  <IconButton
+                    as="a"
+                    href="#"
+                    aria-label="LinkedIn"
+                    icon={<AiOutlineInstagram fontSize="1.25rem" />}
+                  />
+                  <IconButton
+                    as="a"
+                    href="#"
+                    aria-label="GitHub"
+                    icon={<AiOutlineInstagram fontSize="1.25rem" />}
+                  />
+                  <IconButton
+                    as="a"
+                    href="#"
+                    aria-label="Twitter"
+                    icon={<AiOutlineInstagram fontSize="1.25rem" />}
+                  />
+                </ButtonGroup>
               </Stack>
             </Stack>
-
-            <Stack spacing="4" align="center" justify="space-between">
-              <Copyright
-                alignSelf={{ base: 'center', sm: 'start' }}
-                textAlign="center"
+          </Stack>
+          <Divider />
+          <Stack
+            pt="8"
+            pb="12"
+            justify="space-between"
+            direction={{ base: 'column-reverse', md: 'row' }}
+            align="center"
+          >
+            <Link href="mailto:alysson.sousa@aruhub.com">
+              <Image
+                alt="Logomarca da agencia ARU HUB, quem desenvolveu o design e Layout do site"
+                src="/arusig.svg"
+                width={226}
+                height={32}
               />
-              <Link href="mailto:alysson.sousa@aruhub.com">
-                <Image
-                  alt="Logomarca da agencia ARU HUB, quem desenvolveu o design e Layout do site"
-                  src="/arusig.svg"
-                  width={226}
-                  height={32}
-                />
-              </Link>
-            </Stack>
-            <Stack spacing="4" align="center">
-              <SocialMediaLinks />
-              <ChakraLink as={Link} href="mailto:contato@carvalhoebrum.adv.br">
-                <Text color="white" fontSize="15px">
-                  contato@carvalhoebrum.adv.br
-                </Text>
-              </ChakraLink>
-            </Stack>
-          </SimpleGrid>
+            </Link>
+            <Text fontSize="sm" color="subtle">
+              &copy; {new Date().getFullYear()} Grupo Pax União. Todos os
+              Direitos Reservados.
+            </Text>
+            <Text fontSize="sm" color="subtle">
+              Termos de Uso
+            </Text>
+            <Text fontSize="sm" color="subtle">
+              Politica de Privacidade
+            </Text>
+          </Stack>
         </Container>
-      </Box>
+      </Flex>
     </>
   );
 }
