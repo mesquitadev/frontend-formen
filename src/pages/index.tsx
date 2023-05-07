@@ -58,7 +58,7 @@ export default function Home() {
           content="ações de veículos apreendidos, revisional, advogados especializados, consultoria jurídica"
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        {/*<link rel="icon" href="/favicon.ico" />*/}
+        <link rel="icon" href="/favicon.ico" />
       </Head>
       <Flex direction="column">
         <Box position="relative">
