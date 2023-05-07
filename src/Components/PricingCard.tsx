@@ -66,7 +66,7 @@ export const PricingCard = (props: PricingCardProps) => {
         my="8"
         width="100%"
       >
-        <Text fontSize='3xl' fontWeight="inherit"  lineHeight="0.9em">
+        <Text fontSize="3xl" fontWeight="inherit" lineHeight="0.9em">
           {price}
         </Text>
         <Text fontWeight="inherit" fontSize="md">

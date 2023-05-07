@@ -1,7 +1,7 @@
-import { Flex, FlexProps, Text, useColorModeValue } from '@chakra-ui/react'
+import { Flex, FlexProps, Text, useColorModeValue } from '@chakra-ui/react';
 
 export const CardBadge = (props: FlexProps) => {
-  const { children, ...flexProps } = props
+  const { children, ...flexProps } = props;
   return (
     <Flex
       bg={useColorModeValue('blue.500', 'blue.200')}
@@ -25,5 +25,5 @@ export const CardBadge = (props: FlexProps) => {
         {children}
       </Text>
     </Flex>
-  )
-}
+  );
+};
