@@ -1,8 +1,11 @@
 import Head from 'next/head';
 import {
+  Alert,
+  AlertTitle,
   Box,
   Button,
   ButtonGroup,
+  chakra,
   Container,
   Divider,
   Drawer,
@@ -24,16 +27,108 @@ import {
   useBreakpointValue,
   useColorModeValue as mode,
   useDisclosure,
+  Wrap,
+  WrapItem,
 } from '@chakra-ui/react';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { AiOutlineShoppingCart, AiOutlineInstagram } from 'react-icons/ai';
-import { SiHive, SiMarketo, SiMicrosoft } from 'react-icons/si';
+import { AiOutlineShoppingCart } from 'react-icons/ai';
 import { FiMenu, FiUser } from 'react-icons/fi';
 import { BiChevronRight } from 'react-icons/bi';
 import { PricingCard } from '@/Components/PricingCard';
-import { PerolaIcon } from '@/Components/icons';
+import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter } from 'react-icons/fa';
+
+export const links = [
+  {
+    title: 'Home',
+    links: [
+      {
+        label: 'Sobre Nós',
+        href: '#',
+      },
+      {
+        label: 'Complexo',
+        href: '#',
+      },
+    ],
+  },
+  {
+    title: 'Blog',
+    links: [
+      {
+        label: 'Serviços',
+        href: '#',
+      },
+      {
+        label: 'Planos',
+        href: '#',
+      },
+    ],
+  },
+  {
+    title: 'Contato',
+    links: [
+      {
+        label: 'Assessoria de Imprensa',
+        href: '#',
+      },
+    ],
+  },
+];
+export const socialLinks = [
+  {
+    label: 'Facebook',
+    icon: <FaFacebook />,
+    href: '#',
+  },
+  {
+    label: 'Instagram',
+    icon: <FaInstagram />,
+    href: '#',
+  },
+  {
+    label: 'LinkedIn',
+    icon: <FaLinkedin />,
+    href: '#',
+  },
+  {
+    label: 'LinkedIn',
+    icon: <FaTwitter />,
+    href: '#',
+  },
+];
+export const footerLinks = [
+  {
+    label: 'Termos de Serviço',
+    href: '#',
+  },
+  {
+    label: 'Política de Privacidade',
+    href: '#',
+  },
+  {
+    label: 'Politica de Cookies',
+    href: '#',
+  },
+];
+
+export const SocialButton = chakra('a', {
+  baseStyle: {
+    rounded: 'lg',
+    w: '8',
+    h: '8',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    bg: 'blackAlpha.400',
+    color: 'white',
+    transition: 'all 0.2s',
+    _hover: {
+      bg: 'blackAlpha.500',
+    },
+  },
+});
 
 export default function Home() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -45,10 +140,20 @@ export default function Home() {
 
   const isDesktop = useBreakpointValue({ base: false, lg: true });
 
+  const [isOpenAlert, setIsOpenAlert] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsOpenAlert(true);
+    }, 10000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <>
       <Head>
-        <title>Pax União - Cuidando de você</title>
+        <title>Pax União - Eternizar Memórias é um Ato de Amor!</title>
         <meta
           name="description"
           content="Precisa de ajuda com ações de veículos apreendidos e revisional? Nossos advogados especializados estão prontos para ajudá-lo a obter a melhor solução para o seu caso. Entre em contato conosco agora mesmo para uma consulta gratuita."
@@ -60,7 +165,32 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Flex direction="column">
+      <Flex direction="column" width="100%">
+        <Flex
+          position="fixed"
+          direction="column"
+          justifyContent="right"
+          paddingLeft={4}
+          mt={4}
+          paddingRight={4}
+          zIndex={999}
+        >
+          {isOpenAlert && (
+            <Alert
+              as={Link}
+              href="#AJUDA"
+              status="success"
+              variant="subtle"
+              borderRadius={10}
+            >
+              <Flex direction="column">
+                <AlertTitle mr={2}>
+                  Perdeu um ente querido? <br /> Clique Aqui!
+                </AlertTitle>
+              </Flex>
+            </Alert>
+          )}
+        </Flex>
         <Box position="relative">
           <Box position="relative" zIndex={1}>
             <Box as="nav" bg="bg-surface" boxShadow="sm">
@@ -172,7 +302,8 @@ export default function Home() {
                 justify="space-between"
                 backgroundColor="rgba(255, 255, 255, 0.3)"
                 backdropFilter="blur(8px)"
-                w="450px"
+                w="100%"
+                maxW={{ base: '450px', sm: '100%', md: '450px' }}
                 p={4}
                 borderRadius={10}
                 justifyContent="center"
@@ -299,10 +430,9 @@ export default function Home() {
                   maxW="md"
                   color={mode('gray.600', 'gray.400')}
                 >
-                  Estamos aqui para ajudar na rápida recuperação do seu veículo.
-                  Somos especialistas em defesa contra Busca e Apreensão, e
-                  revisão de contratos de financiamento de veículos. Não sofra
-                  mais com juros abusivos de bancos.
+                  Preservar memórias é um ato de amor e nosso compromisso é te
+                  ajudar a manter essas lembranças vivas para sempre. Conheça
+                  nossa história e nossos serviços.
                 </Text>
                 <Button
                   bgColor="primary.dark"
@@ -315,12 +445,6 @@ export default function Home() {
                   Saiba mais
                 </Button>
               </Box>
-              <Img
-                htmlWidth="207px"
-                htmlHeight="233px"
-                src="/world.png"
-                alt="Imagem dos advogados especialistas em revisão de veículos apreendidos do escritório Carvalho & Brum."
-              />
             </Flex>
           </Box>
           <Divider />
@@ -351,7 +475,7 @@ export default function Home() {
                       'Carência de 120 Dias',
                     ],
                   }}
-                  icon={PerolaIcon}
+                  icon={<Img src="/perola.png" width={20} height={20} />}
                   button={
                     <Button
                       bgColor="primary.dark"
@@ -381,7 +505,7 @@ export default function Home() {
                       '50% de desconto na aquisição da cremação individual',
                     ],
                   }}
-                  icon={SiHive}
+                  icon={<Img src="/esmeralda.png" width={20} height={20} />}
                   button={
                     <Button
                       bgColor="primary.dark"
@@ -409,7 +533,7 @@ export default function Home() {
                       '50% de desconto na aquisição da cremação individual',
                     ],
                   }}
-                  icon={SiMicrosoft}
+                  icon={<Img src="/rubi.png" width={20} height={20} />}
                   button={
                     <Button
                       bgColor="primary.dark"
@@ -429,7 +553,7 @@ export default function Home() {
                 <PricingCard
                   data={{
                     price: '$29',
-                    name: 'Marketing UI',
+                    name: 'Plano Safira',
                     features: [
                       'All application UI components',
                       'Lifetime access',
@@ -437,7 +561,7 @@ export default function Home() {
                       'Free Updates',
                     ],
                   }}
-                  icon={SiMarketo}
+                  icon={<Img src="/safira.png" width={20} height={20} />}
                   button={
                     <Button
                       bgColor="primary.dark"
@@ -461,6 +585,7 @@ export default function Home() {
         <Flex w="100%">
           <Container maxW="container.lg">
             <Box
+              id="AJUDA"
               as="section"
               background="linear-gradient(#027240, transparent), url('maos-2.jpg')"
               backgroundBlendMode="overlay"
@@ -656,100 +781,123 @@ export default function Home() {
         </Flex>
       </Flex>
 
-      <Flex bgColor="primary.darkest" color="white">
-        <Container maxW="container.lg" as="footer" role="contentinfo">
-          <Stack
-            spacing="8"
-            direction={{ base: 'column', md: 'row' }}
+      <Box as="footer" bg="primary.darkest" color="white" py="64px">
+        <Box maxW="7xl" px="8" mx="auto">
+          <Flex
+            direction={{
+              base: 'column',
+              lg: 'row',
+            }}
             justify="space-between"
-            py={{ base: '12', md: '16' }}
+            pb="8"
+            align="flex-start"
+            id="top"
           >
-            <Stack spacing={{ base: '6', md: '8' }} align="start">
-              <Image
-                alt="Logomarca da Pax União"
-                src="/logo-pax.png"
-                width={176}
-                height={176}
-              />
-            </Stack>
-            <Stack
-              direction={{ base: 'column-reverse', md: 'column', lg: 'row' }}
-              spacing={{ base: '12', md: '8' }}
-              color="white"
+            <Flex
+              paddingEnd="12"
+              mb={{
+                base: '10',
+                lg: 0,
+              }}
+              flexDir="column"
+              justifyContent={{ sm: 'center', md: 'left' }}
+              alignItems={{ sm: 'center', md: 'left' }}
             >
-              <Stack direction="row" spacing="8">
-                <Stack spacing="4" minW="36" flex="1">
-                  <Stack spacing="3" shouldWrapChildren>
-                    <Button variant="link">Início</Button>
-                    <Button variant="link">Sobre Nós</Button>
-                    <Button variant="link">Complexo</Button>
+              <Box>
+                <Image
+                  alt="Logomarca da Pax União"
+                  src="/logo-pax.png"
+                  width={176}
+                  height={176}
+                />
+              </Box>
+              <HStack spacing="4" mt="8" as="ul">
+                {socialLinks.map((link, idx) => (
+                  <SocialButton key={idx} href={link.href}>
+                    <Box srOnly>{link.label}</Box>
+                    {link.icon}
+                  </SocialButton>
+                ))}
+              </HStack>
+            </Flex>
+            <SimpleGrid
+              w="full"
+              maxW={{
+                base: 'unset',
+                lg: '2xl',
+              }}
+              columns={{
+                base: 2,
+                lg: 4,
+              }}
+              spacing={{
+                base: '8',
+                md: '4',
+              }}
+              fontSize="sm"
+            >
+              {links.map((group, idx) => (
+                <Box key={idx}>
+                  <Text fontWeight="bold" mb="4">
+                    {group.title}
+                  </Text>
+                  <Stack as="ul" listStyleType="none">
+                    {group.links.map((link, idx) => (
+                      <Box as="li" key={idx}>
+                        <Box
+                          as="a"
+                          href={link.href}
+                          _hover={{
+                            textDecor: 'underline',
+                          }}
+                        >
+                          {link.label}
+                        </Box>
+                      </Box>
+                    ))}
                   </Stack>
-                </Stack>
-                <Stack spacing="4" minW="36" flex="1">
-                  <Stack spacing="3" shouldWrapChildren>
-                    <Button variant="link">Blog</Button>
-                    <Button variant="link">Serviços</Button>
-                    <Button variant="link">Planos</Button>
-                  </Stack>
-                </Stack>
-                <Stack spacing="4" minW="36" flex="1">
-                  <Stack spacing="3" shouldWrapChildren>
-                    <Button variant="link">Contato</Button>
-                    <Button variant="link">Acessoria de Imprensa</Button>
-                  </Stack>
-                </Stack>
-                <ButtonGroup variant="ghost">
-                  <IconButton
-                    as="a"
-                    href="#"
-                    aria-label="LinkedIn"
-                    icon={<AiOutlineInstagram fontSize="1.25rem" />}
-                  />
-                  <IconButton
-                    as="a"
-                    href="#"
-                    aria-label="GitHub"
-                    icon={<AiOutlineInstagram fontSize="1.25rem" />}
-                  />
-                  <IconButton
-                    as="a"
-                    href="#"
-                    aria-label="Twitter"
-                    icon={<AiOutlineInstagram fontSize="1.25rem" />}
-                  />
-                </ButtonGroup>
-              </Stack>
-            </Stack>
-          </Stack>
-          <Divider />
-          <Stack
-            pt="8"
-            pb="12"
+                </Box>
+              ))}
+            </SimpleGrid>
+          </Flex>
+          <Divider my="10" borderColor="blue.300" />
+          <Flex
+            direction={{
+              base: 'column-reverse',
+              lg: 'row',
+            }}
+            align={{
+              base: 'flex-start',
+              lg: 'center',
+            }}
             justify="space-between"
-            direction={{ base: 'column-reverse', md: 'row' }}
-            align="center"
+            fontSize="sm"
           >
-            <Link href="mailto:alysson.sousa@aruhub.com">
-              <Image
-                alt="Logomarca da agencia ARU HUB, quem desenvolveu o design e Layout do site"
-                src="/arusig.svg"
-                width={226}
-                height={32}
-              />
-            </Link>
-            <Text fontSize="sm" color="subtle">
-              &copy; {new Date().getFullYear()} Grupo Pax União. Todos os
-              Direitos Reservados.
-            </Text>
-            <Text fontSize="sm" color="subtle">
-              Termos de Uso
-            </Text>
-            <Text fontSize="sm" color="subtle">
-              Politica de Privacidade
-            </Text>
-          </Stack>
-        </Container>
-      </Flex>
+            <Wrap
+              id="bottom"
+              spacing={{
+                base: '4',
+                lg: '8',
+              }}
+              mt={{
+                base: '4',
+                lg: '0',
+              }}
+            >
+              <WrapItem>
+                <Box>&copy; Grupo Pax União </Box>
+              </WrapItem>
+              {footerLinks.map((link, idx) => (
+                <WrapItem key={idx}>
+                  <Box as="a" href={link.href}>
+                    {link.label}
+                  </Box>
+                </WrapItem>
+              ))}
+            </Wrap>
+          </Flex>
+        </Box>
+      </Box>
     </>
   );
 }

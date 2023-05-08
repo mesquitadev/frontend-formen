@@ -1,7 +1,6 @@
 import {
   Flex,
   Heading,
-  Icon,
   List,
   ListIcon,
   ListItem,
@@ -10,7 +9,7 @@ import {
   VStack,
 } from '@chakra-ui/react';
 import { ElementType, ReactElement } from 'react';
-import { HiCheckCircle, HiCheck } from 'react-icons/hi';
+import { HiCheck } from 'react-icons/hi';
 import { Card, CardProps } from './Card';
 
 export interface PricingCardData {
@@ -21,7 +20,7 @@ export interface PricingCardData {
 
 interface PricingCardProps extends CardProps {
   data: PricingCardData;
-  icon: ElementType;
+  icon: ReactElement;
   button: ReactElement;
 }
 
@@ -34,7 +33,7 @@ export const PricingCard = (props: PricingCardProps) => {
     <Card bgColor="card.primary" rounded={{ sm: 'xl' }} {...rest}>
       <Flex justify="center" align="center" h="100%">
         <VStack spacing={4}>
-          <Icon aria-hidden as={icon} fontSize="4xl" color={accentColor} />
+          {icon}
           <Heading size="md" fontWeight="extrabold" color="white">
             {name}
           </Heading>
