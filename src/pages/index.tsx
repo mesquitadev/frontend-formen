@@ -44,8 +44,8 @@ export const links = [
     title: 'Home',
     links: [
       {
-        label: 'Sobre Nós',
-        href: '#',
+        label: 'Nossa História',
+        href: '/nossa-historia',
       },
       {
         label: 'Complexo',
@@ -110,6 +110,29 @@ export const footerLinks = [
   {
     label: 'Politica de Cookies',
     href: '#',
+  },
+];
+
+const menu = [
+  {
+    label: 'Início',
+    href: '/',
+  },
+  {
+    label: 'Nossa História',
+    href: '/nossa-historia',
+  },
+  {
+    label: 'Serviços',
+    href: '/servicos',
+  },
+  {
+    label: 'Contato',
+    href: '/conato',
+  },
+  {
+    label: 'Blog',
+    href: '/blog',
   },
 ];
 
@@ -194,7 +217,7 @@ export default function Home() {
         <Box position="relative">
           <Box position="relative" zIndex={1}>
             <Box as="nav" bg="bg-surface" boxShadow="sm">
-              <Container py={{ base: '2', lg: '3' }} maxW="container.lg">
+              <Container py={{ base: '4', lg: '4' }} maxW="container.lg">
                 <HStack spacing="10" justify="space-between">
                   <Box bgColor="white" p={4} borderRadius={10}>
                     <Image
@@ -207,29 +230,26 @@ export default function Home() {
                   {isDesktop ? (
                     <Flex justify="flex-end" flex="1">
                       <ButtonGroup variant="unstyled" spacing="2">
-                        {[
-                          'Home',
-                          'Sobre Nós',
-                          'Serviços',
-                          'Contato',
-                          'Blog',
-                        ].map(item => (
+                        {menu.map(item => (
                           <ChakraLink
-                            key={item}
+                            as={Link}
+                            href={item.href}
                             color="white"
                             fontWeight="bold"
                             _hover={{
                               color: 'primary.darkest',
                             }}
                           >
-                            {item}
+                            {item.label}
                           </ChakraLink>
                         ))}
                       </ButtonGroup>
                     </Flex>
                   ) : (
                     <IconButton
-                      variant="ghost"
+                      variant="button"
+                      onClick={onOpen}
+                      bgColor="white"
                       icon={<FiMenu fontSize="1.25rem" />}
                       aria-label="Open Menu"
                     />
@@ -242,32 +262,52 @@ export default function Home() {
               <DrawerOverlay />
               <DrawerContent>
                 <DrawerCloseButton />
-                <DrawerHeader>Create your account</DrawerHeader>
+                <DrawerHeader>Grupo Pax União</DrawerHeader>
 
                 <DrawerBody>
                   <Stack
-                    direction={{ base: 'column', sm: 'column', md: 'row' }}
+                    direction={{ base: 'column', sm: 'column', md: 'column' }}
                     display={{
                       base: isOpen ? 'block' : 'none',
                       sm: isOpen ? 'block' : 'none',
                       md: 'flex',
                     }}
                   >
-                    <IconButton
-                      variant="ghost"
-                      aria-label="Minha Conta"
-                      icon={<FiUser size={20} />}
-                    />
-                    <IconButton
-                      onClick={onOpenCart}
-                      variant="ghost"
-                      aria-label="Carrinho"
-                      icon={<AiOutlineShoppingCart size={20} />}
-                    />
+                    {menu.map(item => (
+                      <Flex key={item.label} width="100%">
+                        <ChakraLink
+                          as={Link}
+                          href={item.href}
+                          color="black"
+                          fontWeight="bold"
+                          _hover={{
+                            color: 'primary.darkest',
+                          }}
+                        >
+                          {item.label}
+                        </ChakraLink>
+                      </Flex>
+                    ))}
                   </Stack>
                 </DrawerBody>
-
-                <DrawerFooter />
+                <DrawerFooter>
+                  <Flex
+                    direction="column"
+                    width="100%"
+                    align="center"
+                    justify="center"
+                  >
+                    <Text>Grupo Pax União &copy; 2023</Text>
+                    <HStack spacing="4" mt="8" as="ul">
+                      {socialLinks.map((link, idx) => (
+                        <SocialButton key={idx} href={link.href}>
+                          <Box srOnly>{link.label}</Box>
+                          {link.icon}
+                        </SocialButton>
+                      ))}
+                    </HStack>
+                  </Flex>
+                </DrawerFooter>
               </DrawerContent>
             </Drawer>
           </Box>
@@ -276,12 +316,13 @@ export default function Home() {
             autoPlay
             loop
             muted
+            playsInline
             style={{
               position: 'absolute',
               top: 0,
               left: 0,
               width: '100%',
-              height: '100%',
+              height: '50vh',
               objectFit: 'cover',
             }}
           >
@@ -293,6 +334,7 @@ export default function Home() {
             position="relative"
             zIndex={1}
             minHeight="50vh"
+            maxHeight="50vh"
           >
             {/* Conteúdo da seção */}
 
@@ -351,7 +393,7 @@ export default function Home() {
               mx="auto"
               py={{
                 base: '12',
-                md: '20',
+                md: '12',
               }}
             >
               <SimpleGrid
@@ -781,7 +823,7 @@ export default function Home() {
         </Flex>
       </Flex>
 
-      <Box as="footer" bg="primary.darkest" color="white" py="64px">
+      <Box as="footer" color="black" py="64px">
         <Box maxW="7xl" px="8" mx="auto">
           <Flex
             direction={{
@@ -813,7 +855,11 @@ export default function Home() {
               </Box>
               <HStack spacing="4" mt="8" as="ul">
                 {socialLinks.map((link, idx) => (
-                  <SocialButton key={idx} href={link.href}>
+                  <SocialButton
+                    bgColor="primary.dark"
+                    key={idx}
+                    href={link.href}
+                  >
                     <Box srOnly>{link.label}</Box>
                     {link.icon}
                   </SocialButton>

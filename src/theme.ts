@@ -9,6 +9,7 @@ export const theme = extendTheme({
   colors: {
     card: {
       primary: '#0DAB76',
+      secondary: '#EFEFEF',
     },
     primary: {
       dark: '#027240',
