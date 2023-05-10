@@ -33,13 +33,15 @@ import {
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { AiOutlineShoppingCart } from 'react-icons/ai';
-import { FiMenu, FiUser } from 'react-icons/fi';
+import { FiMenu } from 'react-icons/fi';
 import { BiChevronRight } from 'react-icons/bi';
 import { PricingCard } from '@/Components/PricingCard';
 import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter } from 'react-icons/fa';
+import Hero from '@/Components/hero';
+import BlogCard from '@/Components/BlogCard';
+import { BsArrowRight, BsClockFill } from 'react-icons/bs';
 
-export const links = [
+const links = [
   {
     title: 'Home',
     links: [
@@ -76,7 +78,7 @@ export const links = [
     ],
   },
 ];
-export const socialLinks = [
+const socialLinks = [
   {
     label: 'Facebook',
     icon: <FaFacebook />,
@@ -113,29 +115,6 @@ export const footerLinks = [
   },
 ];
 
-const menu = [
-  {
-    label: 'Início',
-    href: '/',
-  },
-  {
-    label: 'Nossa História',
-    href: '/nossa-historia',
-  },
-  {
-    label: 'Serviços',
-    href: '/servicos',
-  },
-  {
-    label: 'Contato',
-    href: '/conato',
-  },
-  {
-    label: 'Blog',
-    href: '/blog',
-  },
-];
-
 export const SocialButton = chakra('a', {
   baseStyle: {
     rounded: 'lg',
@@ -154,25 +133,6 @@ export const SocialButton = chakra('a', {
 });
 
 export default function Home() {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const {
-    isOpen: isOpenCart,
-    onOpen: onOpenCart,
-    onClose: onCloseCart,
-  } = useDisclosure();
-
-  const isDesktop = useBreakpointValue({ base: false, lg: true });
-
-  const [isOpenAlert, setIsOpenAlert] = useState(false);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsOpenAlert(true);
-    }, 10000);
-
-    return () => clearTimeout(timer);
-  }, []);
-
   return (
     <>
       <Head>
@@ -189,203 +149,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Flex direction="column" width="100%">
-        <Flex
-          position="fixed"
-          direction="column"
-          justifyContent="right"
-          paddingLeft={4}
-          mt={4}
-          paddingRight={4}
-          zIndex={999}
-        >
-          {isOpenAlert && (
-            <Alert
-              as={Link}
-              href="#AJUDA"
-              status="success"
-              variant="subtle"
-              borderRadius={10}
-            >
-              <Flex direction="column">
-                <AlertTitle mr={2}>
-                  Perdeu um ente querido? <br /> Clique Aqui!
-                </AlertTitle>
-              </Flex>
-            </Alert>
-          )}
-        </Flex>
-        <Box position="relative">
-          <Box position="relative" zIndex={1}>
-            <Box as="nav" bg="bg-surface" boxShadow="sm">
-              <Container py={{ base: '4', lg: '4' }} maxW="container.lg">
-                <HStack spacing="10" justify="space-between">
-                  <Box bgColor="white" p={4} borderRadius={10}>
-                    <Image
-                      alt="Logomarca da pax união desde 1976"
-                      src="/logo-pax.png"
-                      width={128}
-                      height={126}
-                    />
-                  </Box>
-                  {isDesktop ? (
-                    <Flex justify="flex-end" flex="1">
-                      <ButtonGroup variant="unstyled" spacing="2">
-                        {menu.map(item => (
-                          <ChakraLink
-                            as={Link}
-                            href={item.href}
-                            color="white"
-                            fontWeight="bold"
-                            _hover={{
-                              color: 'primary.darkest',
-                            }}
-                          >
-                            {item.label}
-                          </ChakraLink>
-                        ))}
-                      </ButtonGroup>
-                    </Flex>
-                  ) : (
-                    <IconButton
-                      variant="button"
-                      onClick={onOpen}
-                      bgColor="white"
-                      icon={<FiMenu fontSize="1.25rem" />}
-                      aria-label="Open Menu"
-                    />
-                  )}
-                </HStack>
-              </Container>
-            </Box>
-
-            <Drawer isOpen={isOpen} placement="left" onClose={onClose}>
-              <DrawerOverlay />
-              <DrawerContent>
-                <DrawerCloseButton />
-                <DrawerHeader>Grupo Pax União</DrawerHeader>
-
-                <DrawerBody>
-                  <Stack
-                    direction={{ base: 'column', sm: 'column', md: 'column' }}
-                    display={{
-                      base: isOpen ? 'block' : 'none',
-                      sm: isOpen ? 'block' : 'none',
-                      md: 'flex',
-                    }}
-                  >
-                    {menu.map(item => (
-                      <Flex key={item.label} width="100%">
-                        <ChakraLink
-                          as={Link}
-                          href={item.href}
-                          color="black"
-                          fontWeight="bold"
-                          _hover={{
-                            color: 'primary.darkest',
-                          }}
-                        >
-                          {item.label}
-                        </ChakraLink>
-                      </Flex>
-                    ))}
-                  </Stack>
-                </DrawerBody>
-                <DrawerFooter>
-                  <Flex
-                    direction="column"
-                    width="100%"
-                    align="center"
-                    justify="center"
-                  >
-                    <Text>Grupo Pax União &copy; 2023</Text>
-                    <HStack spacing="4" mt="8" as="ul">
-                      {socialLinks.map((link, idx) => (
-                        <SocialButton key={idx} href={link.href}>
-                          <Box srOnly>{link.label}</Box>
-                          {link.icon}
-                        </SocialButton>
-                      ))}
-                    </HStack>
-                  </Flex>
-                </DrawerFooter>
-              </DrawerContent>
-            </Drawer>
-          </Box>
-          {/* Vídeo como plano de fundo */}
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            style={{
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              width: '100%',
-              height: '50vh',
-              objectFit: 'cover',
-            }}
-          >
-            <source src="/familia-2.webm" type="video/webm" />
-          </video>
-
-          <Container
-            maxW="container.lg"
-            position="relative"
-            zIndex={1}
-            minHeight="50vh"
-            maxHeight="50vh"
-          >
-            {/* Conteúdo da seção */}
-
-            <Box as="section">
-              <Flex
-                direction="row"
-                justify="space-between"
-                backgroundColor="rgba(255, 255, 255, 0.3)"
-                backdropFilter="blur(8px)"
-                w="100%"
-                maxW={{ base: '450px', sm: '100%', md: '450px' }}
-                p={4}
-                borderRadius={10}
-                justifyContent="center"
-                alignItems="center"
-              >
-                <Box>
-                  <Heading
-                    size="2xl"
-                    mb="4"
-                    color="white"
-                    fontWeight="extrabold"
-                  >
-                    Eternizar memórias <br /> é um ato de Amor
-                  </Heading>
-                  <Text
-                    fontSize={{
-                      md: 'lg',
-                    }}
-                    mb="6"
-                    maxW="md"
-                    color="white"
-                  >
-                    Clique em saiba mais e descubra por que somos a melhor
-                    solução para você!
-                  </Text>
-                  <Button
-                    bgColor="primary.dark"
-                    rightIcon={<BiChevronRight size={25} />}
-                    _hover={{
-                      bgColor: 'primary.darkest',
-                    }}
-                    color="white"
-                  >
-                    Saiba Mais
-                  </Button>
-                </Box>
-              </Flex>
-            </Box>
-          </Container>
-        </Box>
+        <Hero />
 
         <Container maxW="container.lg">
           <Box as="section">
@@ -683,95 +447,81 @@ export default function Home() {
           </Container>
         </Flex>
 
-        <Flex w="100%">
-          <Container maxW="container.lg">
-            <Box as="section" py="8">
-              <Flex mb={5} py={6} justifyContent="center" alignItems="center">
-                <Text fontWeight="extrabold" fontSize="3xl">
-                  Confira nosso Blog
-                </Text>
-              </Flex>
+        <Container maxW="container.lg">
+          <Box
+            as="section"
+            py={{
+              base: '10',
+              sm: '24',
+            }}
+          >
+            <Box
+              maxW={{
+                base: 'xl',
+                md: '7xl',
+              }}
+              mx="auto"
+              px={{
+                base: '6',
+                md: '8',
+              }}
+            >
+              <Heading size="xl" mb="8" fontWeight="extrabold">
+                Nosso Blog
+              </Heading>
               <SimpleGrid
-                columns={{ base: 1, md: 2, lg: 3 }}
-                spacing={{ base: '4', lg: '4' }}
-                maxW="7xl"
-                mx="auto"
-                justifyItems="center"
-                alignItems="center"
+                columns={{
+                  base: 1,
+                  md: 3,
+                }}
+                spacing="12"
+                mb="10"
               >
-                <Box>
-                  <Box borderRadius={10}>
-                    <Img src="/complexo-1.png" />
-                  </Box>
-                  <Box>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Beatae molestias neque quo similique ut vel voluptate?
-                    Deserunt fugit, magnam mollitia nobis perspiciatis ratione
-                    repellendus soluta tempora tempore, velit veritatis vero.
-                  </Box>
-                  <Button
-                    as={Link}
-                    size="sm"
-                    href="tel:5598991741075"
-                    bgColor="primary.dark"
-                    _hover={{
-                      bgColor: 'primary.darkest',
-                    }}
-                    color="white"
-                  >
-                    Leia Mais
-                  </Button>
-                </Box>
-                <Box>
-                  <Box borderRadius={10}>
-                    <Img src="/complexo-1.png" />
-                  </Box>
-                  <Box>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Dignissimos dolor fugit illum magnam molestias, natus saepe
-                    velit veritatis. Assumenda cumque deserunt dicta dolor
-                    molestias nemo quis quos repellat. Natus, ut.
-                  </Box>
-                  <Button
-                    as={Link}
-                    size="sm"
-                    href="tel:5598991741075"
-                    bgColor="primary.dark"
-                    _hover={{
-                      bgColor: 'primary.darkest',
-                    }}
-                    color="white"
-                  >
-                    Leia Mais
-                  </Button>
-                </Box>
-                <Box>
-                  <Box borderRadius={10}>
-                    <Img src="/complexo-1.png" />
-                  </Box>
-                  <Box>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Dignissimos dolor fugit illum magnam molestias, natus saepe
-                    velit veritatis. Assumenda cumque deserunt dicta dolor
-                    molestias nemo quis quos repellat. Natus, ut.
-                  </Box>
-                  <Button
-                    as={Link}
-                    size="sm"
-                    href="tel:5598991741075"
-                    bgColor="primary.dark"
-                    _hover={{
-                      bgColor: 'primary.darkest',
-                    }}
-                    color="white"
-                  >
-                    Leia Mais
-                  </Button>
-                </Box>
+                <BlogCard
+                  category="Fashion"
+                  media="https://images.unsplash.com/photo-1505944270255-72b8c68c6a70?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Mnx8ZmFjaWFsfGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+                  title="7 Steps to Get Professional Facial Results At Home"
+                  description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"
+                  href="#"
+                  author={{
+                    name: 'Segun Adebayo',
+                    href: '#',
+                  }}
+                />
+                <BlogCard
+                  category="Valentine"
+                  media="https://images.unsplash.com/photo-1516401266446-6432a8a07d41?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MzR8fHZhbGVudGluZXxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+                  title="The Best Excuses To Spend A Cozy Valentine’s Day In"
+                  description="As much as I love an over-the-top, romantic Valentine’s date, part of me is looking"
+                  href="#"
+                  author={{
+                    name: 'Segun Adebayo',
+                    href: '#',
+                  }}
+                />
+                <BlogCard
+                  category="My Style"
+                  media="https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Nnx8c2hvcHBpbmd8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+                  title="Top 5 Best-Sellers, Most-Loved & Favorite Buys of 2020"
+                  description="HAAAAPPY 2021! It’s the first Monday of the year and I have never been so ready for"
+                  href="#"
+                  author={{
+                    name: 'Segun Adebayo',
+                    href: '#',
+                  }}
+                />
               </SimpleGrid>
+              <ChakraLink
+                fontSize="xl"
+                fontWeight="bold"
+                color={mode('blue.600', 'blue.400')}
+              >
+                <span>Ver todos</span>
+                <Box as={BsArrowRight} display="inline-block" ms="2" />
+              </ChakraLink>
             </Box>
-          </Container>
-        </Flex>
+          </Box>
+        </Container>
 
         <Flex w="100%" pb={40}>
           <Container maxW="container.lg">

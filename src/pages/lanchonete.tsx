@@ -2,7 +2,6 @@ import Head from 'next/head';
 import {
   Alert,
   AlertTitle,
-  AspectRatio,
   Box,
   Button,
   ButtonGroup,
@@ -28,8 +27,6 @@ import {
   useBreakpointValue,
   useColorModeValue as mode,
   useDisclosure,
-  Wrap,
-  WrapItem,
 } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
@@ -129,41 +126,6 @@ export const SocialButton = chakra('a', {
   },
 });
 
-const testimonials = [
-  {
-    name: 'Brandon P.',
-    role: 'Chief Marketing Officer',
-    content:
-      'It really saves me time and effort. It is exactly what our business has been lacking. EEZY is the most valuable business resource we have EVER purchased. After using EEZY my business skyrocketed!',
-    avatar:
-      'https://images.unsplash.com/photo-1603415526960-f7e0328c63b1?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80',
-  },
-  {
-    name: 'Krysta B.',
-    role: 'Entrepreneur',
-    content:
-      "I didn't even need training. We've used EEZY for the last five years. I have gotten at least 50 times the value from EEZY. I made back the purchase price in just 48 hours!",
-    avatar:
-      'https://images.unsplash.com/photo-1598550874175-4d0ef436c909?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80',
-  },
-  {
-    name: 'Darcy L.',
-    role: 'Movie star',
-    content:
-      "Thank you for making it painless, pleasant and most of all, hassle free! I'm good to go. No matter where you go, EEZY is the coolest, most happening thing around! I love EEZY!",
-    avatar:
-      'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=334&q=80',
-  },
-  {
-    name: 'Daniel T.',
-    role: 'Musician',
-    content:
-      'I am so pleased with this product. EEZY is both attractive and highly adaptable. Without EEZY, we would have gone bankrupt by now. Thank you for creating this product!',
-    avatar:
-      'https://images.unsplash.com/photo-1606513542745-97629752a13b?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80',
-  },
-];
-
 const menu = [
   {
     label: 'Início',
@@ -172,6 +134,10 @@ const menu = [
   {
     label: 'Nossa História',
     href: '/nossa-historia',
+  },
+  {
+    label: 'Planos',
+    href: '/planos',
   },
   {
     label: 'Serviços',
@@ -329,8 +295,8 @@ export default function Home() {
                       <ButtonGroup variant="unstyled" spacing="2">
                         {menu.map(item => (
                           <ChakraLink
-                            as={Link}
                             key={item.href}
+                            as={Link}
                             href={item.href}
                             color="white"
                             fontWeight="bold"
@@ -439,7 +405,7 @@ export default function Home() {
         >
           <Flex py={10} justify="center" align="center">
             <Heading size="2xl" mb="4" color="black" fontWeight="extrabold">
-              Nossa História
+              Lanchonete
             </Heading>
           </Flex>
           <Stack spacing={4} align="center">
@@ -463,26 +429,47 @@ export default function Home() {
                 }}
                 mb="6"
               >
-                A Pax União foi fundada no dia 7 de agosto de 1976 pelo casal
-                goianiense Moacir Machado e Donizette Machado, em São Luís do
-                Maranhão. <br /> O negócio surgiu através da constatação de que
-                o povo maranhense não tinha um serviço de prevenção familiar, o
-                que gerava um impacto mais doloroso ainda ao se perder um ente
-                querido. Com essa visão e com o carinho e valorização mútuos
-                entre a empresa e o povo Ludovicense, o fundador Moacir Machado
-                liderou as atividades do Grupo Empresarial Pax união, que
-                tornou-se uma grande referência nacional em complexo de apoio
-                aos familiares, em serviços fúnebres como salas de velórios,
-                jazigos e até mesmo grupos de apoio para aqueles que mais
-                precisam de acolhimento após o luto. <br /> <br /> A Pax União é
-                um grande exemplo de empreendedorismo, serviço sério, humanizado
-                e de demonstração de amor às pessoas através de serviços
-                prestados. Durante os mais de 40 anos de serviços prestados,
-                continuamos em ascensão, porque o foco foi e continua sendo o de
-                entregar o melhor serviço e sentimento possíveis para que o povo
-                maranhense homenageie as pessoas amadas, as pessoas mais
-                importantes das suas vidas. Daí nasce o lema, “Preservar
-                memórias é um ato de amor”.
+                A perda de um ente querido é uma das experiências mais difíceis
+                pela qual podemos passar na vida. E, em meio a todo o processo
+                de luto, é importante contar com o apoio de profissionais que
+                entendam a importância desse momento e possam oferecer suporte
+                em todas as etapas. É nesse sentido que a pax união se destaca,
+                oferecendo um atendimento completo e cuidadoso aos seus
+                clientes. <br /> <br />
+                Muitos não sabem, mas a Pax União conta com uma lanchonete
+                própria, pensada para atender às necessidades dos nossos
+                clientes e parceiros. E não se trata de uma simples lanchonete,
+                mas sim de um espaço cuidadosamente planejado para oferecer
+                conforto e acolhimento em todos os momentos. <br /> <br />
+                Ao entrar na nossa lanchonete, o primeiro aspecto que chama a
+                atenção é a decoração cuidadosa e discreta, que busca criar um
+                ambiente acolhedor e tranquilo. As cores são suaves, os móveis
+                são confortáveis e há detalhes que remetem ao tema esperança.{' '}
+                <br /> <br />
+                Mas o ponto alto da lanchonete não é a decoração, e sim a
+                qualidade dos produtos oferecidos. Ao contrário do que se pode
+                imaginar, não se trata de uma lanchonete comum, com opções
+                apenas de fast food e refrigerantes. Pelo contrário, investimos
+                em produtos de alta qualidade e preparados com cuidado e
+                carinho. <br /> <br />
+                Os funcionários são treinados para oferecer um atendimento
+                atencioso e empático, entendendo que os clientes que passam por
+                ali estão em um momento singular e que precisam do máximo apoio.{' '}
+                <br /> <br />
+                Assim, além de se preocupar com a qualidade dos produtos
+                oferecidos, também buscamos oferecer um ambiente acolhedor e uma
+                experiência positiva aos seus clientes. <br /> <br />
+                É comum ver funcionários conversando com os clientes, oferecendo
+                um ombro amigo ou simplesmente escutando as histórias e memórias
+                que eles têm do ente querido. <br /> <br />
+                Assim, ao oferecer um ambiente acolhedor e produtos de
+                qualidade, a lanchonete da PAX união contribui para que as
+                memórias daqueles que se foram possam ser guardadas com carinho
+                e ternura. E, como diz o nosso lema, &ldquo;eternizar memórias é
+                um ato de amor&ldquo;. E é exatamente isso que buscamos oferecer
+                aos nossos clientes: não apenas um serviço de qualidade, mas
+                também um suporte emocional e uma forma de honrar a memória
+                daqueles que partiram. <br /> <br />
               </Text>
             </Box>
           </Stack>
@@ -543,10 +530,6 @@ export default function Home() {
               </Box>
               <Box>
                 <Flex
-                  _hover={{
-                    zIndex: 1,
-                    transform: 'scale(1.05)',
-                  }}
                   borderRadius={10}
                   bgColor="card.secondary"
                   w={195}
@@ -582,59 +565,6 @@ export default function Home() {
         </Box>
         <Divider />
       </Container>
-
-      <Flex w="100%" mb={20}>
-        <Container maxW="container.lg">
-          <Box as="section" py="8" mb={5}>
-            <Flex py={6} justifyContent="center" alignItems="center">
-              <Text fontWeight="extrabold" fontSize="3xl">
-                Depoimentos
-              </Text>
-            </Flex>
-          </Box>
-
-          <Flex
-            textAlign={'center'}
-            pt={5}
-            justifyContent={'center'}
-            direction={'column'}
-            width={'full'}
-            overflow={'hidden'}
-          >
-            <SimpleGrid
-              columns={{ base: 1, xl: 2 }}
-              spacing={'20'}
-              mt={16}
-              mb={16}
-              mx={'auto'}
-            >
-              {testimonials.map((cardInfo, index) => (
-                <TestimonialCard key={index} {...cardInfo} index={index} />
-              ))}
-            </SimpleGrid>
-          </Flex>
-        </Container>
-      </Flex>
-
-      <Flex w="100%" mb={20}>
-        <Container maxW="container.lg">
-          <Box as="section" py="8" mb={5}>
-            <Flex py={6} justifyContent="center" alignItems="center">
-              <Text fontWeight="extrabold" fontSize="3xl">
-                Conheça um pouco mais da nossa história
-              </Text>
-            </Flex>
-          </Box>
-
-          <AspectRatio maxH={500} ratio={1}>
-            <iframe
-              title="História do grupo Pax União"
-              src="https://www.youtube.com/embed/DIGE5XON1Gc"
-              allowFullScreen
-            />
-          </AspectRatio>
-        </Container>
-      </Flex>
 
       <Container maxW="container.lg">
         <Divider />

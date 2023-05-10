@@ -3,6 +3,7 @@ import {
   Alert,
   AlertTitle,
   AspectRatio,
+  Avatar,
   Box,
   Button,
   ButtonGroup,
@@ -30,11 +31,12 @@ import {
   useDisclosure,
   Wrap,
   WrapItem,
+  Icon,
 } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { FiMenu } from 'react-icons/fi';
+import { FiMenu, FiUser } from 'react-icons/fi';
 import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter } from 'react-icons/fa';
 import Footer from '@/Components/Footer';
 
@@ -329,8 +331,8 @@ export default function Home() {
                       <ButtonGroup variant="unstyled" spacing="2">
                         {menu.map(item => (
                           <ChakraLink
-                            as={Link}
                             key={item.href}
+                            as={Link}
                             href={item.href}
                             color="white"
                             fontWeight="bold"
@@ -439,7 +441,7 @@ export default function Home() {
         >
           <Flex py={10} justify="center" align="center">
             <Heading size="2xl" mb="4" color="black" fontWeight="extrabold">
-              Nossa História
+              Central de Velórios
             </Heading>
           </Flex>
           <Stack spacing={4} align="center">
@@ -463,26 +465,50 @@ export default function Home() {
                 }}
                 mb="6"
               >
-                A Pax União foi fundada no dia 7 de agosto de 1976 pelo casal
-                goianiense Moacir Machado e Donizette Machado, em São Luís do
-                Maranhão. <br /> O negócio surgiu através da constatação de que
-                o povo maranhense não tinha um serviço de prevenção familiar, o
-                que gerava um impacto mais doloroso ainda ao se perder um ente
-                querido. Com essa visão e com o carinho e valorização mútuos
-                entre a empresa e o povo Ludovicense, o fundador Moacir Machado
-                liderou as atividades do Grupo Empresarial Pax união, que
-                tornou-se uma grande referência nacional em complexo de apoio
-                aos familiares, em serviços fúnebres como salas de velórios,
-                jazigos e até mesmo grupos de apoio para aqueles que mais
-                precisam de acolhimento após o luto. <br /> <br /> A Pax União é
-                um grande exemplo de empreendedorismo, serviço sério, humanizado
-                e de demonstração de amor às pessoas através de serviços
-                prestados. Durante os mais de 40 anos de serviços prestados,
-                continuamos em ascensão, porque o foco foi e continua sendo o de
-                entregar o melhor serviço e sentimento possíveis para que o povo
-                maranhense homenageie as pessoas amadas, as pessoas mais
-                importantes das suas vidas. Daí nasce o lema, “Preservar
-                memórias é um ato de amor”.
+                Perder alguém que amamos é uma das situações mais difíceis que
+                podemos enfrentar na vida. Além do sofrimento emocional, muitas
+                vezes precisamos lidar com questões práticas, como a organização
+                do velório e do funeral. É nesse momento que a nossa Central de
+                Velórios entra, oferecendo acolhimento e respeito para você e
+                sua família. <br /> <br />
+                Na Central de Velórios da pax você encontra uma equipe preparada
+                para atender suas necessidades e oferecer o apoio necessário
+                nesse momento tão delicado. Nosso objetivo é fazer com que você
+                se sinta acolhido e confortado, para que possa lidar com o luto
+                da melhor forma possível. <br /> <br />
+                O que nos diferencia de outras empresas do ramo é justamente o
+                nosso foco no acolhimento e no respeito. Sabemos que cada pessoa
+                é única e tem suas próprias crenças e valores. Por isso, estamos
+                preparados para atender a todas as demandas, respeitando sempre
+                as escolhas e preferências de cada família. <br /> <br />
+                Nossa estrutura é pensada para oferecer todo o conforto e
+                tranquilidade que você precisa nesse momento. Contamos com salas
+                amplas e bem iluminadas, equipadas com ar-condicionado e
+                confortáveis poltronas. Além disso, temos uma equipe de limpeza
+                que mantém o ambiente sempre limpo e organizado. <br /> <br />
+                Nossa arquitetura, paisagismo e prestação de serviços de alta
+                qualidade nos tornam referência nacional em conforto e
+                atendimento personalizado. Além disso, nossa ampla área comum
+                com jardins e praças, transmite calma e conforto para todos os
+                visitantes se sentirem acolhidos e cuidados durante este momento
+                difícil. <br /> <br />
+                Outro diferencial da Central de Velórios é a nossa preocupação
+                com o meio ambiente. Sabemos que muitos materiais utilizados em
+                velórios e funerais podem causar impactos ambientais negativos.
+                Por isso, investimos em soluções mais sustentáveis, como a
+                utilização de materiais biodegradáveis e a adoção de práticas de
+                reciclagem. <br /> <br />
+                Nosso compromisso é com a excelência no atendimento e na
+                prestação de serviços. Por isso, investimos constantemente em
+                capacitação para nossa equipe, além de modernizar nossos
+                equipamentos e tecnologias. Tudo isso para que você tenha a
+                melhor experiência possível ao utilizar nossos serviços. <br />{' '}
+                <br />
+                Se você está em busca de um serviço que oferece acolhimento e
+                respeito, não hesite em nos procurar. Estamos sempre prontos
+                para ajudar você e sua família nesse momento tão difícil. Venha
+                conhecer a Central de Velórios e veja como podemos fazer a
+                diferença na hora de se despedir de quem amamos. <br /> <br />
               </Text>
             </Box>
           </Stack>
@@ -543,10 +569,6 @@ export default function Home() {
               </Box>
               <Box>
                 <Flex
-                  _hover={{
-                    zIndex: 1,
-                    transform: 'scale(1.05)',
-                  }}
                   borderRadius={10}
                   bgColor="card.secondary"
                   w={195}
@@ -582,59 +604,6 @@ export default function Home() {
         </Box>
         <Divider />
       </Container>
-
-      <Flex w="100%" mb={20}>
-        <Container maxW="container.lg">
-          <Box as="section" py="8" mb={5}>
-            <Flex py={6} justifyContent="center" alignItems="center">
-              <Text fontWeight="extrabold" fontSize="3xl">
-                Depoimentos
-              </Text>
-            </Flex>
-          </Box>
-
-          <Flex
-            textAlign={'center'}
-            pt={5}
-            justifyContent={'center'}
-            direction={'column'}
-            width={'full'}
-            overflow={'hidden'}
-          >
-            <SimpleGrid
-              columns={{ base: 1, xl: 2 }}
-              spacing={'20'}
-              mt={16}
-              mb={16}
-              mx={'auto'}
-            >
-              {testimonials.map((cardInfo, index) => (
-                <TestimonialCard key={index} {...cardInfo} index={index} />
-              ))}
-            </SimpleGrid>
-          </Flex>
-        </Container>
-      </Flex>
-
-      <Flex w="100%" mb={20}>
-        <Container maxW="container.lg">
-          <Box as="section" py="8" mb={5}>
-            <Flex py={6} justifyContent="center" alignItems="center">
-              <Text fontWeight="extrabold" fontSize="3xl">
-                Conheça um pouco mais da nossa história
-              </Text>
-            </Flex>
-          </Box>
-
-          <AspectRatio maxH={500} ratio={1}>
-            <iframe
-              title="História do grupo Pax União"
-              src="https://www.youtube.com/embed/DIGE5XON1Gc"
-              allowFullScreen
-            />
-          </AspectRatio>
-        </Container>
-      </Flex>
 
       <Container maxW="container.lg">
         <Divider />

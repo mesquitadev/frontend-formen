@@ -1,8 +1,11 @@
 import Head from 'next/head';
 import {
+  Accordion,
+  AccordionButton,
+  AccordionItem,
+  AccordionPanel,
   Alert,
   AlertTitle,
-  AspectRatio,
   Box,
   Button,
   ButtonGroup,
@@ -28,8 +31,6 @@ import {
   useBreakpointValue,
   useColorModeValue as mode,
   useDisclosure,
-  Wrap,
-  WrapItem,
 } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
@@ -37,45 +38,9 @@ import Link from 'next/link';
 import { FiMenu } from 'react-icons/fi';
 import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter } from 'react-icons/fa';
 import Footer from '@/Components/Footer';
+import { RxCaretDown, RxCaretUp } from 'react-icons/rx';
 
-export const links = [
-  {
-    title: 'Home',
-    links: [
-      {
-        label: 'Nossa História',
-        href: '/nossa-historia',
-      },
-      {
-        label: 'Complexo',
-        href: '#',
-      },
-    ],
-  },
-  {
-    title: 'Blog',
-    links: [
-      {
-        label: 'Serviços',
-        href: '#',
-      },
-      {
-        label: 'Planos',
-        href: '#',
-      },
-    ],
-  },
-  {
-    title: 'Contato',
-    links: [
-      {
-        label: 'Assessoria de Imprensa',
-        href: '#',
-      },
-    ],
-  },
-];
-export const socialLinks = [
+const socialLinks = [
   {
     label: 'Facebook',
     icon: <FaFacebook />,
@@ -97,20 +62,6 @@ export const socialLinks = [
     href: '#',
   },
 ];
-export const footerLinks = [
-  {
-    label: 'Termos de Serviço',
-    href: '#',
-  },
-  {
-    label: 'Política de Privacidade',
-    href: '#',
-  },
-  {
-    label: 'Politica de Cookies',
-    href: '#',
-  },
-];
 
 export const SocialButton = chakra('a', {
   baseStyle: {
@@ -128,41 +79,6 @@ export const SocialButton = chakra('a', {
     },
   },
 });
-
-const testimonials = [
-  {
-    name: 'Brandon P.',
-    role: 'Chief Marketing Officer',
-    content:
-      'It really saves me time and effort. It is exactly what our business has been lacking. EEZY is the most valuable business resource we have EVER purchased. After using EEZY my business skyrocketed!',
-    avatar:
-      'https://images.unsplash.com/photo-1603415526960-f7e0328c63b1?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80',
-  },
-  {
-    name: 'Krysta B.',
-    role: 'Entrepreneur',
-    content:
-      "I didn't even need training. We've used EEZY for the last five years. I have gotten at least 50 times the value from EEZY. I made back the purchase price in just 48 hours!",
-    avatar:
-      'https://images.unsplash.com/photo-1598550874175-4d0ef436c909?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80',
-  },
-  {
-    name: 'Darcy L.',
-    role: 'Movie star',
-    content:
-      "Thank you for making it painless, pleasant and most of all, hassle free! I'm good to go. No matter where you go, EEZY is the coolest, most happening thing around! I love EEZY!",
-    avatar:
-      'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=334&q=80',
-  },
-  {
-    name: 'Daniel T.',
-    role: 'Musician',
-    content:
-      'I am so pleased with this product. EEZY is both attractive and highly adaptable. Without EEZY, we would have gone bankrupt by now. Thank you for creating this product!',
-    avatar:
-      'https://images.unsplash.com/photo-1606513542745-97629752a13b?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80',
-  },
-];
 
 const menu = [
   {
@@ -329,8 +245,8 @@ export default function Home() {
                       <ButtonGroup variant="unstyled" spacing="2">
                         {menu.map(item => (
                           <ChakraLink
-                            as={Link}
                             key={item.href}
+                            as={Link}
                             href={item.href}
                             color="white"
                             fontWeight="bold"
@@ -439,53 +355,215 @@ export default function Home() {
         >
           <Flex py={10} justify="center" align="center">
             <Heading size="2xl" mb="4" color="black" fontWeight="extrabold">
-              Nossa História
+              Planos
             </Heading>
           </Flex>
-          <Stack spacing={4} align="center">
-            <Img
-              htmlWidth="500px"
-              htmlHeight="320px"
-              height={{
-                md: '320px',
-              }}
-              objectFit="cover"
-              src="/complexo-2.png"
-              alt="Imagem da central de velórios da pax união do canto da fabril em são luís."
-              borderTopLeftRadius={20}
-              borderBottomLeftRadius={20}
-              borderBottomRightRadius={20}
-            />
-            <Box width="100%">
-              <Text
-                fontSize={{
-                  md: 'lg',
-                }}
-                mb="6"
+          <SimpleGrid
+            columns={{ base: 1, md: 2, lg: 2 }}
+            spacing={{ base: '16', lg: '16' }}
+            mx="auto"
+            justifyItems="center"
+            alignItems="center"
+          >
+            <Box>
+              <Flex
+                w="100%"
+                alignItems="center"
+                justifyContent="center"
+                py={10}
               >
-                A Pax União foi fundada no dia 7 de agosto de 1976 pelo casal
-                goianiense Moacir Machado e Donizette Machado, em São Luís do
-                Maranhão. <br /> O negócio surgiu através da constatação de que
-                o povo maranhense não tinha um serviço de prevenção familiar, o
-                que gerava um impacto mais doloroso ainda ao se perder um ente
-                querido. Com essa visão e com o carinho e valorização mútuos
-                entre a empresa e o povo Ludovicense, o fundador Moacir Machado
-                liderou as atividades do Grupo Empresarial Pax união, que
-                tornou-se uma grande referência nacional em complexo de apoio
-                aos familiares, em serviços fúnebres como salas de velórios,
-                jazigos e até mesmo grupos de apoio para aqueles que mais
-                precisam de acolhimento após o luto. <br /> <br /> A Pax União é
-                um grande exemplo de empreendedorismo, serviço sério, humanizado
-                e de demonstração de amor às pessoas através de serviços
-                prestados. Durante os mais de 40 anos de serviços prestados,
-                continuamos em ascensão, porque o foco foi e continua sendo o de
-                entregar o melhor serviço e sentimento possíveis para que o povo
-                maranhense homenageie as pessoas amadas, as pessoas mais
-                importantes das suas vidas. Daí nasce o lema, “Preservar
-                memórias é um ato de amor”.
-              </Text>
+                <Text fontWeight="bold" fontSize="48px">
+                  Funeral
+                </Text>
+              </Flex>
+              <Accordion
+                allowToggle
+                borderTopRadius={10}
+                borderColor="primary.dark"
+              >
+                <AccordionItem>
+                  {({ isExpanded }) => (
+                    <>
+                      <AccordionButton>
+                        <Box as="span" flex="1" textAlign="left">
+                          <Text fontWeight="bold" fontSize="md">
+                            {' '}
+                            Plano Luxo
+                          </Text>
+                        </Box>
+                        {isExpanded ? (
+                          <RxCaretUp fontSize="30px" />
+                        ) : (
+                          <RxCaretDown fontSize="30px" />
+                        )}
+                      </AccordionButton>
+                      <AccordionPanel pb={4}>
+                        Inclui urna funerária simples, 2 buquês de flores, 50 km
+                        de deslocamento, kit lanche (café e biscoito), velas e
+                        paramentações para velório em residência, veste feminina
+                        de três peças e tule de nylon para homens, nota de
+                        falecimento, cobertura para titular mais seis
+                        dependentes, carência de 90 dias. Ato: 45,00 Parcelas:
+                        10 x 40,00 À Vista: 445,00 Semestralidades: 120,00
+                      </AccordionPanel>
+                    </>
+                  )}
+                </AccordionItem>
+                <AccordionItem>
+                  {({ isExpanded }) => (
+                    <>
+                      <AccordionButton>
+                        <Box as="span" flex="1" textAlign="left">
+                          <Text fontWeight="bold" fontSize="md">
+                            {' '}
+                            Plano Super Luxo
+                          </Text>
+                        </Box>
+                        {isExpanded ? (
+                          <RxCaretUp fontSize="30px" />
+                        ) : (
+                          <RxCaretDown fontSize="30px" />
+                        )}
+                      </AccordionButton>
+                      <AccordionPanel pb={4}>
+                        Inclui urna com visor, 2 buquês de flores, 50 km de
+                        deslocamento, kit lanche (café e biscoito), velas e
+                        paramentações para velório em residência, veste feminina
+                        de três peças e tule de nylon para homens, nota de
+                        falecimento, cobertura para titular mais seis
+                        dependentes, carência de 90 dias, 100 cartões digitais
+                        para missa de sétimo dia. Ato: 65,00 Parcelas: 10 x
+                        60,00 À Vista: 665,00 Semestralidades: 200,00
+                      </AccordionPanel>
+                    </>
+                  )}
+                </AccordionItem>
+                <AccordionItem>
+                  {({ isExpanded }) => (
+                    <>
+                      <AccordionButton>
+                        <Box as="span" flex="1" textAlign="left">
+                          <Text fontWeight="bold" fontSize="md">
+                            {' '}
+                            Plano Especial
+                          </Text>
+                        </Box>
+                        {isExpanded ? (
+                          <RxCaretUp fontSize="30px" />
+                        ) : (
+                          <RxCaretDown fontSize="30px" />
+                        )}
+                      </AccordionButton>
+                      <AccordionPanel pb={4}>
+                        Inclui urn estilo colonial, 4 buquês de flores, salas de
+                        velório ou paramentações para velório em residência,
+                        taxa de sepultamento isenta, 50 km de deslocamento, kit
+                        lanche (café e biscoito), veste feminina de três peças e
+                        tule de nylon para homens, nota de falecimento,
+                        cobertura para titular mais seis dependentes, carência
+                        de 90 dias, 100 cartões digitais para missa de sétimo
+                        dia. Ato: 105,00 Parcelas: 10 x 100,00 À Vista: 1.105,00
+                        Semestralidades: 280,00
+                      </AccordionPanel>
+                    </>
+                  )}
+                </AccordionItem>
+              </Accordion>
             </Box>
-          </Stack>
+
+            <Box>
+              <Flex
+                w="100%"
+                alignItems="center"
+                justifyContent="center"
+                py={10}
+              >
+                <Text fontWeight="bold" fontSize="48px">
+                  Jazigo
+                </Text>
+              </Flex>
+              <Accordion
+                allowToggle
+                borderTopRadius={10}
+                borderColor="primary.dark"
+              >
+                <AccordionItem>
+                  {({ isExpanded }) => (
+                    <>
+                      <AccordionButton>
+                        <Box as="span" flex="1" textAlign="left">
+                          <Text fontWeight="bold" fontSize="md">
+                            {' '}
+                            Cova
+                          </Text>
+                        </Box>
+                        {isExpanded ? (
+                          <RxCaretUp fontSize="30px" />
+                        ) : (
+                          <RxCaretDown fontSize="30px" />
+                        )}
+                      </AccordionButton>
+                      <AccordionPanel pb={4}>
+                        Inclui uso familiar (sem limite de dependentes),
+                        exumação a cada 5 anos, cova. Ato: 185,00 Parcelas: 12 x
+                        220,00 À Vista: 2.710,00 Semestralidades: 175,00
+                      </AccordionPanel>
+                    </>
+                  )}
+                </AccordionItem>
+                <AccordionItem>
+                  {({ isExpanded }) => (
+                    <>
+                      <AccordionButton>
+                        <Box as="span" flex="1" textAlign="left">
+                          <Text fontWeight="bold" fontSize="md">
+                            {' '}
+                            2 Gavetas
+                          </Text>
+                        </Box>
+                        {isExpanded ? (
+                          <RxCaretUp fontSize="30px" />
+                        ) : (
+                          <RxCaretDown fontSize="30px" />
+                        )}
+                      </AccordionButton>
+                      <AccordionPanel pb={4}>
+                        Inclui uso familiar (sem limite de dependentes),
+                        exumação a cada 5 anos, 2 gavetas. Ato: 230,00 Parcelas:
+                        12 x 290,00 À Vista: 3.710,00 Semestralidades: 195,00
+                      </AccordionPanel>
+                    </>
+                  )}
+                </AccordionItem>
+                <AccordionItem>
+                  {({ isExpanded }) => (
+                    <>
+                      <AccordionButton>
+                        <Box as="span" flex="1" textAlign="left">
+                          <Text fontWeight="bold" fontSize="md">
+                            {' '}
+                            3 Gavetas
+                          </Text>
+                        </Box>
+                        {isExpanded ? (
+                          <RxCaretUp fontSize="30px" />
+                        ) : (
+                          <RxCaretDown fontSize="30px" />
+                        )}
+                      </AccordionButton>
+                      <AccordionPanel pb={4}>
+                        Inclui uso familiar (sem limite de dependentes),
+                        exumação a cada 5 anos, 3 gavetas. Ato: 310,00 Parcelas:
+                        12 x 425,00 À Vista: 5.410,00 Semestralidades: 240,00
+                        Cremação Individual: Inclui uso individual. Ato: 400,00
+                        Parcelas: 10 x 340,00 À Vista: 3.800,00
+                      </AccordionPanel>
+                    </>
+                  )}
+                </AccordionItem>
+              </Accordion>
+            </Box>
+          </SimpleGrid>
         </Flex>
         <Divider />
 
@@ -543,10 +621,6 @@ export default function Home() {
               </Box>
               <Box>
                 <Flex
-                  _hover={{
-                    zIndex: 1,
-                    transform: 'scale(1.05)',
-                  }}
                   borderRadius={10}
                   bgColor="card.secondary"
                   w={195}
@@ -582,59 +656,6 @@ export default function Home() {
         </Box>
         <Divider />
       </Container>
-
-      <Flex w="100%" mb={20}>
-        <Container maxW="container.lg">
-          <Box as="section" py="8" mb={5}>
-            <Flex py={6} justifyContent="center" alignItems="center">
-              <Text fontWeight="extrabold" fontSize="3xl">
-                Depoimentos
-              </Text>
-            </Flex>
-          </Box>
-
-          <Flex
-            textAlign={'center'}
-            pt={5}
-            justifyContent={'center'}
-            direction={'column'}
-            width={'full'}
-            overflow={'hidden'}
-          >
-            <SimpleGrid
-              columns={{ base: 1, xl: 2 }}
-              spacing={'20'}
-              mt={16}
-              mb={16}
-              mx={'auto'}
-            >
-              {testimonials.map((cardInfo, index) => (
-                <TestimonialCard key={index} {...cardInfo} index={index} />
-              ))}
-            </SimpleGrid>
-          </Flex>
-        </Container>
-      </Flex>
-
-      <Flex w="100%" mb={20}>
-        <Container maxW="container.lg">
-          <Box as="section" py="8" mb={5}>
-            <Flex py={6} justifyContent="center" alignItems="center">
-              <Text fontWeight="extrabold" fontSize="3xl">
-                Conheça um pouco mais da nossa história
-              </Text>
-            </Flex>
-          </Box>
-
-          <AspectRatio maxH={500} ratio={1}>
-            <iframe
-              title="História do grupo Pax União"
-              src="https://www.youtube.com/embed/DIGE5XON1Gc"
-              allowFullScreen
-            />
-          </AspectRatio>
-        </Container>
-      </Flex>
 
       <Container maxW="container.lg">
         <Divider />
