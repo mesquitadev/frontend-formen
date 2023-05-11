@@ -39,6 +39,7 @@ import { FiMenu } from 'react-icons/fi';
 import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter } from 'react-icons/fa';
 import Footer from '@/Components/Footer';
 import { RxCaretDown, RxCaretUp } from 'react-icons/rx';
+import { PricingCard } from '@/Components/PricingCard';
 
 const socialLinks = [
   {
@@ -345,6 +346,138 @@ export default function Home() {
         </Box>
       </Flex>
 
+      <Flex w="100%" bgSize="cover">
+        <Container maxW="container.lg">
+          <Box
+            as="section"
+            py="14"
+            // px={{ base: '4', md: '8' }}
+          >
+            <SimpleGrid
+              columns={{ base: 1, lg: 4 }}
+              spacing={{ base: '8', lg: '8' }}
+              maxW="7xl"
+              mx="auto"
+              justifyItems="center"
+              alignItems="center"
+            >
+              <PricingCard
+                data={{
+                  price: 'R$: 200,00',
+                  name: 'Plano Pérola',
+                  features: [
+                    'Funeral Super Luxo',
+                    'Jazigo de 2 Gavetas',
+                    'Carência de 120 Dias',
+                  ],
+                }}
+                icon={<Img src="/perola.png" width={20} height={20} />}
+                button={
+                  <Button
+                    bgColor="primary.dark"
+                    size="sm"
+                    w="full"
+                    fontWeight="extrabold"
+                    color="white"
+                    _hover={{
+                      bgColor: 'primary.darkest',
+                    }}
+                  >
+                    Saiba Mais
+                  </Button>
+                }
+              />
+
+              <PricingCard
+                zIndex={1}
+                transform={{ lg: 'scale(1.05)' }}
+                data={{
+                  price: 'R$: 250,00',
+                  name: 'Plano Esmeralda',
+                  features: [
+                    'Funeral Especial',
+                    'Jazigo de 2 Gavetas',
+                    'Carência de 120 Dias',
+                    '50% de desconto na aquisição da cremação individual',
+                  ],
+                }}
+                icon={<Img src="/esmeralda.png" width={20} height={20} />}
+                button={
+                  <Button
+                    bgColor="primary.dark"
+                    size="sm"
+                    w="full"
+                    fontWeight="extrabold"
+                    color="white"
+                    _hover={{
+                      bgColor: 'primary.darkest',
+                    }}
+                  >
+                    Saiba Mais
+                  </Button>
+                }
+              />
+
+              <PricingCard
+                data={{
+                  price: 'R$: 360,00',
+                  name: 'Plano Rubi',
+                  features: [
+                    'Funeral Especial',
+                    'Jazigo de 3 Gavetas',
+                    'Carência de 120 dias',
+                    '50% de desconto na aquisição da cremação individual',
+                  ],
+                }}
+                icon={<Img src="/rubi.png" width={20} height={20} />}
+                button={
+                  <Button
+                    bgColor="primary.dark"
+                    size="sm"
+                    w="full"
+                    fontWeight="extrabold"
+                    color="white"
+                    _hover={{
+                      bgColor: 'primary.darkest',
+                    }}
+                  >
+                    Saiba Mais
+                  </Button>
+                }
+              />
+
+              <PricingCard
+                data={{
+                  price: '$29',
+                  name: 'Plano Safira',
+                  features: [
+                    'All application UI components',
+                    'Lifetime access',
+                    'Use on unlimited projects',
+                    'Free Updates',
+                  ],
+                }}
+                icon={<Img src="/safira.png" width={20} height={20} />}
+                button={
+                  <Button
+                    bgColor="primary.dark"
+                    size="sm"
+                    w="full"
+                    fontWeight="extrabold"
+                    color="white"
+                    _hover={{
+                      bgColor: 'primary.darkest',
+                    }}
+                  >
+                    Saiba Mais
+                  </Button>
+                }
+              />
+            </SimpleGrid>
+          </Box>
+        </Container>
+      </Flex>
+
       <Container maxW="container.lg">
         <Flex
           as="section"
@@ -365,7 +498,7 @@ export default function Home() {
             justifyItems="center"
             alignItems="center"
           >
-            <Box>
+            <Flex w="full" flexDir="column">
               <Flex
                 w="100%"
                 alignItems="center"
@@ -469,11 +602,11 @@ export default function Home() {
                   )}
                 </AccordionItem>
               </Accordion>
-            </Box>
+            </Flex>
 
             <Box>
               <Flex
-                w="100%"
+                w="full"
                 alignItems="center"
                 justifyContent="center"
                 py={10}
