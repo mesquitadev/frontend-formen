@@ -8,86 +8,21 @@ import {
   Divider,
   Flex,
   Heading,
-  HStack,
   Img,
   Link as ChakraLink,
   SimpleGrid,
-  Stack,
   Text,
   useColorModeValue as mode,
-  Wrap,
-  WrapItem,
 } from '@chakra-ui/react';
 import React from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 import { BiChevronRight } from 'react-icons/bi';
-import { PricingCard } from '@/Components/PricingCard';
 import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter } from 'react-icons/fa';
 import Hero from '@/Components/hero';
 import BlogCard from '@/Components/BlogCard';
 import { BsArrowRight } from 'react-icons/bs';
 import Footer from '@/Components/Footer';
 
-const links = [
-  {
-    title: 'Home',
-    links: [
-      {
-        label: 'Nossa História',
-        href: '/nossa-historia',
-      },
-      {
-        label: 'Complexo',
-        href: '#',
-      },
-    ],
-  },
-  {
-    title: 'Blog',
-    links: [
-      {
-        label: 'Serviços',
-        href: '#',
-      },
-      {
-        label: 'Planos',
-        href: '#',
-      },
-    ],
-  },
-  {
-    title: 'Contato',
-    links: [
-      {
-        label: 'Assessoria de Imprensa',
-        href: '#',
-      },
-    ],
-  },
-];
-const socialLinks = [
-  {
-    label: 'Facebook',
-    icon: <FaFacebook />,
-    href: '#',
-  },
-  {
-    label: 'Instagram',
-    icon: <FaInstagram />,
-    href: '#',
-  },
-  {
-    label: 'LinkedIn',
-    icon: <FaLinkedin />,
-    href: '#',
-  },
-  {
-    label: 'LinkedIn',
-    icon: <FaTwitter />,
-    href: '#',
-  },
-];
 export const footerLinks = [
   {
     label: 'Termos de Serviço',
@@ -250,7 +185,7 @@ export default function Home() {
           <Divider />
         </Container>
 
-        <Container maxW="container.lg" id="servicos" >
+        <Container maxW="container.lg" id="servicos">
           <Box as="section">
             <Flex direction="column" justify="space-between" py={10}>
               <Box>
