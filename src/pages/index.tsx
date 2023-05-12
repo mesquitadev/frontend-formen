@@ -364,6 +364,8 @@ export default function Home() {
                       transform: 'scale(1.05)',
                       shadow: 'dark-lg',
                     }}
+                    as={Link}
+                    href="/planos"
                     borderRadius={10}
                     bgColor="primary.dark"
                     w={195}

@@ -4,65 +4,23 @@ import {
   AccordionButton,
   AccordionItem,
   AccordionPanel,
-  Alert,
-  AlertTitle,
   Box,
   Button,
-  ButtonGroup,
   chakra,
   Container,
   Divider,
-  Drawer,
-  DrawerBody,
-  DrawerCloseButton,
-  DrawerContent,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerOverlay,
   Flex,
   Heading,
-  HStack,
-  IconButton,
   Img,
-  Link as ChakraLink,
   SimpleGrid,
   Stack,
   Text,
-  useBreakpointValue,
-  useColorModeValue as mode,
-  useDisclosure,
 } from '@chakra-ui/react';
-import React, { useEffect, useState } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { FiMenu } from 'react-icons/fi';
-import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter } from 'react-icons/fa';
+import React from 'react';
 import Footer from '@/Components/Footer';
 import { RxCaretDown, RxCaretUp } from 'react-icons/rx';
 import { PricingCard } from '@/Components/PricingCard';
-
-const socialLinks = [
-  {
-    label: 'Facebook',
-    icon: <FaFacebook />,
-    href: '#',
-  },
-  {
-    label: 'Instagram',
-    icon: <FaInstagram />,
-    href: '#',
-  },
-  {
-    label: 'LinkedIn',
-    icon: <FaLinkedin />,
-    href: '#',
-  },
-  {
-    label: 'LinkedIn',
-    icon: <FaTwitter />,
-    href: '#',
-  },
-];
+import Header from '@/Components/header';
 
 export const SocialButton = chakra('a', {
   baseStyle: {
@@ -81,112 +39,7 @@ export const SocialButton = chakra('a', {
   },
 });
 
-const menu = [
-  {
-    label: 'Início',
-    href: '/',
-  },
-  {
-    label: 'Nossa História',
-    href: '/nossa-historia',
-  },
-  {
-    label: 'Serviços',
-    href: '/servicos',
-  },
-  {
-    label: 'Contato',
-    href: '/conato',
-  },
-  {
-    label: 'Blog',
-    href: '/blog',
-  },
-];
-
-interface TestimonialCardProps {
-  name: string;
-  role: string;
-  content: string;
-  avatar: string;
-  index: number;
-}
-
-function TestimonialCard(props: TestimonialCardProps) {
-  const { name, role, content, avatar, index } = props;
-  return (
-    <Flex
-      boxShadow={'lg'}
-      maxW={'640px'}
-      direction={{ base: 'column-reverse', md: 'row' }}
-      width={'full'}
-      rounded={'xl'}
-      p={10}
-      justifyContent={'space-between'}
-      position={'relative'}
-      bg={mode('white', 'gray.800')}
-      _after={{
-        content: '""',
-        position: 'absolute',
-        height: '21px',
-        width: '29px',
-        left: '35px',
-        top: '-10px',
-      }}
-      _before={{
-        content: '""',
-        position: 'absolute',
-        zIndex: '-1',
-        height: 'full',
-        maxW: '640px',
-        width: 'full',
-        filter: 'blur(40px)',
-        transform: 'scale(0.98)',
-        top: 0,
-        left: 0,
-      }}
-    >
-      <Flex
-        direction={'column'}
-        textAlign={'left'}
-        justifyContent={'space-between'}
-      >
-        <chakra.p
-          fontFamily={'Inter'}
-          fontWeight={'medium'}
-          fontSize={'15px'}
-          pb={4}
-        >
-          {content}
-        </chakra.p>
-        <chakra.p fontFamily={'Work Sans'} fontWeight={'bold'} fontSize={14}>
-          {name}
-        </chakra.p>
-      </Flex>
-    </Flex>
-  );
-}
-
-export default function Home() {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const {
-    isOpen: isOpenCart,
-    onOpen: onOpenCart,
-    onClose: onCloseCart,
-  } = useDisclosure();
-
-  const isDesktop = useBreakpointValue({ base: false, lg: true });
-
-  const [isOpenAlert, setIsOpenAlert] = useState(false);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsOpenAlert(true);
-    }, 10000);
-
-    return () => clearTimeout(timer);
-  }, []);
-
+export default function Planos() {
   return (
     <>
       <Head>
@@ -202,281 +55,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Flex direction="column" width="100%">
-        <Flex
-          position="fixed"
-          direction="column"
-          justifyContent="right"
-          paddingLeft={4}
-          mt={4}
-          paddingRight={4}
-          zIndex={999}
-        >
-          {isOpenAlert && (
-            <Alert
-              as={Link}
-              href="#AJUDA"
-              status="success"
-              variant="subtle"
-              borderRadius={10}
-            >
-              <Flex direction="column">
-                <AlertTitle mr={2}>
-                  Perdeu um ente querido? <br /> Clique Aqui!
-                </AlertTitle>
-              </Flex>
-            </Alert>
-          )}
-        </Flex>
-        <Box position="relative">
-          <Box position="relative" zIndex={1}>
-            <Box as="nav" bg="bg-surface" boxShadow="sm">
-              <Container py={{ base: '4', lg: '4' }} maxW="container.lg">
-                <HStack spacing="10" justify="space-between">
-                  <Box bgColor="white" p={4} borderRadius={10}>
-                    <Image
-                      alt="Logomarca da pax união desde 1976"
-                      src="/logo-pax.png"
-                      width={128}
-                      height={126}
-                    />
-                  </Box>
-                  {isDesktop ? (
-                    <Flex justify="flex-end" flex="1">
-                      <ButtonGroup variant="unstyled" spacing="2">
-                        {menu.map(item => (
-                          <ChakraLink
-                            key={item.href}
-                            as={Link}
-                            href={item.href}
-                            color="white"
-                            fontWeight="bold"
-                            _hover={{
-                              color: 'primary.darkest',
-                            }}
-                          >
-                            {item.label}
-                          </ChakraLink>
-                        ))}
-                      </ButtonGroup>
-                    </Flex>
-                  ) : (
-                    <IconButton
-                      variant="button"
-                      onClick={onOpen}
-                      bgColor="white"
-                      icon={<FiMenu fontSize="1.25rem" />}
-                      aria-label="Open Menu"
-                    />
-                  )}
-                </HStack>
-              </Container>
-            </Box>
-
-            <Drawer isOpen={isOpen} placement="left" onClose={onClose}>
-              <DrawerOverlay />
-              <DrawerContent>
-                <DrawerCloseButton />
-                <DrawerHeader>Grupo Pax União</DrawerHeader>
-
-                <DrawerBody>
-                  <Stack
-                    direction={{ base: 'column', sm: 'column', md: 'column' }}
-                    display={{
-                      base: isOpen ? 'block' : 'none',
-                      sm: isOpen ? 'block' : 'none',
-                      md: 'flex',
-                    }}
-                  >
-                    {menu.map(item => (
-                      <Flex key={item.label} width="100%">
-                        <ChakraLink
-                          as={Link}
-                          href={item.href}
-                          color="black"
-                          fontWeight="bold"
-                          _hover={{
-                            color: 'primary.darkest',
-                          }}
-                        >
-                          {item.label}
-                        </ChakraLink>
-                      </Flex>
-                    ))}
-                  </Stack>
-                </DrawerBody>
-                <DrawerFooter>
-                  <Flex
-                    direction="column"
-                    width="100%"
-                    align="center"
-                    justify="center"
-                  >
-                    <Text>Grupo Pax União &copy; 2023</Text>
-                    <HStack spacing="4" mt="8" as="ul">
-                      {socialLinks.map((link, idx) => (
-                        <SocialButton key={idx} href={link.href}>
-                          <Box srOnly>{link.label}</Box>
-                          {link.icon}
-                        </SocialButton>
-                      ))}
-                    </HStack>
-                  </Flex>
-                </DrawerFooter>
-              </DrawerContent>
-            </Drawer>
-          </Box>
-          {/* Vídeo como plano de fundo */}
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            style={{
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover',
-            }}
-          >
-            <source src="/familia-2.webm" type="video/webm" />
-          </video>
-        </Box>
-      </Flex>
-
-      <Flex w="100%" bgSize="cover">
-        <Container maxW="container.lg">
-          <Box
-            as="section"
-            py="14"
-            // px={{ base: '4', md: '8' }}
-          >
-            <SimpleGrid
-              columns={{ base: 1, lg: 4 }}
-              spacing={{ base: '8', lg: '8' }}
-              maxW="7xl"
-              mx="auto"
-              justifyItems="center"
-              alignItems="center"
-            >
-              <PricingCard
-                data={{
-                  price: 'R$: 200,00',
-                  name: 'Plano Pérola',
-                  features: [
-                    'Funeral Super Luxo',
-                    'Jazigo de 2 Gavetas',
-                    'Carência de 120 Dias',
-                  ],
-                }}
-                icon={<Img src="/perola.png" width={20} height={20} />}
-                button={
-                  <Button
-                    bgColor="primary.dark"
-                    size="sm"
-                    w="full"
-                    fontWeight="extrabold"
-                    color="white"
-                    _hover={{
-                      bgColor: 'primary.darkest',
-                    }}
-                  >
-                    Saiba Mais
-                  </Button>
-                }
-              />
-
-              <PricingCard
-                zIndex={1}
-                transform={{ lg: 'scale(1.05)' }}
-                data={{
-                  price: 'R$: 250,00',
-                  name: 'Plano Esmeralda',
-                  features: [
-                    'Funeral Especial',
-                    'Jazigo de 2 Gavetas',
-                    'Carência de 120 Dias',
-                    '50% de desconto na aquisição da cremação individual',
-                  ],
-                }}
-                icon={<Img src="/esmeralda.png" width={20} height={20} />}
-                button={
-                  <Button
-                    bgColor="primary.dark"
-                    size="sm"
-                    w="full"
-                    fontWeight="extrabold"
-                    color="white"
-                    _hover={{
-                      bgColor: 'primary.darkest',
-                    }}
-                  >
-                    Saiba Mais
-                  </Button>
-                }
-              />
-
-              <PricingCard
-                data={{
-                  price: 'R$: 360,00',
-                  name: 'Plano Rubi',
-                  features: [
-                    'Funeral Especial',
-                    'Jazigo de 3 Gavetas',
-                    'Carência de 120 dias',
-                    '50% de desconto na aquisição da cremação individual',
-                  ],
-                }}
-                icon={<Img src="/rubi.png" width={20} height={20} />}
-                button={
-                  <Button
-                    bgColor="primary.dark"
-                    size="sm"
-                    w="full"
-                    fontWeight="extrabold"
-                    color="white"
-                    _hover={{
-                      bgColor: 'primary.darkest',
-                    }}
-                  >
-                    Saiba Mais
-                  </Button>
-                }
-              />
-
-              <PricingCard
-                data={{
-                  price: '$29',
-                  name: 'Plano Safira',
-                  features: [
-                    'All application UI components',
-                    'Lifetime access',
-                    'Use on unlimited projects',
-                    'Free Updates',
-                  ],
-                }}
-                icon={<Img src="/safira.png" width={20} height={20} />}
-                button={
-                  <Button
-                    bgColor="primary.dark"
-                    size="sm"
-                    w="full"
-                    fontWeight="extrabold"
-                    color="white"
-                    _hover={{
-                      bgColor: 'primary.darkest',
-                    }}
-                  >
-                    Saiba Mais
-                  </Button>
-                }
-              />
-            </SimpleGrid>
-          </Box>
-        </Container>
-      </Flex>
+      <Header />
 
       <Container maxW="container.lg">
         <Flex
@@ -484,7 +63,7 @@ export default function Home() {
           direction="column"
           justify="center"
           align="center"
-          mt={10}
+          py={10}
         >
           <Flex py={10} justify="center" align="center">
             <Heading size="2xl" mb="4" color="black" fontWeight="extrabold">
@@ -494,42 +73,39 @@ export default function Home() {
           <SimpleGrid
             columns={{ base: 1, md: 2, lg: 2 }}
             spacing={{ base: '16', lg: '16' }}
-            mx="auto"
             justifyItems="center"
             alignItems="center"
           >
-            <Flex w="full" flexDir="column">
-              <Flex
-                w="100%"
-                alignItems="center"
-                justifyContent="center"
-                py={10}
-              >
+            <Flex flexDir="column" width="100%">
+              <Flex justifyItems="center" alignItems="center" py={10}>
                 <Text fontWeight="bold" fontSize="48px">
                   Funeral
                 </Text>
               </Flex>
-              <Accordion
-                allowToggle
-                borderTopRadius={10}
-                borderColor="primary.dark"
-              >
+              <Accordion>
                 <AccordionItem>
                   {({ isExpanded }) => (
                     <>
-                      <AccordionButton>
-                        <Box as="span" flex="1" textAlign="left">
-                          <Text fontWeight="bold" fontSize="md">
-                            {' '}
-                            Plano Luxo
-                          </Text>
-                        </Box>
-                        {isExpanded ? (
-                          <RxCaretUp fontSize="30px" />
-                        ) : (
-                          <RxCaretDown fontSize="30px" />
-                        )}
-                      </AccordionButton>
+                      <h2>
+                        <AccordionButton>
+                          <Flex
+                            as="span"
+                            width="full"
+                            justifyContent="space-between"
+                            textAlign="left"
+                          >
+                            <Text fontWeight="bold" fontSize="md">
+                              {' '}
+                              Plano Luxo
+                            </Text>
+                          </Flex>
+                          {isExpanded ? (
+                            <RxCaretUp fontSize="30px" />
+                          ) : (
+                            <RxCaretDown fontSize="30px" />
+                          )}
+                        </AccordionButton>
+                      </h2>
                       <AccordionPanel pb={4}>
                         Inclui urna funerária simples, 2 buquês de flores, 50 km
                         de deslocamento, kit lanche (café e biscoito), velas e
@@ -604,22 +180,13 @@ export default function Home() {
               </Accordion>
             </Flex>
 
-            <Box>
-              <Flex
-                w="full"
-                alignItems="center"
-                justifyContent="center"
-                py={10}
-              >
+            <Flex direction="column" width="100%">
+              <Box py={10} justifyItems="center" alignItems="center">
                 <Text fontWeight="bold" fontSize="48px">
                   Jazigo
                 </Text>
-              </Flex>
-              <Accordion
-                allowToggle
-                borderTopRadius={10}
-                borderColor="primary.dark"
-              >
+              </Box>
+              <Accordion>
                 <AccordionItem>
                   {({ isExpanded }) => (
                     <>
@@ -695,127 +262,244 @@ export default function Home() {
                   )}
                 </AccordionItem>
               </Accordion>
+            </Flex>
+          </SimpleGrid>
+        </Flex>
+
+        <Divider />
+
+        <Flex as="section" direction="column" py="5">
+          <Flex py={10} justify="center" align="center">
+            <Heading size="2xl" mb="4" color="black" fontWeight="extrabold">
+              Planos Especiais
+            </Heading>
+          </Flex>
+          <SimpleGrid
+            columns={{ base: 1, sm: 2, md: 2, lg: 4 }}
+            spacing={{ base: '8', lg: '8' }}
+            maxW="7xl"
+            mx="auto"
+            justifyItems="center"
+            alignItems="center"
+          >
+            <PricingCard
+              data={{
+                price: 'R$: 200,00',
+                name: 'Plano Pérola',
+                features: [
+                  'Funeral Super Luxo',
+                  'Jazigo de 2 Gavetas',
+                  'Carência de 120 Dias',
+                ],
+              }}
+              icon={<Img src="/perola.png" width={20} height={20} />}
+              button={
+                <Button
+                  bgColor="primary.dark"
+                  size="sm"
+                  w="full"
+                  fontWeight="extrabold"
+                  color="white"
+                  _hover={{
+                    bgColor: 'primary.darkest',
+                  }}
+                >
+                  Saiba Mais
+                </Button>
+              }
+            />
+
+            <PricingCard
+              data={{
+                price: 'R$: 250,00',
+                name: 'Plano Esmeralda',
+                features: [
+                  'Funeral Especial',
+                  'Jazigo de 2 Gavetas',
+                  'Carência de 120 Dias',
+                  '50% de desconto na aquisição da cremação individual',
+                ],
+              }}
+              icon={<Img src="/esmeralda.png" width={20} height={20} />}
+              button={
+                <Button
+                  bgColor="primary.dark"
+                  size="sm"
+                  w="full"
+                  fontWeight="extrabold"
+                  color="white"
+                  _hover={{
+                    bgColor: 'primary.darkest',
+                  }}
+                >
+                  Saiba Mais
+                </Button>
+              }
+            />
+
+            <PricingCard
+              data={{
+                price: 'R$: 360,00',
+                name: 'Plano Rubi',
+                features: [
+                  'Funeral Especial',
+                  'Jazigo de 3 Gavetas',
+                  'Carência de 120 dias',
+                  '50% de desconto na aquisição da cremação individual',
+                ],
+              }}
+              icon={<Img src="/rubi.png" width={20} height={20} />}
+              button={
+                <Button
+                  bgColor="primary.dark"
+                  size="sm"
+                  w="full"
+                  fontWeight="extrabold"
+                  color="white"
+                  _hover={{
+                    bgColor: 'primary.darkest',
+                  }}
+                >
+                  Saiba Mais
+                </Button>
+              }
+            />
+
+            <PricingCard
+              data={{
+                price: '$29',
+                name: 'Plano Safira',
+                features: [
+                  'All application UI components',
+                  'Lifetime access',
+                  'Use on unlimited projects',
+                  'Free Updates',
+                ],
+              }}
+              icon={<Img src="/safira.png" width={20} height={20} />}
+              button={
+                <Button
+                  bgColor="primary.dark"
+                  size="sm"
+                  w="full"
+                  fontWeight="extrabold"
+                  color="white"
+                  _hover={{
+                    bgColor: 'primary.darkest',
+                  }}
+                >
+                  Saiba Mais
+                </Button>
+              }
+            />
+          </SimpleGrid>
+        </Flex>
+
+        <Divider />
+
+        <Flex
+          direction="column"
+          justify="center"
+          px={10}
+          py={10}
+          bgColor="primary.dark"
+        >
+          <Heading size="lg" mb="4" color="white">
+            Conheça nosso Complexo
+          </Heading>
+          <SimpleGrid
+            columns={{ base: 1, md: 2, lg: 4 }}
+            spacing={{ base: '16', lg: '16' }}
+            mx="auto"
+            justifyItems="center"
+            alignItems="center"
+          >
+            <Box>
+              <Flex
+                borderRadius={10}
+                bgColor="card.secondary"
+                w={195}
+                h={195}
+                mb={2}
+                justify="center"
+                align="center"
+              >
+                <Img src="/pomba.png" />
+              </Flex>
+              <Text fontSize="xl" fontWeight="bold" color="white">
+                Central de Velórios
+              </Text>
+            </Box>
+            <Box>
+              <Flex
+                borderRadius={10}
+                bgColor="card.secondary"
+                w={195}
+                h={195}
+                mb={2}
+                justify="center"
+                align="center"
+              >
+                <Img src="/lanchonete.png" />
+              </Flex>
+              <Text fontSize="xl" fontWeight="bold" color="white">
+                Lanchonete
+              </Text>
+            </Box>
+            <Box>
+              <Flex
+                borderRadius={10}
+                bgColor="card.secondary"
+                w={195}
+                h={195}
+                mb={2}
+                justify="center"
+                align="center"
+              >
+                <Img src="/flores.png" />
+              </Flex>
+              <Text fontSize="xl" fontWeight="bold" color="white">
+                Floricultura
+              </Text>
+            </Box>
+            <Box>
+              <Flex
+                borderRadius={10}
+                bgColor="card.secondary"
+                w={195}
+                h={195}
+                mb={2}
+                justify="center"
+                align="center"
+              >
+                <Img src="/lapide.png" />
+              </Flex>
+              <Text fontSize="xl" fontWeight="bold" color="white">
+                Memorial
+              </Text>
             </Box>
           </SimpleGrid>
         </Flex>
+
         <Divider />
 
-        <Box as="section">
-          <Flex
-            direction="column"
-            justify="space-between"
-            px={10}
-            py={10}
-            bgColor="primary.dark"
-          >
-            <Box>
-              <Heading size="lg" mb="4" color="white">
-                Conheça nosso Complexo
-              </Heading>
-            </Box>
-            <SimpleGrid
-              columns={{ base: 1, md: 2, lg: 4 }}
-              spacing={{ base: '16', lg: '16' }}
-              mx="auto"
-              justifyItems="center"
-              alignItems="center"
-            >
-              <Box>
-                <Flex
-                  borderRadius={10}
-                  bgColor="card.secondary"
-                  w={195}
-                  h={195}
-                  mb={2}
-                  justify="center"
-                  align="center"
-                >
-                  <Img src="/pomba.png" />
-                </Flex>
-                <Text fontSize="xl" fontWeight="bold" color="white">
-                  Central de Velórios
-                </Text>
-              </Box>
-              <Box>
-                <Flex
-                  borderRadius={10}
-                  bgColor="card.secondary"
-                  w={195}
-                  h={195}
-                  mb={2}
-                  justify="center"
-                  align="center"
-                >
-                  <Img src="/lanchonete.png" />
-                </Flex>
-                <Text fontSize="xl" fontWeight="bold" color="white">
-                  Lanchonete
-                </Text>
-              </Box>
-              <Box>
-                <Flex
-                  borderRadius={10}
-                  bgColor="card.secondary"
-                  w={195}
-                  h={195}
-                  mb={2}
-                  justify="center"
-                  align="center"
-                >
-                  <Img src="/flores.png" />
-                </Flex>
-                <Text fontSize="xl" fontWeight="bold" color="white">
-                  Floricultura
-                </Text>
-              </Box>
-              <Box>
-                <Flex
-                  borderRadius={10}
-                  bgColor="card.secondary"
-                  w={195}
-                  h={195}
-                  mb={2}
-                  justify="center"
-                  align="center"
-                >
-                  <Img src="/lapide.png" />
-                </Flex>
-                <Text fontSize="xl" fontWeight="bold" color="white">
-                  Memorial
-                </Text>
-              </Box>
-            </SimpleGrid>
-          </Flex>
-        </Box>
-        <Divider />
+        <Flex
+          my={10}
+          justifyContent="center"
+          alignItems="center"
+          direction="column"
+        >
+          <Stack spacing={4} align="center">
+            <Text fontWeight="extrabold" fontSize="4xl">
+              ATENDIMENTO 24H
+            </Text>
+            <Text>Floricultura - Laboratório - Lanchonete</Text>
+            <Button bgColor="primary.dark" color="white">
+              Entre em Contato
+            </Button>
+          </Stack>
+        </Flex>
       </Container>
-
-      <Container maxW="container.lg">
-        <Divider />
-      </Container>
-
-      <Flex w="100%" mb={20}>
-        <Container maxW="container.lg">
-          <Box as="section" py="8" mb={5}>
-            <Flex
-              py={6}
-              justifyContent="center"
-              alignItems="center"
-              direction="column"
-            >
-              <Stack spacing={4} align="center">
-                <Text fontWeight="extrabold" fontSize="4xl">
-                  ATENDIMENTO 24H
-                </Text>
-                <Text>Floricultura - Laboratório - Lanchonete</Text>
-                <Button bgColor="primary.dark" color="white">
-                  Entre em Contato
-                </Button>
-              </Stack>
-            </Flex>
-          </Box>
-        </Container>
-      </Flex>
 
       <Footer />
     </>

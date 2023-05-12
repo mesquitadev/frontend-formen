@@ -56,22 +56,22 @@ export const PricingCard = (props: PricingCardProps) => {
         ))}
       </List>
 
-      <Flex
-        align="center"
-        justify="center"
-        direction="column"
-        fontWeight="extrabold"
-        color="white"
-        my="8"
-        width="100%"
-      >
-        <Text fontSize="3xl" fontWeight="inherit" lineHeight="0.9em">
-          {price}
-        </Text>
-        <Text fontWeight="inherit" fontSize="md">
-          MENSAL
-        </Text>
-      </Flex>
+      {/*<Flex*/}
+      {/*  align="center"*/}
+      {/*  justify="center"*/}
+      {/*  direction="column"*/}
+      {/*  fontWeight="extrabold"*/}
+      {/*  color="white"*/}
+      {/*  my="8"*/}
+      {/*  width="100%"*/}
+      {/*>*/}
+      {/*  <Text fontSize="3xl" fontWeight="inherit" lineHeight="0.9em">*/}
+      {/*    {price}*/}
+      {/*  </Text>*/}
+      {/*  <Text fontWeight="inherit" fontSize="md">*/}
+      {/*    MENSAL*/}
+      {/*  </Text>*/}
+      {/*</Flex>*/}
 
       {button}
     </Card>

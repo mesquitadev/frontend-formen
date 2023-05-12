@@ -1,7 +1,6 @@
 import {
-  Alert,
-  AlertTitle,
   Box,
+  Button,
   ButtonGroup,
   chakra,
   Container,
@@ -112,29 +111,32 @@ function Header() {
       <Flex
         position="fixed"
         direction="column"
-        justifyContent="right"
+        width="100%"
+        justifyContent="center"
+        alignItems="flex-end"
         paddingLeft={4}
-        mt={4}
+        mt={2}
         paddingRight={4}
         zIndex={999}
       >
         {isOpenAlert && (
-          <Alert
-            as={Link}
-            href="#AJUDA"
-            status="success"
-            variant="subtle"
-            borderRadius={10}
-          >
-            <Flex direction="column">
-              <AlertTitle mr={2}>
-                Perdeu um ente querido? <br /> Clique Aqui!
-              </AlertTitle>
-            </Flex>
-          </Alert>
+          <Flex borderRadius={5} shadow="dark-lg">
+            <Button
+              as={Link}
+              href="#plantao"
+              bgColor="primary.dark"
+              color="white"
+              fontSize={30}
+              _hover={{ bgColor: 'primary.darkest' }}
+              width="100%"
+              py={10}
+            >
+              Plantão 24H
+            </Button>
+          </Flex>
         )}
       </Flex>
-      <Box position="relative">
+      <Box position="relative" py={12}>
         <Box position="relative" zIndex={1}>
           <Box as="nav" bg="bg-surface" boxShadow="sm">
             <Container py={{ base: '4', lg: '4' }} maxW="container.lg">
@@ -156,7 +158,7 @@ function Header() {
 
                         // Defina os estilos baseados no estado isActive
                         const linkStyles = {
-                          color: isActive ? 'blue.500' : 'gray.500',
+                          color: isActive ? 'primary.dark' : 'gray.500',
                           fontWeight: isActive ? 'bold' : 'normal',
                           // Adicione outros estilos de acordo com suas necessidades
                         };

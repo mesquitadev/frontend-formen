@@ -1,39 +1,21 @@
 import Head from 'next/head';
 import {
-  Alert,
-  AlertTitle,
   Box,
   Button,
-  ButtonGroup,
   chakra,
   Container,
   Divider,
-  Drawer,
-  DrawerBody,
-  DrawerCloseButton,
-  DrawerContent,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerOverlay,
   Flex,
   Heading,
-  HStack,
-  IconButton,
   Img,
-  Link as ChakraLink,
   SimpleGrid,
   Stack,
   Text,
-  useBreakpointValue,
-  useColorModeValue as mode,
-  useDisclosure,
 } from '@chakra-ui/react';
-import React, { useEffect, useState } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { FiMenu } from 'react-icons/fi';
+import React from 'react';
 import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter } from 'react-icons/fa';
 import Footer from '@/Components/Footer';
+import Header from '@/Components/header';
 
 export const links = [
   {
@@ -126,116 +108,7 @@ export const SocialButton = chakra('a', {
   },
 });
 
-const menu = [
-  {
-    label: 'Início',
-    href: '/',
-  },
-  {
-    label: 'Nossa História',
-    href: '/nossa-historia',
-  },
-  {
-    label: 'Planos',
-    href: '/planos',
-  },
-  {
-    label: 'Serviços',
-    href: '/servicos',
-  },
-  {
-    label: 'Contato',
-    href: '/conato',
-  },
-  {
-    label: 'Blog',
-    href: '/blog',
-  },
-];
-
-interface TestimonialCardProps {
-  name: string;
-  role: string;
-  content: string;
-  avatar: string;
-  index: number;
-}
-
-function TestimonialCard(props: TestimonialCardProps) {
-  const { name, role, content, avatar, index } = props;
-  return (
-    <Flex
-      boxShadow={'lg'}
-      maxW={'640px'}
-      direction={{ base: 'column-reverse', md: 'row' }}
-      width={'full'}
-      rounded={'xl'}
-      p={10}
-      justifyContent={'space-between'}
-      position={'relative'}
-      bg={mode('white', 'gray.800')}
-      _after={{
-        content: '""',
-        position: 'absolute',
-        height: '21px',
-        width: '29px',
-        left: '35px',
-        top: '-10px',
-      }}
-      _before={{
-        content: '""',
-        position: 'absolute',
-        zIndex: '-1',
-        height: 'full',
-        maxW: '640px',
-        width: 'full',
-        filter: 'blur(40px)',
-        transform: 'scale(0.98)',
-        top: 0,
-        left: 0,
-      }}
-    >
-      <Flex
-        direction={'column'}
-        textAlign={'left'}
-        justifyContent={'space-between'}
-      >
-        <chakra.p
-          fontFamily={'Inter'}
-          fontWeight={'medium'}
-          fontSize={'15px'}
-          pb={4}
-        >
-          {content}
-        </chakra.p>
-        <chakra.p fontFamily={'Work Sans'} fontWeight={'bold'} fontSize={14}>
-          {name}
-        </chakra.p>
-      </Flex>
-    </Flex>
-  );
-}
-
-export default function Home() {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const {
-    isOpen: isOpenCart,
-    onOpen: onOpenCart,
-    onClose: onCloseCart,
-  } = useDisclosure();
-
-  const isDesktop = useBreakpointValue({ base: false, lg: true });
-
-  const [isOpenAlert, setIsOpenAlert] = useState(false);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsOpenAlert(true);
-    }, 10000);
-
-    return () => clearTimeout(timer);
-  }, []);
-
+export default function Planos() {
   return (
     <>
       <Head>
@@ -251,149 +124,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Flex direction="column" width="100%">
-        <Flex
-          position="fixed"
-          direction="column"
-          justifyContent="right"
-          paddingLeft={4}
-          mt={4}
-          paddingRight={4}
-          zIndex={999}
-        >
-          {isOpenAlert && (
-            <Alert
-              as={Link}
-              href="#AJUDA"
-              status="success"
-              variant="subtle"
-              borderRadius={10}
-            >
-              <Flex direction="column">
-                <AlertTitle mr={2}>
-                  Perdeu um ente querido? <br /> Clique Aqui!
-                </AlertTitle>
-              </Flex>
-            </Alert>
-          )}
-        </Flex>
-        <Box position="relative">
-          <Box position="relative" zIndex={1}>
-            <Box as="nav" bg="bg-surface" boxShadow="sm">
-              <Container py={{ base: '4', lg: '4' }} maxW="container.lg">
-                <HStack spacing="10" justify="space-between">
-                  <Box bgColor="white" p={4} borderRadius={10}>
-                    <Image
-                      alt="Logomarca da pax união desde 1976"
-                      src="/logo-pax.png"
-                      width={128}
-                      height={126}
-                    />
-                  </Box>
-                  {isDesktop ? (
-                    <Flex justify="flex-end" flex="1">
-                      <ButtonGroup variant="unstyled" spacing="2">
-                        {menu.map(item => (
-                          <ChakraLink
-                            key={item.href}
-                            as={Link}
-                            href={item.href}
-                            color="white"
-                            fontWeight="bold"
-                            _hover={{
-                              color: 'primary.darkest',
-                            }}
-                          >
-                            {item.label}
-                          </ChakraLink>
-                        ))}
-                      </ButtonGroup>
-                    </Flex>
-                  ) : (
-                    <IconButton
-                      variant="button"
-                      onClick={onOpen}
-                      bgColor="white"
-                      icon={<FiMenu fontSize="1.25rem" />}
-                      aria-label="Open Menu"
-                    />
-                  )}
-                </HStack>
-              </Container>
-            </Box>
-
-            <Drawer isOpen={isOpen} placement="left" onClose={onClose}>
-              <DrawerOverlay />
-              <DrawerContent>
-                <DrawerCloseButton />
-                <DrawerHeader>Grupo Pax União</DrawerHeader>
-
-                <DrawerBody>
-                  <Stack
-                    direction={{ base: 'column', sm: 'column', md: 'column' }}
-                    display={{
-                      base: isOpen ? 'block' : 'none',
-                      sm: isOpen ? 'block' : 'none',
-                      md: 'flex',
-                    }}
-                  >
-                    {menu.map(item => (
-                      <Flex key={item.label} width="100%">
-                        <ChakraLink
-                          as={Link}
-                          href={item.href}
-                          color="black"
-                          fontWeight="bold"
-                          _hover={{
-                            color: 'primary.darkest',
-                          }}
-                        >
-                          {item.label}
-                        </ChakraLink>
-                      </Flex>
-                    ))}
-                  </Stack>
-                </DrawerBody>
-                <DrawerFooter>
-                  <Flex
-                    direction="column"
-                    width="100%"
-                    align="center"
-                    justify="center"
-                  >
-                    <Text>Grupo Pax União &copy; 2023</Text>
-                    <HStack spacing="4" mt="8" as="ul">
-                      {socialLinks.map((link, idx) => (
-                        <SocialButton key={idx} href={link.href}>
-                          <Box srOnly>{link.label}</Box>
-                          {link.icon}
-                        </SocialButton>
-                      ))}
-                    </HStack>
-                  </Flex>
-                </DrawerFooter>
-              </DrawerContent>
-            </Drawer>
-          </Box>
-          {/* Vídeo como plano de fundo */}
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            style={{
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover',
-            }}
-          >
-            <source src="/familia-2.webm" type="video/webm" />
-          </video>
-        </Box>
-      </Flex>
+      <Header />
 
       <Container maxW="container.lg">
         <Flex

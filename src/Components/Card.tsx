@@ -13,7 +13,7 @@ export const Card = (props: CardProps) => {
       position="relative"
       px="4"
       pb="6"
-      pt="16"
+      pt="8"
       overflow="hidden"
       shadow="lg"
       maxW="md"
