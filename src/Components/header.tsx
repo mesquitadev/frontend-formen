@@ -15,6 +15,7 @@ import {
   HStack,
   IconButton,
   Link as ChakraLink,
+  ScaleFade,
   Stack,
   Text,
   useBreakpointValue,
@@ -108,34 +109,36 @@ function Header() {
 
   return (
     <Flex direction="column" width="100%">
-      <Flex
-        position="fixed"
-        direction="column"
-        width="100%"
-        justifyContent="center"
-        alignItems="flex-end"
-        paddingLeft={4}
-        mt={2}
-        paddingRight={4}
-        zIndex={999}
-      >
-        {isOpenAlert && (
-          <Flex borderRadius={5} shadow="dark-lg">
-            <Button
-              as={Link}
-              href="#plantao"
-              bgColor="primary.dark"
-              color="white"
-              fontSize={30}
-              _hover={{ bgColor: 'primary.darkest' }}
-              width="100%"
-              py={10}
-            >
-              Plantão 24H
-            </Button>
-          </Flex>
-        )}
-      </Flex>
+      <ScaleFade initialScale={0.9}>
+        <Flex
+          position="fixed"
+          direction="column"
+          width="100%"
+          justifyContent="center"
+          alignItems="flex-end"
+          paddingLeft={4}
+          mt={2}
+          paddingRight={4}
+          zIndex={999}
+        >
+          {isOpenAlert && (
+            <Flex borderRadius={5} shadow="dark-lg">
+              <Button
+                as={Link}
+                href="#plantao"
+                bgColor="primary.dark"
+                color="white"
+                fontSize={30}
+                _hover={{ bgColor: 'primary.darkest' }}
+                width="100%"
+                py={10}
+              >
+                Plantão 24H
+              </Button>
+            </Flex>
+          )}
+        </Flex>
+      </ScaleFade>
       <Box position="relative" py={12}>
         <Box position="relative" zIndex={1}>
           <Box as="nav" bg="bg-surface" boxShadow="sm">

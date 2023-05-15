@@ -312,7 +312,7 @@ export default function Home() {
                     <Img src="/airplane.png " />
                   </Flex>
                   <Text fontSize="xl" fontWeight="bold" color="black">
-                    Traslado
+                    Translado
                   </Text>
                 </Box>
 
@@ -333,7 +333,7 @@ export default function Home() {
                     justify="center"
                     align="center"
                   >
-                    <Img src="/pricing.png" />
+                    <Img src="/parchment.png" />
                   </Flex>
                   <Text
                     fontSize="xl"
@@ -381,13 +381,13 @@ export default function Home() {
                 mb="10"
               >
                 <BlogCard
-                  category="Fashion"
-                  media="https://images.unsplash.com/photo-1505944270255-72b8c68c6a70?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Mnx8ZmFjaWFsfGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
-                  title="7 Steps to Get Professional Facial Results At Home"
-                  description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"
+                  category="Luto, Comunidade"
+                  media="grupo-apoio.jpg"
+                  title="Conheça o nosso grupo de enfrentamento ao Luto"
+                  description="Você não está sozinho(a). O luto é uma jornada dolorosa, mas juntos podemos superar. Apresentamos o Grupo de Enfrentamento ao Luto, um espaço seguro e acolhedor para compartilhar experiências, encontrar apoio e descobrir forças dentro de si mesmo(a). Aqui, você encontrará uma comunidade de pessoas que entendem a dor que você está passando e estão dispostas a caminhar ao seu lado."
                   href="#"
                   author={{
-                    name: 'Segun Adebayo',
+                    name: 'Pax União',
                     href: '#',
                   }}
                 />

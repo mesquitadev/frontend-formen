@@ -14,7 +14,6 @@ import {
   WrapItem,
 } from '@chakra-ui/react';
 import Image from 'next/image';
-import { SocialButton } from '@/pages/lanchonete';
 import {
   FaFacebook,
   FaInstagram,

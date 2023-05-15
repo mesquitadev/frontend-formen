@@ -66,20 +66,20 @@ export default function BlogCard(props: any) {
             color={mode('gray.600', 'gray.400')}
           >
             <Text>
-              By{' '}
+              Por{' '}
               <Box as="a" textDecor="underline" href={author.href}>
                 {author.name}
               </Box>
             </Text>
-            <Link href="#">
-              <Box
-                as={BsClockFill}
-                display="inline-block"
-                me="2"
-                opacity={0.4}
-              />
-              3 min read
-            </Link>
+            {/*<Link href="#">*/}
+            {/*  <Box*/}
+            {/*    as={BsClockFill}*/}
+            {/*    display="inline-block"*/}
+            {/*    me="2"*/}
+            {/*    opacity={0.4}*/}
+            {/*  />*/}
+            {/*  {Date.now()}*/}
+            {/*</Link>*/}
           </Flex>
         </Flex>
       </Flex>

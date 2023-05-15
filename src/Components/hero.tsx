@@ -1,6 +1,4 @@
 import {
-  Alert,
-  AlertTitle,
   Box,
   Button,
   ButtonGroup,
@@ -18,6 +16,7 @@ import {
   HStack,
   IconButton,
   Link as ChakraLink,
+  ScaleFade,
   Stack,
   Text,
   useBreakpointValue,
@@ -111,34 +110,36 @@ const Hero = () => {
   return (
     <>
       {/*Alert*/}
-      <Flex
-        position="fixed"
-        direction="column"
-        width="100%"
-        justifyContent="center"
-        alignItems="flex-end"
-        paddingLeft={4}
-        mt={2}
-        paddingRight={4}
-        zIndex={999}
-      >
-        {isOpenAlert && (
-          <Flex borderRadius={5} shadow="dark-lg">
-            <Button
-              as={Link}
-              href="#plantao"
-              bgColor="primary.dark"
-              color="white"
-              fontSize={30}
-              _hover={{ bgColor: 'primary.darkest' }}
-              width="100%"
-              py={10}
-            >
-              Plantão 24H
-            </Button>
-          </Flex>
-        )}
-      </Flex>
+      <ScaleFade in={true}>
+        <Flex
+          position="fixed"
+          direction="column"
+          width="100%"
+          justifyContent="center"
+          alignItems="flex-end"
+          paddingLeft={4}
+          mt={2}
+          paddingRight={4}
+          zIndex={999}
+        >
+          {isOpenAlert && (
+            <Flex borderRadius={5} shadow="dark-lg">
+              <Button
+                as={Link}
+                href="#plantao"
+                bgColor="primary.dark"
+                color="white"
+                fontSize={30}
+                _hover={{ bgColor: 'primary.darkest' }}
+                width="100%"
+                py={10}
+              >
+                Plantão 24H
+              </Button>
+            </Flex>
+          )}
+        </Flex>
+      </ScaleFade>
       {/*End Alert*/}
       <Box position="relative" py={12}>
         {/*Header*/}
