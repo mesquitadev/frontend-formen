@@ -2,7 +2,6 @@ import Head from 'next/head';
 import {
   Box,
   Button,
-  chakra,
   Container,
   Divider,
   Flex,
@@ -13,100 +12,8 @@ import {
   Text,
 } from '@chakra-ui/react';
 import React from 'react';
-import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter } from 'react-icons/fa';
 import Footer from '@/Components/Footer';
 import Header from '@/Components/header';
-
-export const links = [
-  {
-    title: 'Home',
-    links: [
-      {
-        label: 'Nossa História',
-        href: '/nossa-historia',
-      },
-      {
-        label: 'Complexo',
-        href: '#',
-      },
-    ],
-  },
-  {
-    title: 'Blog',
-    links: [
-      {
-        label: 'Serviços',
-        href: '#',
-      },
-      {
-        label: 'Planos',
-        href: '#',
-      },
-    ],
-  },
-  {
-    title: 'Contato',
-    links: [
-      {
-        label: 'Assessoria de Imprensa',
-        href: '#',
-      },
-    ],
-  },
-];
-export const socialLinks = [
-  {
-    label: 'Facebook',
-    icon: <FaFacebook />,
-    href: '#',
-  },
-  {
-    label: 'Instagram',
-    icon: <FaInstagram />,
-    href: '#',
-  },
-  {
-    label: 'LinkedIn',
-    icon: <FaLinkedin />,
-    href: '#',
-  },
-  {
-    label: 'LinkedIn',
-    icon: <FaTwitter />,
-    href: '#',
-  },
-];
-export const footerLinks = [
-  {
-    label: 'Termos de Serviço',
-    href: '#',
-  },
-  {
-    label: 'Política de Privacidade',
-    href: '#',
-  },
-  {
-    label: 'Politica de Cookies',
-    href: '#',
-  },
-];
-
-export const SocialButton = chakra('a', {
-  baseStyle: {
-    rounded: 'lg',
-    w: '8',
-    h: '8',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    bg: 'blackAlpha.400',
-    color: 'white',
-    transition: 'all 0.2s',
-    _hover: {
-      bg: 'blackAlpha.500',
-    },
-  },
-});
 
 export default function Planos() {
   return (

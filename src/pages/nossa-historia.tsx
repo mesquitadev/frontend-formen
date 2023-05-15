@@ -15,100 +15,8 @@ import {
   useColorModeValue as mode,
 } from '@chakra-ui/react';
 import React from 'react';
-import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter } from 'react-icons/fa';
 import Footer from '@/Components/Footer';
 import Header from '@/Components/header';
-
-export const links = [
-  {
-    title: 'Home',
-    links: [
-      {
-        label: 'Nossa História',
-        href: '/nossa-historia',
-      },
-      {
-        label: 'Complexo',
-        href: '#',
-      },
-    ],
-  },
-  {
-    title: 'Blog',
-    links: [
-      {
-        label: 'Serviços',
-        href: '#',
-      },
-      {
-        label: 'Planos',
-        href: '#',
-      },
-    ],
-  },
-  {
-    title: 'Contato',
-    links: [
-      {
-        label: 'Assessoria de Imprensa',
-        href: '#',
-      },
-    ],
-  },
-];
-export const socialLinks = [
-  {
-    label: 'Facebook',
-    icon: <FaFacebook />,
-    href: '#',
-  },
-  {
-    label: 'Instagram',
-    icon: <FaInstagram />,
-    href: '#',
-  },
-  {
-    label: 'LinkedIn',
-    icon: <FaLinkedin />,
-    href: '#',
-  },
-  {
-    label: 'LinkedIn',
-    icon: <FaTwitter />,
-    href: '#',
-  },
-];
-export const footerLinks = [
-  {
-    label: 'Termos de Serviço',
-    href: '#',
-  },
-  {
-    label: 'Política de Privacidade',
-    href: '#',
-  },
-  {
-    label: 'Politica de Cookies',
-    href: '#',
-  },
-];
-
-export const SocialButton = chakra('a', {
-  baseStyle: {
-    rounded: 'lg',
-    w: '8',
-    h: '8',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    bg: 'blackAlpha.400',
-    color: 'white',
-    transition: 'all 0.2s',
-    _hover: {
-      bg: 'blackAlpha.500',
-    },
-  },
-});
 
 const testimonials = [
   {
@@ -142,29 +50,6 @@ const testimonials = [
       'I am so pleased with this product. EEZY is both attractive and highly adaptable. Without EEZY, we would have gone bankrupt by now. Thank you for creating this product!',
     avatar:
       'https://images.unsplash.com/photo-1606513542745-97629752a13b?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80',
-  },
-];
-
-const menu = [
-  {
-    label: 'Início',
-    href: '/',
-  },
-  {
-    label: 'Nossa História',
-    href: '/nossa-historia',
-  },
-  {
-    label: 'Serviços',
-    href: '/servicos',
-  },
-  {
-    label: 'Contato',
-    href: '/conato',
-  },
-  {
-    label: 'Blog',
-    href: '/blog',
   },
 ];
 
@@ -231,7 +116,7 @@ function TestimonialCard(props: TestimonialCardProps) {
   );
 }
 
-export default function Home() {
+export default function NossaHistoria() {
   return (
     <>
       <Head>
