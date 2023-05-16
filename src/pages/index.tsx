@@ -89,6 +89,8 @@ export default function Home() {
                     enlutados.
                   </Text>
                   <Button
+                    as={Link}
+                    href="/central-de-velorios"
                     bgColor="primary.dark"
                     rightIcon={<BiChevronRight size={25} />}
                     _hover={{
@@ -103,49 +105,8 @@ export default function Home() {
             </Box>
           </Box>
           <Divider />
-          <Box as="section">
-            <Flex
-              direction="row"
-              justify="space-between"
-              py={{
-                base: '12',
-                md: '20',
-              }}
-            >
-              <Box>
-                <Heading size="xl" mb="4" fontWeight="extrabold">
-                  Nossa História
-                </Heading>
-                <Text
-                  fontSize={{
-                    md: 'lg',
-                  }}
-                  mb="6"
-                  maxW="md"
-                  color={mode('gray.600', 'gray.400')}
-                >
-                  Preservar memórias é um ato de amor e nosso compromisso é te
-                  ajudar a manter essas lembranças vivas para sempre. Conheça
-                  nossa história e nossos serviços.
-                </Text>
-                <Button
-                  bgColor="primary.dark"
-                  rightIcon={<BiChevronRight size={25} />}
-                  _hover={{
-                    bgColor: 'primary.darkest',
-                  }}
-                  color="white"
-                >
-                  Saiba mais
-                </Button>
-              </Box>
-            </Flex>
-          </Box>
-          <Divider />
-        </Container>
 
-        <Container maxW="container.lg" id="servicos">
-          <Box as="section">
+          <Box as="section" id="servicos">
             <Flex direction="column" justify="space-between" py={10}>
               <Box>
                 <Heading size="lg" mb="4" color="black">
@@ -348,9 +309,51 @@ export default function Home() {
             </Flex>
           </Box>
           <Divider />
-        </Container>
 
-        <Container maxW="container.lg">
+          <Box as="section">
+            <Flex
+              direction="row"
+              justify="space-between"
+              py={{
+                base: '12',
+                md: '20',
+              }}
+            >
+              <Box>
+                <Heading size="xl" mb="4" fontWeight="extrabold">
+                  Nossa História
+                </Heading>
+                <Text
+                  fontSize={{
+                    md: 'lg',
+                  }}
+                  mb="6"
+                  maxW="md"
+                  color={mode('gray.600', 'gray.400')}
+                >
+                  Preservar memórias é um ato de amor e nosso compromisso é te
+                  ajudar a manter essas lembranças vivas para sempre. Conheça
+                  nossa história e nossos serviços.
+                </Text>
+                <Button
+                  as={Link}
+                  href="/"
+                  bgColor="primary.dark"
+                  rightIcon={<BiChevronRight size={25} />}
+                  _hover={{
+                    bgColor: 'primary.darkest',
+                  }}
+                  color="white"
+                >
+                  Saiba mais
+                </Button>
+              </Box>
+              <Img src="/logo-pax.png" w={200} h={200} />
+            </Flex>
+          </Box>
+
+          <Divider />
+
           <Box
             as="section"
             py={{
@@ -420,56 +423,50 @@ export default function Home() {
               </ChakraLink>
             </Box>
           </Box>
-        </Container>
 
-        <Flex w="100%" pb={40} id="plantao">
-          <Container maxW="container.lg">
-            <Box
-              as="section"
-              background="linear-gradient(#027240, transparent), url('maos.jpg')"
-              backgroundBlendMode="overlay"
-              backgroundSize="cover"
-              backgroundPosition="center"
-              borderRadius={10}
+          <Divider />
+
+          <Box
+            as="section"
+            background="linear-gradient(#027240, transparent), url('maos.jpg')"
+            backgroundBlendMode="overlay"
+            backgroundSize="cover"
+            backgroundPosition="center"
+            borderRadius={10}
+            id="plantao"
+          >
+            <Flex
+              direction="row"
+              justify="right"
+              textAlign="right"
+              py={{
+                base: '12',
+                md: '20',
+              }}
+              px={5}
             >
-              <Flex
-                direction="row"
-                justify="right"
-                textAlign="right"
-                py={{
-                  base: '12',
-                  md: '20',
-                }}
-                px={5}
-              >
-                <Box>
-                  <Heading
-                    size="xl"
-                    mb="4"
-                    color="white"
-                    fontWeight="extrabold"
-                  >
-                    Nossa equipe de atendimento <br /> está disponível para você
-                  </Heading>
-                  <Text fontSize="6xl" color="white" fontWeight="extrabold">
-                    24 HORAS
-                  </Text>
-                  <Button
-                    as={Link}
-                    href="tel:5598991741075"
-                    bgColor="primary.dark"
-                    _hover={{
-                      bgColor: 'primary.darkest',
-                    }}
-                    color="white"
-                  >
-                    Fale Conosco Agora!
-                  </Button>
-                </Box>
-              </Flex>
-            </Box>
-          </Container>
-        </Flex>
+              <Box>
+                <Heading size="xl" mb="4" color="white" fontWeight="extrabold">
+                  Nossa equipe de atendimento <br /> está disponível para você
+                </Heading>
+                <Text fontSize="6xl" color="white" fontWeight="extrabold">
+                  24 HORAS
+                </Text>
+                <Button
+                  as={Link}
+                  href="tel:5598991741075"
+                  bgColor="primary.dark"
+                  _hover={{
+                    bgColor: 'primary.darkest',
+                  }}
+                  color="white"
+                >
+                  Fale Conosco Agora!
+                </Button>
+              </Box>
+            </Flex>
+          </Box>
+        </Container>
       </Flex>
 
       <Footer />
