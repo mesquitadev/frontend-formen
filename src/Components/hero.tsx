@@ -246,7 +246,7 @@ const Hero = () => {
         {/* Vídeo como plano de fundo */}
         <Flex
           as="video"
-          autoPlay
+          autoplay
           loop
           muted
           playsInline

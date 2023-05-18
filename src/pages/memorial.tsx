@@ -43,7 +43,7 @@ export default function Memorial() {
         >
           <Flex py={10} justify="center" align="center">
             <Heading size="2xl" mb="4" color="black" fontWeight="extrabold">
-              Floricultura
+              Memorial
             </Heading>
           </Flex>
           <Stack spacing={4} align="center">

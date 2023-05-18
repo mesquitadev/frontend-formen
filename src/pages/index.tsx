@@ -214,6 +214,8 @@ export default function Home() {
                 </Box>
                 <Box>
                   <Flex
+                    as={Link}
+                    href="/crematorio"
                     _hover={{
                       zIndex: 1,
                       transform: 'scale(1.05)',
