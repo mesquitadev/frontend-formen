@@ -31,7 +31,11 @@ export default function CentralDeVelorios() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Header />
+      <Header
+        titulo="Central de Velórios"
+        subtitulo="Conforto, tranquilidade, acolhimento e respeito em momentos difíceis: Conheça a Central de Velórios da pax."
+        bg="https://res.cloudinary.com/dxin0mfj4/image/upload/v1684529986/Pax%20Uni%C3%A3o/complexo-1_toid4f.png"
+      />
 
       <Container maxW="container.lg">
         <Flex
@@ -41,25 +45,7 @@ export default function CentralDeVelorios() {
           align="center"
           mt={10}
         >
-          <Flex py={10} justify="center" align="center">
-            <Heading size="2xl" mb="4" color="black" fontWeight="extrabold">
-              Central de Velórios
-            </Heading>
-          </Flex>
           <Stack spacing={4} align="center">
-            <Img
-              htmlWidth="500px"
-              htmlHeight="320px"
-              height={{
-                md: '320px',
-              }}
-              objectFit="cover"
-              src="/complexo-2.png"
-              alt="Imagem da central de velórios da pax união do canto da fabril em são luís."
-              borderTopLeftRadius={20}
-              borderBottomLeftRadius={20}
-              borderBottomRightRadius={20}
-            />
             <Box width="100%">
               <Text
                 fontSize={{

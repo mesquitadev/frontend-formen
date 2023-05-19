@@ -31,7 +31,11 @@ export default function Memorial() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Header />
+      <Header
+        titulo="Crematório PAX"
+        subtitulo="Honrando a Vida: Uma Despedida com Dignidade e Respeito"
+        bg="https://pbs.twimg.com/media/FZtyFtHXwAEBUUZ.jpg:large"
+      />
 
       <Container maxW="container.lg">
         <Flex
@@ -41,11 +45,6 @@ export default function Memorial() {
           align="center"
           mt={10}
         >
-          <Flex py={10} justify="center" align="center">
-            <Heading size="2xl" mb="4" color="black" fontWeight="extrabold">
-              Crematório
-            </Heading>
-          </Flex>
           <Stack spacing={4} align="center">
             <Box width="100%">
               <Text
@@ -87,8 +86,6 @@ export default function Memorial() {
                 todas as etapas, oferecendo um acompanhamento detalhado e
                 esclarecendo qualquer dúvida que possa surgir durante o processo
                 de cremação.
-                <br />
-                <br />
                 <br />
                 <br />
                 Entendemos que a perda de um ente querido é uma experiência
@@ -143,10 +140,6 @@ export default function Memorial() {
                 despedida é única e merece ser tratada com a máxima atenção e
                 respeito, e é esse princípio que nos impulsiona a ser uma
                 referência no estado.
-                <br />
-                <br />
-                <br />
-                <br />
                 <br />
                 <br />
                 O crematório da pax é um local onde o acolhimento, o respeito, o

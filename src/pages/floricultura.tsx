@@ -31,7 +31,11 @@ export default function Floricultura() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Header />
+      <Header
+        titulo="Floricultura"
+        subtitulo="Acolhimento, Respeito e Excelência em Cada Detalhe Floral"
+        bg="https://i.pinimg.com/originals/36/33/7e/36337eca020b787d607755649d70b5db.jpg"
+      />
 
       <Container maxW="container.lg">
         <Flex
@@ -41,25 +45,20 @@ export default function Floricultura() {
           align="center"
           mt={10}
         >
-          <Flex py={10} justify="center" align="center">
-            <Heading size="2xl" mb="4" color="black" fontWeight="extrabold">
-              Floricultura
-            </Heading>
-          </Flex>
           <Stack spacing={4} align="center">
-            <Img
-              htmlWidth="500px"
-              htmlHeight="320px"
-              height={{
-                md: '320px',
-              }}
-              objectFit="cover"
-              src="/complexo-2.png"
-              alt="Imagem da central de velórios da pax união do canto da fabril em são luís."
-              borderTopLeftRadius={20}
-              borderBottomLeftRadius={20}
-              borderBottomRightRadius={20}
-            />
+            {/*<Img*/}
+            {/*  htmlWidth="500px"*/}
+            {/*  htmlHeight="320px"*/}
+            {/*  height={{*/}
+            {/*    md: '320px',*/}
+            {/*  }}*/}
+            {/*  objectFit="cover"*/}
+            {/*  src="/complexo-2.png"*/}
+            {/*  alt="Imagem da central de velórios da pax união do canto da fabril em são luís."*/}
+            {/*  borderTopLeftRadius={20}*/}
+            {/*  borderBottomLeftRadius={20}*/}
+            {/*  borderBottomRightRadius={20}*/}
+            {/*/>*/}
             <Box width="100%">
               <Text
                 fontSize={{
@@ -208,34 +207,6 @@ export default function Floricultura() {
         </Box>
         <Divider />
       </Container>
-
-      <Container maxW="container.lg">
-        <Divider />
-      </Container>
-
-      <Flex w="100%" mb={20}>
-        <Container maxW="container.lg">
-          <Box as="section" py="8" mb={5}>
-            <Flex
-              py={6}
-              justifyContent="center"
-              alignItems="center"
-              direction="column"
-            >
-              <Stack spacing={4} align="center">
-                <Text fontWeight="extrabold" fontSize="4xl">
-                  ATENDIMENTO 24H
-                </Text>
-                <Text>Floricultura - Laboratório - Lanchonete</Text>
-                <Button bgColor="primary.dark" color="white">
-                  Entre em Contato
-                </Button>
-              </Stack>
-            </Flex>
-          </Box>
-        </Container>
-      </Flex>
-
       <Footer />
     </>
   );

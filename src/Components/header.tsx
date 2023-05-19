@@ -12,6 +12,7 @@ import {
   DrawerHeader,
   DrawerOverlay,
   Flex,
+  Heading,
   HStack,
   IconButton,
   Link as ChakraLink,
@@ -27,8 +28,15 @@ import Link from 'next/link';
 import { FiMenu } from 'react-icons/fi';
 import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter } from 'react-icons/fa';
 import { useRouter } from 'next/router';
+import { BiChevronRight } from 'react-icons/bi';
 
-function Header() {
+interface IHeaderProps {
+  titulo?: string;
+  subtitulo?: string;
+  bg?: string;
+}
+
+function Header({ titulo, subtitulo, bg }: IHeaderProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const isDesktop = useBreakpointValue({ base: false, lg: true });
 
@@ -108,7 +116,17 @@ function Header() {
   const router = useRouter();
 
   return (
-    <Flex direction="column" width="100%">
+    <Flex
+      direction="column"
+      width="100%"
+      bgSize="cover"
+      style={{
+        backgroundImage: bg
+          ? `url(${bg})`
+          : `url('https://res.cloudinary.com/dxin0mfj4/image/upload/v1684415451/Pax%20Uni%C3%A3o/pax-crem_g4yokp.jpg')`,
+        backgroundPosition: 'center',
+      }}
+    >
       <ScaleFade initialScale={0.9}>
         <Flex
           position="fixed"
@@ -130,7 +148,6 @@ function Header() {
                 color="white"
                 fontSize={30}
                 _hover={{ bgColor: 'primary.darkest' }}
-                width="100%"
                 py={10}
               >
                 Plantão 24H
@@ -139,9 +156,9 @@ function Header() {
           )}
         </Flex>
       </ScaleFade>
-      <Box position="relative" py={12}>
+      <Box position="relative">
         <Box position="relative" zIndex={1}>
-          <Box as="nav" bg="bg-surface" boxShadow="sm">
+          <Box as="nav" bg="bg-surface" boxShadow="sm" width="100%">
             <Container py={{ base: '4', lg: '4' }} maxW="container.lg">
               <HStack spacing="10" justify="space-between">
                 <Box bgColor="white" p={4} borderRadius={10}>
@@ -249,26 +266,33 @@ function Header() {
             </DrawerContent>
           </Drawer>
         </Box>
-        {/* Vídeo como plano de fundo */}
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-          }}
-        >
-          <source
-            src="https://res.cloudinary.com/dxin0mfj4/video/upload/v1684172790/Pax%20Uni%C3%A3o/familia-2_kadtfh.webm"
-            type="video/webm"
-          />
-        </video>
+
+        <Container maxW="container.lg">
+          <Flex
+            backgroundColor="rgba(0, 218, 118, 0.7)"
+            backdropFilter="blur(8px)"
+            p={4}
+            borderRadius={10}
+            justifyContent="center"
+            alignItems="center"
+            my={5}
+          >
+            <Box>
+              <Heading size="2xl" mb="4" color="white" fontWeight="extrabold">
+                {titulo}
+              </Heading>
+              <Heading
+                as="h2"
+                size="md"
+                mb="4"
+                color="white"
+                fontWeight="light"
+              >
+                {subtitulo}
+              </Heading>
+            </Box>
+          </Flex>
+        </Container>
       </Box>
     </Flex>
   );

@@ -132,7 +132,7 @@ export default function NossaHistoria() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Header />
+      <Header titulo="Nossa História" />
 
       <Container maxW="container.lg">
         <Flex
@@ -142,25 +142,7 @@ export default function NossaHistoria() {
           align="center"
           mt={10}
         >
-          <Flex py={10} justify="center" align="center">
-            <Heading size="2xl" mb="4" color="black" fontWeight="extrabold">
-              Nossa História
-            </Heading>
-          </Flex>
           <Stack spacing={4} align="center">
-            <Img
-              htmlWidth="500px"
-              htmlHeight="320px"
-              height={{
-                md: '320px',
-              }}
-              objectFit="cover"
-              src="/complexo-2.png"
-              alt="Imagem da central de velórios da pax união do canto da fabril em são luís."
-              borderTopLeftRadius={20}
-              borderBottomLeftRadius={20}
-              borderBottomRightRadius={20}
-            />
             <Box width="100%">
               <Text
                 fontSize={{

@@ -238,6 +238,8 @@ export default function Home() {
 
                 <Box>
                   <Flex
+                    as={Link}
+                    href="/laboratorio"
                     _hover={{
                       zIndex: 1,
                       transform: 'scale(1.05)',
@@ -259,6 +261,8 @@ export default function Home() {
                 </Box>
                 <Box>
                   <Flex
+                    as={Link}
+                    href="/translado"
                     _hover={{
                       zIndex: 1,
                       transform: 'scale(1.05)',

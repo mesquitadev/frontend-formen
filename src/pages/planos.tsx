@@ -38,7 +38,11 @@ export default function Planos() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Header />
+      <Header
+        titulo="Planos"
+        subtitulo="Confira nossos planos de prevenção familiar."
+        bg="https://i.pinimg.com/originals/a4/14/82/a41482cdc08f7025d7d3b981af0103b8.jpg"
+      />
 
       <Container maxW="container.lg">
         <Flex
@@ -48,11 +52,6 @@ export default function Planos() {
           align="center"
           py={10}
         >
-          <Flex py={10} justify="center" align="center">
-            <Heading size="2xl" mb="4" color="black" fontWeight="extrabold">
-              Planos
-            </Heading>
-          </Flex>
           <SimpleGrid
             columns={{ base: 1, md: 2, lg: 2 }}
             spacing={{ base: '16', lg: '16' }}

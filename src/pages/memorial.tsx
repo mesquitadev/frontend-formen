@@ -31,7 +31,11 @@ export default function Memorial() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Header />
+      <Header
+        titulo="Memorial"
+        subtitulo="Um Espaço de Acolhimento e Respeito para Honrar a Memória dos Entes Queridos"
+        bg="https://res.cloudinary.com/dxin0mfj4/image/upload/v1684529986/Pax%20Uni%C3%A3o/complexo-2_d9micy.png"
+      />
 
       <Container maxW="container.lg">
         <Flex
@@ -41,25 +45,7 @@ export default function Memorial() {
           align="center"
           mt={10}
         >
-          <Flex py={10} justify="center" align="center">
-            <Heading size="2xl" mb="4" color="black" fontWeight="extrabold">
-              Memorial
-            </Heading>
-          </Flex>
           <Stack spacing={4} align="center">
-            <Img
-              htmlWidth="500px"
-              htmlHeight="320px"
-              height={{
-                md: '320px',
-              }}
-              objectFit="cover"
-              src="/complexo-2.png"
-              alt="Imagem da central de velórios da pax união do canto da fabril em são luís."
-              borderTopLeftRadius={20}
-              borderBottomLeftRadius={20}
-              borderBottomRightRadius={20}
-            />
             <Box width="100%">
               <Text
                 fontSize={{
@@ -67,36 +53,129 @@ export default function Memorial() {
                 }}
                 mb="6"
               >
-                Os arranjos florais são uma forma de expressar os sentimentos e
-                homenagear aqueles que já não estão mais entre nós. Eles
-                transmitem a ideia de que, mesmo em momentos de dor, ainda há
-                beleza e vida ao nosso redor. Além disso, a presença de flores
-                pode proporcionar um alívio para a tristeza e ajudar a acalmar o
-                coração. <br /> <br />
-                A equipe de floristas da pax é altamente capacitada e está
-                sempre disposta a ouvir e atender às necessidades de cada
-                cliente, buscando sempre oferecer opções que possam trazer
-                conforto e acolhimento nesse momento tão delicado. <br /> <br />
-                A escolha das flores é muito importante, pois cada espécie tem
-                um significado e uma simbologia própria. Na floricultura da Pax
-                união, as opções são diversas, desde as tradicionais rosas até
-                as delicadas margaridas e lírios. Além disso, é possível
-                personalizar os arranjos de acordo com as preferências do
-                cliente, seja com a escolha de cores específicas ou a inclusão
-                de mensagens ou fotos. <br /> <br />
-                Buscamos oferecer não apenas produtos de qualidade, mas também
-                um atendimento diferenciado e humanizado, com o objetivo de
-                tornar esse momento tão difícil um pouco mais reconfortante. Os
-                floristas são treinados para entender as necessidades de cada
-                cliente e ajudá-los a escolher o arranjo ideal para homenagear
-                seu ente querido. Eles estão sempre disponíveis para esclarecer
-                dúvidas e oferecer suporte emocional. <br /> <br />
-                Por fim, a nossa floricultura é um espaço que busca oferecer um
-                atendimento acolhedor e personalizado, com arranjos florais de
-                qualidade que possam ajudar a eternizar a memória daqueles que
-                já se foram. Afinal, como já dizia o poeta, &ldquo;as flores
-                falam uma linguagem que ultrapassa as barreiras do tempo e do
-                espaço&ldquo;. <br /> <br />
+                O memorial é muito mais do que um cemitério tradicional. É um
+                espaço dedicado a honrar e preservar a memória dos entes
+                queridos, proporcionando um ambiente de acolhimento, respeito e
+                serenidade.
+                <br />
+                <br />
+                No nosso memorial, valorizamos a importância do acolhimento,
+                reconhecendo que esse é um momento delicado e que cada família
+                enfrenta sua própria jornada de luto. Compreendemos que
+                encontrar um local que transmita paz e serenidade é fundamental
+                para honrar a memória dos entes queridos.
+                <br />
+                <br />
+                Ao entrar em nosso memorial, você será recebido por um ambiente
+                tranquilo e acolhedor, projetado para proporcionar conforto e
+                serenidade. Nossos jardins cuidadosamente planejados, com amplas
+                áreas verdes e arborizadas, criam um ambiente de paz e conexão
+                com a natureza. Aqui, você encontrará um refúgio onde poderá
+                refletir, recordar e homenagear seus entes queridos de maneira
+                especial.
+                <br />
+                <br />
+                <b>O Respeito em Cada Detalhe</b>
+                <br />
+                <br />
+                No nosso memorial, o respeito é um valor fundamental que permeia
+                todas as nossas ações. Compreendemos a importância de cuidar dos
+                entes queridos que partiram e respeitar as necessidades e
+                desejos das famílias em momentos de luto.
+                <br />
+                <br />
+                Nossa equipe está treinada para oferecer um atendimento
+                respeitoso e compassivo em todos os momentos. Estamos aqui para
+                ouvir suas histórias, compreender suas necessidades e apoiá-lo
+                em cada etapa do processo. Nosso compromisso é garantir que você
+                se sinta confortável e amparado durante sua visita ao memorial,
+                permitindo que você se concentre em honrar a memória dos seus
+                entes queridos da maneira mais significativa para você.
+                <br />
+                <br />
+                <b>Um Ambiente Arborizado e Sereno</b>
+                <br />
+                <br />
+                Nosso memorial se destaca por sua beleza natural e ambiente
+                arborizado. Cuidamos meticulosamente dos jardins, buscando criar
+                um espaço de paz e tranquilidade, onde as pessoas possam
+                encontrar conforto em meio à natureza.
+                <br />
+                <br />
+                Os jardins são projetados para proporcionar um cenário sereno,
+                com árvores majestosas, caminhos tranquilos e áreas de descanso
+                acolhedoras. Aqui, você encontrará um local onde pode caminhar,
+                sentar-se e refletir, criando momentos de conexão com a memória
+                dos seus entes queridos.
+                <br />
+                <br />
+                <b>Equipe Treinada para Todos os Momentos</b>
+                <br />
+                <br />
+                No nosso memorial, contamos com uma equipe altamente treinada e
+                sensível, pronta para oferecer suporte e assistência em todos os
+                momentos. Sabemos que cada família tem necessidades únicas
+                durante o processo de despedida, e estamos aqui para ajudar a
+                tornar esse momento o mais tranquilo possível.
+                <br />
+                <br />
+                Nossos profissionais são especializados em lidar com situações
+                de luto e estão preparados para oferecer orientação e apoio
+                emocional. Eles estão disponíveis para esclarecer suas dúvidas,
+                fornecer informações sobre os serviços disponíveis no memorial e
+                auxiliá-lo na escolha da melhor opção para homenagear a memória
+                de seu ente querido.
+                <br />
+                <br />
+                Além disso, nossa equipe está pronta para coordenar todos os
+                detalhes logísticos do funeral, como preparação do local,
+                transporte do corpo e realização das cerimônias. Você pode
+                contar conosco para cuidar de todos os aspectos práticos,
+                permitindo que você se concentre em estar presente e se despedir
+                de maneira significativa.
+                <br />
+                <br />
+                <b>Atendimento Humanizado em Todas as Etapas</b>
+                <br />
+                <br />
+                No nosso memorial, acreditamos na importância de um atendimento
+                humanizado, que reconheça a singularidade de cada pessoa e
+                ofereça suporte emocional durante o processo de luto. Nossa
+                equipe está comprometida em proporcionar um ambiente acolhedor e
+                empático, onde você se sinta compreendido e respeitado.
+                <br />
+                <br />
+                Durante todo o processo, desde o momento em que você entra em
+                contato conosco até a realização das cerimônias, nossa equipe
+                estará ao seu lado, oferecendo apoio emocional e orientações
+                personalizadas. Entendemos que o luto é uma jornada individual e
+                que cada pessoa lida com a perda de maneira única. Por isso,
+                estamos aqui para ouvir suas necessidades, respeitar suas
+                escolhas e adaptar nossos serviços para atender às suas
+                expectativas.
+                <br />
+                <br />
+                <b>Convidamos Você a Conhecer Nosso Memorial</b>
+                <br />
+                <br />
+                Convidamos você a visitar nosso memorial e vivenciar a
+                tranquilidade, o respeito e o acolhimento que oferecemos. Aqui,
+                você encontrará um espaço cuidadosamente planejado, onde a
+                natureza e a serenidade se unem para criar um ambiente propício
+                para homenagens e momentos de reflexão.
+                <br />
+                <br />
+                Estamos prontos para auxiliá-lo na organização das cerimônias e
+                na escolha dos serviços mais adequados, garantindo que cada
+                detalhe seja cuidado com o máximo de qualidade e respeito. Nosso
+                objetivo é proporcionar uma despedida significativa e
+                reconfortante, onde a memória de seus entes queridos seja
+                honrada da maneira que eles merecem.
+                <br />
+                <br />
+                Nossa equipe treinada está pronta para oferecer suporte e
+                orientação em todos os momentos, garantindo um atendimento
+                humanizado e respeitoso.
               </Text>
             </Box>
           </Stack>
