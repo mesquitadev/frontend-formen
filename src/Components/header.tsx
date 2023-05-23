@@ -161,7 +161,7 @@ function Header({ titulo, subtitulo, bg }: IHeaderProps) {
           <Box as="nav" bg="bg-surface" boxShadow="sm" width="100%">
             <Container py={{ base: '4', lg: '4' }} maxW="container.lg">
               <HStack spacing="10" justify="space-between">
-                <Box bgColor="white" p={4} borderRadius={10}>
+                <Box as={Link} href="/" bgColor="white" p={4} borderRadius={10}>
                   <Image
                     alt="Logomarca da pax união desde 1976"
                     src="/logo-pax.png"

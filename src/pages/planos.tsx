@@ -21,6 +21,7 @@ import Footer from '@/Components/Footer';
 import { RxCaretDown, RxCaretUp } from 'react-icons/rx';
 import { PricingCard } from '@/Components/PricingCard';
 import Header from '@/Components/header';
+import Link from 'next/link';
 
 export default function Planos() {
   return (
@@ -379,89 +380,209 @@ export default function Planos() {
 
         <Divider />
 
-        <Flex
-          direction="column"
-          justify="center"
-          px={10}
-          py={10}
-          bgColor="primary.dark"
-        >
-          <Heading size="lg" mb="4" color="white">
-            Conheça nosso Complexo
-          </Heading>
-          <SimpleGrid
-            columns={{ base: 1, md: 2, lg: 4 }}
-            spacing={{ base: '16', lg: '16' }}
-            mx="auto"
-            justifyItems="center"
-            alignItems="center"
-          >
+        <Box as="section" id="servicos">
+          <Flex direction="column" justify="space-between" py={10}>
             <Box>
-              <Flex
-                borderRadius={10}
-                bgColor="card.secondary"
-                w={195}
-                h={195}
-                mb={2}
-                justify="center"
-                align="center"
-              >
-                <Img src="/pomba.png" />
-              </Flex>
-              <Text fontSize="xl" fontWeight="bold" color="white">
-                Central de Velórios
-              </Text>
+              <Heading size="lg" mb="4" color="black">
+                Conheça nossos serviços
+              </Heading>
             </Box>
-            <Box>
-              <Flex
-                borderRadius={10}
-                bgColor="card.secondary"
-                w={195}
-                h={195}
-                mb={2}
-                justify="center"
-                align="center"
-              >
-                <Img src="/lanchonete.png" />
-              </Flex>
-              <Text fontSize="xl" fontWeight="bold" color="white">
-                Lanchonete
-              </Text>
-            </Box>
-            <Box>
-              <Flex
-                borderRadius={10}
-                bgColor="card.secondary"
-                w={195}
-                h={195}
-                mb={2}
-                justify="center"
-                align="center"
-              >
-                <Img src="/flores.png" />
-              </Flex>
-              <Text fontSize="xl" fontWeight="bold" color="white">
-                Floricultura
-              </Text>
-            </Box>
-            <Box>
-              <Flex
-                borderRadius={10}
-                bgColor="card.secondary"
-                w={195}
-                h={195}
-                mb={2}
-                justify="center"
-                align="center"
-              >
-                <Img src="/lapide.png" />
-              </Flex>
-              <Text fontSize="xl" fontWeight="bold" color="white">
-                Memorial
-              </Text>
-            </Box>
-          </SimpleGrid>
-        </Flex>
+            <SimpleGrid
+              columns={{ base: 1, sm: 2, md: 3, lg: 4 }}
+              spacing={{ base: '8', sm: '16', md: '16', lg: '16' }}
+              mx="auto"
+              justifyItems="center"
+              alignItems="center"
+            >
+              <Box>
+                <Flex
+                  as={Link}
+                  href="/central-de-velorios"
+                  _hover={{
+                    zIndex: 1,
+                    transform: 'scale(1.05)',
+                    shadow: 'dark-lg',
+                  }}
+                  borderRadius={10}
+                  bgColor="primary.dark"
+                  w={195}
+                  h={195}
+                  mb={2}
+                  justify="center"
+                  align="center"
+                >
+                  <Img src="/pomba.svg" />
+                </Flex>
+                <Text fontSize="xl" fontWeight="bold" color="black">
+                  Central de Velórios
+                </Text>
+              </Box>
+              <Box>
+                <Flex
+                  as={Link}
+                  href="/lanchonete"
+                  _hover={{
+                    zIndex: 1,
+                    transform: 'scale(1.05)',
+                    shadow: 'dark-lg',
+                  }}
+                  borderRadius={10}
+                  bgColor="primary.dark"
+                  w={195}
+                  h={195}
+                  mb={2}
+                  justify="center"
+                  align="center"
+                >
+                  <Img src="/lanchonete.svg" />
+                </Flex>
+                <Text fontSize="xl" fontWeight="bold" color="black">
+                  Lanchonete
+                </Text>
+              </Box>
+              <Box>
+                <Flex
+                  as={Link}
+                  href="/floricultura"
+                  _hover={{
+                    zIndex: 1,
+                    transform: 'scale(1.05)',
+                    shadow: 'dark-lg',
+                  }}
+                  borderRadius={10}
+                  bgColor="primary.dark"
+                  w={195}
+                  h={195}
+                  mb={2}
+                  justify="center"
+                  align="center"
+                >
+                  <Img src="/floricultura.svg" />
+                </Flex>
+                <Text fontSize="xl" fontWeight="bold" color="black">
+                  Floricultura
+                </Text>
+              </Box>
+              <Box>
+                <Flex
+                  as={Link}
+                  href="/memorial"
+                  _hover={{
+                    zIndex: 1,
+                    transform: 'scale(1.05)',
+                    shadow: 'dark-lg',
+                  }}
+                  borderRadius={10}
+                  bgColor="primary.dark"
+                  w={195}
+                  h={195}
+                  mb={2}
+                  justify="center"
+                  align="center"
+                >
+                  <Img src="/cemetery.png" />
+                </Flex>
+                <Text fontSize="xl" fontWeight="bold" color="black">
+                  Memorial
+                </Text>
+              </Box>
+              <Box>
+                <Flex
+                  as={Link}
+                  href="/crematorio"
+                  _hover={{
+                    zIndex: 1,
+                    transform: 'scale(1.05)',
+                    shadow: 'dark-lg',
+                  }}
+                  borderRadius={10}
+                  bgColor="primary.dark"
+                  w={195}
+                  h={195}
+                  mb={2}
+                  justify="center"
+                  align="center"
+                >
+                  <Img src="/ashes.png" />
+                </Flex>
+                <Text fontSize="xl" fontWeight="bold" color="black">
+                  Crematório
+                </Text>
+              </Box>
+
+              <Box>
+                <Flex
+                  as={Link}
+                  href="/laboratorio"
+                  _hover={{
+                    zIndex: 1,
+                    transform: 'scale(1.05)',
+                    shadow: 'dark-lg',
+                  }}
+                  borderRadius={10}
+                  bgColor="primary.dark"
+                  w={195}
+                  h={195}
+                  mb={2}
+                  justify="center"
+                  align="center"
+                >
+                  <Img src="/medical-lab.png" />
+                </Flex>
+                <Text fontSize="xl" fontWeight="bold" color="black">
+                  Laboratório
+                </Text>
+              </Box>
+              <Box>
+                <Flex
+                  as={Link}
+                  href="/translado"
+                  _hover={{
+                    zIndex: 1,
+                    transform: 'scale(1.05)',
+                    shadow: 'dark-lg',
+                  }}
+                  borderRadius={10}
+                  bgColor="primary.dark"
+                  w={195}
+                  h={195}
+                  mb={2}
+                  justify="center"
+                  align="center"
+                >
+                  <Img src="/airplane.png " />
+                </Flex>
+                <Text fontSize="xl" fontWeight="bold" color="black">
+                  Translado
+                </Text>
+              </Box>
+
+              <Box>
+                <Flex
+                  _hover={{
+                    zIndex: 1,
+                    transform: 'scale(1.05)',
+                    shadow: 'dark-lg',
+                  }}
+                  as={Link}
+                  href="/planos"
+                  borderRadius={10}
+                  bgColor="primary.dark"
+                  w={195}
+                  h={195}
+                  mb={2}
+                  justify="center"
+                  align="center"
+                >
+                  <Img src="/parchment.png" />
+                </Flex>
+                <Text fontSize="xl" fontWeight="bold" color="black" maxW="100%">
+                  Planos
+                </Text>
+              </Box>
+            </SimpleGrid>
+          </Flex>
+        </Box>
 
         <Divider />
 
