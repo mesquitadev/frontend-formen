@@ -391,42 +391,42 @@ export default function Home() {
               >
                 <BlogCard
                   category="Luto, Comunidade"
-                  media="grupo-apoio.jpg"
-                  title="Conheça o nosso grupo de enfrentamento ao Luto"
-                  description="Você não está sozinho(a). O luto é uma jornada dolorosa, mas juntos podemos superar. Apresentamos o Grupo de Enfrentamento ao Luto, um espaço seguro e acolhedor para compartilhar experiências, encontrar apoio e descobrir forças dentro de si mesmo(a). Aqui, você encontrará uma comunidade de pessoas que entendem a dor que você está passando e estão dispostas a caminhar ao seu lado."
-                  href="#"
+                  media="https://img.huffingtonpost.com/asset/5d0252652500006813e4f3f0.jpeg?ops=1778_1000"
+                  title="Supere o luto e honre a memória"
+                  description="Dicas e conselhos para honrar a memória do seu ente querido e seguir em frente."
+                  href="blog/dor-luto"
                   author={{
                     name: 'Pax União',
-                    href: '#',
+                    href: 'dor-luto',
                   }}
                 />
                 <BlogCard
-                  category="Valentine"
-                  media="https://images.unsplash.com/photo-1516401266446-6432a8a07d41?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MzR8fHZhbGVudGluZXxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
-                  title="The Best Excuses To Spend A Cozy Valentine’s Day In"
-                  description="As much as I love an over-the-top, romantic Valentine’s date, part of me is looking"
-                  href="#"
+                  category="Dor, Luto"
+                  media="https://womenintheworld.org/wp-content/uploads/2022/02/depressed-young-woman-scaled.jpg"
+                  title="Perdi alguém, o que fazer? Como lidar com a papelada em um momento tão delicado?"
+                  description="Confira algumas dicas para ajudar nesse momento!"
+                  href="blog/perdi-alguem"
                   author={{
-                    name: 'Segun Adebayo',
-                    href: '#',
+                    name: 'Pax União',
+                    href: 'perdi-alguem',
                   }}
                 />
                 <BlogCard
-                  category="My Style"
-                  media="https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Nnx8c2hvcHBpbmd8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
-                  title="Top 5 Best-Sellers, Most-Loved & Favorite Buys of 2020"
-                  description="HAAAAPPY 2021! It’s the first Monday of the year and I have never been so ready for"
-                  href="#"
+                  category="Dor, Pet"
+                  media="https://www.minstervet.com/wp-content/uploads/2018/10/mvc-001.jpg"
+                  title="Confira algumas dicas para ajudar nesse momento!"
+                  description="Confira essas dicas que podem você ajudar a lidar melhor com esse momento."
+                  href="blog/perdi-pet"
                   author={{
-                    name: 'Segun Adebayo',
-                    href: '#',
+                    name: 'Pax União',
+                    href: 'perdi-pet',
                   }}
                 />
               </SimpleGrid>
-              <ChakraLink fontSize="xl" fontWeight="bold" color="primary.dark">
-                <span>Ver todos</span>
-                <Box as={BsArrowRight} display="inline-block" ms="2" />
-              </ChakraLink>
+              {/*<ChakraLink fontSize="xl" fontWeight="bold" color="primary.dark">*/}
+              {/*  <span>Ver todos</span>*/}
+              {/*  <Box as={BsArrowRight} display="inline-block" ms="2" />*/}
+              {/*</ChakraLink>*/}
             </Box>
           </Box>
 
