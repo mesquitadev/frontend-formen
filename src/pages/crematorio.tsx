@@ -391,7 +391,13 @@ export default function Memorial() {
                   ATENDIMENTO 24H
                 </Text>
                 <Text>Floricultura - Laboratório - Lanchonete</Text>
-                <Button bgColor="primary.dark" color="white">
+                <Button
+                  bgColor="primary.dark"
+                  color="white"
+                  as={Link}
+                  href="https://api.whatsapp.com/send?phone=5598970085380"
+                  target="_blank"
+                >
                   Entre em Contato
                 </Button>
               </Stack>

@@ -278,6 +278,9 @@ export default function Planos() {
               icon={<Img src="/perola.png" width={20} height={20} />}
               button={
                 <Button
+                  as={Link}
+                  href="https://api.whatsapp.com/send?phone=5598970085380&text=Ol%C3%A1%2C%20Quero%20informa%C3%A7%C3%B5es%20sobre%20o%20plano%20Safira"
+                  target="_blank"
                   bgColor="primary.dark"
                   size="sm"
                   w="full"
@@ -306,6 +309,9 @@ export default function Planos() {
               icon={<Img src="/esmeralda.png" width={20} height={20} />}
               button={
                 <Button
+                  as={Link}
+                  href="https://api.whatsapp.com/send?phone=5598970085380&text=Ol%C3%A1%2C%20Quero%20informa%C3%A7%C3%B5es%20sobre%20o%20plano%20Esmeralda"
+                  target="_blank"
                   bgColor="primary.dark"
                   size="sm"
                   w="full"
@@ -334,6 +340,9 @@ export default function Planos() {
               icon={<Img src="/rubi.png" width={20} height={20} />}
               button={
                 <Button
+                  as={Link}
+                  href="https://api.whatsapp.com/send?phone=5598970085380&text=Ol%C3%A1%2C%20Quero%20informa%C3%A7%C3%B5es%20sobre%20o%20plano%Rubi"
+                  target="_blank"
                   bgColor="primary.dark"
                   size="sm"
                   w="full"
@@ -353,15 +362,18 @@ export default function Planos() {
                 price: '$29',
                 name: 'Plano Safira',
                 features: [
-                  'All application UI components',
-                  'Lifetime access',
-                  'Use on unlimited projects',
-                  'Free Updates',
+                  'Funeral Super Luxo',
+                  'Cremação familiar',
+                  'Carência de 120 dias',
+                  '50% de desconto na aquisição da cremação individual',
                 ],
               }}
               icon={<Img src="/safira.png" width={20} height={20} />}
               button={
                 <Button
+                  as={Link}
+                  href="https://api.whatsapp.com/send?phone=5598970085380&text=Ol%C3%A1%2C%20Quero%20informa%C3%A7%C3%B5es%20sobre%20o%20plano%20Safira"
+                  target="_blank"
                   bgColor="primary.dark"
                   size="sm"
                   w="full"
@@ -597,7 +609,13 @@ export default function Planos() {
               ATENDIMENTO 24H
             </Text>
             <Text>Floricultura - Laboratório - Lanchonete</Text>
-            <Button bgColor="primary.dark" color="white">
+            <Button
+              bgColor="primary.dark"
+              color="white"
+              as={Link}
+              href="https://api.whatsapp.com/send?phone=5598970085380"
+              target="_blank"
+            >
               Entre em Contato
             </Button>
           </Stack>
