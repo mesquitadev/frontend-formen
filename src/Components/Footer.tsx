@@ -118,7 +118,7 @@ export default function Footer() {
     <Box as="footer" color="black" py="64px">
       <ChakraLink
         as={Link}
-        href="https://api.whatsapp.com/send?phone=SEU_NUMERO_DE_TELEFONE"
+        href="https://api.whatsapp.com/send?phone=5598970085380"
         isExternal
       >
         <IconButton
