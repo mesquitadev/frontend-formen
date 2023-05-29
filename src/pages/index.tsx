@@ -460,7 +460,7 @@ export default function Home() {
                 </Text>
                 <Button
                   as={Link}
-                  href="tel:5598970085380"
+                  href="tel:9832310528"
                   bgColor="primary.dark"
                   _hover={{
                     bgColor: 'primary.darkest',

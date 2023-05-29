@@ -70,7 +70,7 @@ export default function Footer() {
     {
       label: 'Instagram',
       icon: <FaInstagram />,
-      href: '#',
+      href: 'https://instagram.com/paxuniaoma',
     },
     {
       label: 'LinkedIn',

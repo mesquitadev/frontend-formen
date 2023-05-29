@@ -82,7 +82,7 @@ function Header({ titulo, subtitulo, bg }: IHeaderProps) {
     {
       label: 'Instagram',
       icon: <FaInstagram />,
-      href: '#',
+      href: 'https://instagram.com/paxuniaoma',
     },
     {
       label: 'LinkedIn',

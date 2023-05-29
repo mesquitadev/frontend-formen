@@ -76,7 +76,7 @@ const Hero = () => {
     {
       label: 'Instagram',
       icon: <FaInstagram />,
-      href: '#',
+      href: 'https://instagram.com/paxuniaoma',
     },
     {
       label: 'LinkedIn',
