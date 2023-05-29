@@ -19,14 +19,16 @@ export default function Planos() {
   return (
     <>
       <Head>
-        <title>Pax União - Eternizar Memórias é um Ato de Amor!</title>
+        <title>
+          Pax União - Eternizar Memórias é um Ato de Amor! | Translado
+        </title>
         <meta
           name="description"
-          content="Precisa de ajuda com ações de veículos apreendidos e revisional? Nossos advogados especializados estão prontos para ajudá-lo a obter a melhor solução para o seu caso. Entre em contato conosco agora mesmo para uma consulta gratuita."
+          content="O serviço de translado da Pax União garante uma transferência segura e respeitosa do ente querido de um local para outro, seja dentro do país ou internacionalmente. Contamos com uma equipe especializada e experiente que cuida de todos os aspectos logísticos e burocráticos envolvidos no processo de translado funerário. Nossos profissionais se dedicam a garantir que a jornada seja realizada com dignidade e respeito, proporcionando tranquilidade para a família. Independentemente da distância ou destino, a Pax União oferece suporte completo durante todo o processo de translado, coordenando todos os detalhes para garantir uma experiência tranquila e sem complicações. Confie em nossa experiência e compromisso para realizar o translado do seu ente querido com cuidado e respeito."
         />
         <meta
           name="keywords"
-          content="ações de veículos apreendidos, revisional, advogados especializados, consultoria jurídica"
+          content="Funerária em São Luís, Serviços funerários em São Luís, Cuidados funerários em São Luís, Cerimônias fúnebres em São Luís, Cremação em São Luís, Sepultamento em São Luís, Jazigos em São Luís, Translado funerário em São Luís, Velório em São Luís, Luto em São Luís, Assistência funerária em São Luís, Funeral tradicional em São Luís, Urnas funerárias em São Luís, Coroas de flores em São Luís, Memorialização em São Luís, Funerária Pax União em São Luís, Serviços funerários de qualidade em São Luís"
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />

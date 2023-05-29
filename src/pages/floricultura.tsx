@@ -20,14 +20,16 @@ export default function Floricultura() {
   return (
     <>
       <Head>
-        <title>Pax União - Eternizar Memórias é um Ato de Amor!</title>
+        <title>
+          Pax União - Eternizar Memórias é um Ato de Amor! | Floricultura
+        </title>
         <meta
           name="description"
-          content="Precisa de ajuda com ações de veículos apreendidos e revisional? Nossos advogados especializados estão prontos para ajudá-lo a obter a melhor solução para o seu caso. Entre em contato conosco agora mesmo para uma consulta gratuita."
+          content="A Floricultura da Pax União oferece uma ampla variedade de arranjos florais e coroas de flores para homenagear e expressar sentimentos durante os momentos de luto. Nossas flores frescas e de qualidade são cuidadosamente selecionadas para transmitir conforto e simbolizar afeto. Nossa equipe dedicada está pronta para ajudar a escolher as opções mais adequadas, de acordo com suas preferências e necessidades. Além disso, oferecemos entrega rápida e eficiente para garantir que as flores cheguem ao local desejado no momento certo. Confie na Floricultura da Pax União para tornar sua homenagem floral especial e significativa. Entre em contato conosco e descubra as opções disponíveis."
         />
         <meta
           name="keywords"
-          content="ações de veículos apreendidos, revisional, advogados especializados, consultoria jurídica"
+          content="Funerária em São Luís, Serviços funerários em São Luís, Cuidados funerários em São Luís, Cerimônias fúnebres em São Luís, Cremação em São Luís, Sepultamento em São Luís, Jazigos em São Luís, Translado funerário em São Luís, Velório em São Luís, Luto em São Luís, Assistência funerária em São Luís, Funeral tradicional em São Luís, Urnas funerárias em São Luís, Coroas de flores em São Luís, Memorialização em São Luís, Funerária Pax União em São Luís, Serviços funerários de qualidade em São Luís"
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />

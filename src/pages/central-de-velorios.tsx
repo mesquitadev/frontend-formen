@@ -20,14 +20,16 @@ export default function CentralDeVelorios() {
   return (
     <>
       <Head>
-        <title>Pax União - Eternizar Memórias é um Ato de Amor!</title>
+        <title>
+          Pax União - Eternizar Memórias é um Ato de Amor! | Central de Velórios
+        </title>
         <meta
           name="description"
-          content="Precisa de ajuda com ações de veículos apreendidos e revisional? Nossos advogados especializados estão prontos para ajudá-lo a obter a melhor solução para o seu caso. Entre em contato conosco agora mesmo para uma consulta gratuita."
+          content="A Central de Velórios da Pax União oferece um ambiente acolhedor e tranquilo para realizar cerimônias de despedida dignas e respeitosas. Nossas instalações são projetadas para proporcionar conforto aos familiares e amigos durante esse momento de luto. Contamos com serviços completos, incluindo preparação do corpo, velório, assistência 24 horas, translado funerário e opções personalizadas para atender às necessidades individuais. Confie na experiência e dedicação da Pax União para prestar o apoio necessário durante esse momento delicado. Entre em contato conosco e saiba mais sobre nossos serviços de Central de Velórios."
         />
         <meta
           name="keywords"
-          content="ações de veículos apreendidos, revisional, advogados especializados, consultoria jurídica"
+          content="Funerária em São Luís, Serviços funerários em São Luís, Cuidados funerários em São Luís, Cerimônias fúnebres em São Luís, Cremação em São Luís, Sepultamento em São Luís, Jazigos em São Luís, Translado funerário em São Luís, Velório em São Luís, Luto em São Luís, Assistência funerária em São Luís, Funeral tradicional em São Luís, Urnas funerárias em São Luís, Coroas de flores em São Luís, Memorialização em São Luís, Funerária Pax União em São Luís, Serviços funerários de qualidade em São Luís"
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />

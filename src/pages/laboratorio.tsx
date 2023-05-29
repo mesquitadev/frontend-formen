@@ -19,14 +19,16 @@ export default function Planos() {
   return (
     <>
       <Head>
-        <title>Pax União - Eternizar Memórias é um Ato de Amor!</title>
+        <title>
+          Pax União - Eternizar Memórias é um Ato de Amor! | Laboratório
+        </title>
         <meta
           name="description"
-          content="Precisa de ajuda com ações de veículos apreendidos e revisional? Nossos advogados especializados estão prontos para ajudá-lo a obter a melhor solução para o seu caso. Entre em contato conosco agora mesmo para uma consulta gratuita."
+          content="O Laboratório da Pax União oferece serviços de análises clínicas com qualidade e precisão, visando contribuir para o diagnóstico e cuidado da saúde. Nossos profissionais altamente capacitados e equipamentos modernos garantem resultados confiáveis e rápidos. Realizamos uma ampla gama de exames laboratoriais, incluindo análises bioquímicas, hematológicas, hormonais e microbiológicas. Além disso, temos um atendimento acolhedor e humanizado, buscando oferecer conforto e segurança aos nossos pacientes. Conte com o Laboratório da Pax União para obter resultados precisos e confiáveis em seu diagnóstico. Entre em contato conosco para agendar seu exame."
         />
         <meta
           name="keywords"
-          content="ações de veículos apreendidos, revisional, advogados especializados, consultoria jurídica"
+          content="Funerária em São Luís, Serviços funerários em São Luís, Cuidados funerários em São Luís, Cerimônias fúnebres em São Luís, Cremação em São Luís, Sepultamento em São Luís, Jazigos em São Luís, Translado funerário em São Luís, Velório em São Luís, Luto em São Luís, Assistência funerária em São Luís, Funeral tradicional em São Luís, Urnas funerárias em São Luís, Coroas de flores em São Luís, Memorialização em São Luís, Funerária Pax União em São Luís, Serviços funerários de qualidade em São Luís"
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />

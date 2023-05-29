@@ -121,14 +121,16 @@ export default function NossaHistoria() {
   return (
     <>
       <Head>
-        <title>Pax União - Eternizar Memórias é um Ato de Amor!</title>
+        <title>
+          Pax União - Eternizar Memórias é um Ato de Amor! | Nossa História
+        </title>
         <meta
           name="description"
-          content="Precisa de ajuda com ações de veículos apreendidos e revisional? Nossos advogados especializados estão prontos para ajudá-lo a obter a melhor solução para o seu caso. Entre em contato conosco agora mesmo para uma consulta gratuita."
+          content="A história da Pax União remonta a 1976, quando nossa empresa foi fundada com o objetivo de oferecer serviços funerários de qualidade, atendendo às necessidades das famílias em momentos de luto. Ao longo dos anos, crescemos e nos consolidamos como referência no setor, graças à nossa dedicação, profissionalismo e compromisso com o cuidado e respeito aos entes queridos. Nossa trajetória é marcada por milhares de famílias atendidas, e nos orgulhamos de poder oferecer suporte e assistência em momentos delicados. Saiba mais sobre a nossa história e como nos tornamos uma empresa de confiança e respeito no ramo funerário."
         />
         <meta
           name="keywords"
-          content="ações de veículos apreendidos, revisional, advogados especializados, consultoria jurídica"
+          content="Funerária em São Luís, Serviços funerários em São Luís, Cuidados funerários em São Luís, Cerimônias fúnebres em São Luís, Cremação em São Luís, Sepultamento em São Luís, Jazigos em São Luís, Translado funerário em São Luís, Velório em São Luís, Luto em São Luís, Assistência funerária em São Luís, Funeral tradicional em São Luís, Urnas funerárias em São Luís, Coroas de flores em São Luís, Memorialização em São Luís, Funerária Pax União em São Luís, Serviços funerários de qualidade em São Luís"
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />

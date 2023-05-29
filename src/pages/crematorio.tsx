@@ -20,14 +20,16 @@ export default function Memorial() {
   return (
     <>
       <Head>
-        <title>Pax União - Eternizar Memórias é um Ato de Amor!</title>
+        <title>
+          Pax União - Eternizar Memórias é um Ato de Amor! | Crematório
+        </title>
         <meta
           name="description"
-          content="Precisa de ajuda com ações de veículos apreendidos e revisional? Nossos advogados especializados estão prontos para ajudá-lo a obter a melhor solução para o seu caso. Entre em contato conosco agora mesmo para uma consulta gratuita."
+          content="O Crematório da Pax União oferece um serviço de cremação digno e respeitoso para aqueles que optam por essa opção. Nossas instalações são projetadas para proporcionar um ambiente tranquilo e sereno, onde familiares e amigos podem se despedir de seus entes queridos de maneira íntima e significativa. Contamos com equipamentos modernos e profissionais experientes que garantem a realização do processo de cremação de forma ética e cuidadosa. Além disso, oferecemos assistência completa, incluindo a preparação do corpo, translado funerário e opções personalizadas para atender às preferências individuais. Confie na Pax União para fornecer um serviço de cremação de qualidade durante esse momento sensível. Entre em contato conosco para mais informações sobre nosso Crematório."
         />
         <meta
           name="keywords"
-          content="ações de veículos apreendidos, revisional, advogados especializados, consultoria jurídica"
+          content="Funerária em São Luís, Serviços funerários em São Luís, Cuidados funerários em São Luís, Cerimônias fúnebres em São Luís, Cremação em São Luís, Sepultamento em São Luís, Jazigos em São Luís, Translado funerário em São Luís, Velório em São Luís, Luto em São Luís, Assistência funerária em São Luís, Funeral tradicional em São Luís, Urnas funerárias em São Luís, Coroas de flores em São Luís, Memorialização em São Luís, Funerária Pax União em São Luís, Serviços funerários de qualidade em São Luís"
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />

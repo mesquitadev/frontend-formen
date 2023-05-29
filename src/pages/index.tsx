@@ -27,11 +27,11 @@ export default function Home() {
         <title>Pax União - Eternizar Memórias é um Ato de Amor!</title>
         <meta
           name="description"
-          content="Precisa de ajuda com ações de veículos apreendidos e revisional? Nossos advogados especializados estão prontos para ajudá-lo a obter a melhor solução para o seu caso. Entre em contato conosco agora mesmo para uma consulta gratuita."
+          content="A Funerária Pax União oferece serviços funerários completos, cuidados funerários personalizados, preparação de corpos, cerimônias fúnebres, cremação, sepultamento, translado funerário e muito mais. Nossos profissionais estão disponíveis 24 horas para prestar assistência empática e garantir que cada detalhe seja cuidado durante o momento de luto. Conte com nossa experiência e compromisso para realizar um funeral tradicional e memorializar seu ente querido de forma respeitosa. Entre em contato conosco e saiba como podemos ajudar."
         />
         <meta
           name="keywords"
-          content="ações de veículos apreendidos, revisional, advogados especializados, consultoria jurídica"
+          content="Funerária em São Luís, Serviços funerários em São Luís, Cuidados funerários em São Luís, Cerimônias fúnebres em São Luís, Cremação em São Luís, Sepultamento em São Luís, Jazigos em São Luís, Translado funerário em São Luís, Velório em São Luís, Luto em São Luís, Assistência funerária em São Luís, Funeral tradicional em São Luís, Urnas funerárias em São Luís, Coroas de flores em São Luís, Memorialização em São Luís, Funerária Pax União em São Luís, Serviços funerários de qualidade em São Luís"
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />

@@ -27,14 +27,14 @@ export default function Planos() {
   return (
     <>
       <Head>
-        <title>Pax União - Eternizar Memórias é um Ato de Amor!</title>
+        <title>Pax União - Eternizar Memórias é um Ato de Amor! | Planos</title>
         <meta
           name="description"
-          content="Precisa de ajuda com ações de veículos apreendidos e revisional? Nossos advogados especializados estão prontos para ajudá-lo a obter a melhor solução para o seu caso. Entre em contato conosco agora mesmo para uma consulta gratuita."
+          content="Os planos da Pax União oferecem tranquilidade e segurança para você e sua família, garantindo que seus desejos e necessidades sejam atendidos durante o momento de luto. Nossos planos funerários abrangem uma variedade de opções, incluindo serviços de preparação do corpo, cerimônias fúnebres, cremação, sepultamento e traslado funerário. Com a Pax União, você pode escolher um plano que se adapte às suas preferências e orçamento, garantindo que tudo seja organizado antecipadamente e de acordo com seus desejos. Nossa equipe está disponível para orientá-lo na escolha do plano mais adequado e esclarecer todas as suas dúvidas. Garanta a tranquilidade e o cuidado que sua família merece com os planos da Pax União."
         />
         <meta
           name="keywords"
-          content="ações de veículos apreendidos, revisional, advogados especializados, consultoria jurídica"
+          content="Funerária em São Luís, Serviços funerários em São Luís, Cuidados funerários em São Luís, Cerimônias fúnebres em São Luís, Cremação em São Luís, Sepultamento em São Luís, Jazigos em São Luís, Translado funerário em São Luís, Velório em São Luís, Luto em São Luís, Assistência funerária em São Luís, Funeral tradicional em São Luís, Urnas funerárias em São Luís, Coroas de flores em São Luís, Memorialização em São Luís, Funerária Pax União em São Luís, Serviços funerários de qualidade em São Luís"
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
