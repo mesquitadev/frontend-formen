@@ -460,7 +460,7 @@ export default function NossaHistoria() {
                   bgColor="primary.dark"
                   color="white"
                   as={Link}
-                  href="https://api.whatsapp.com/send?phone=5598970085380"
+                  href="https://api.whatsapp.com/send?phone=5598992330054"
                   target="_blank"
                 >
                   Entre em Contato
