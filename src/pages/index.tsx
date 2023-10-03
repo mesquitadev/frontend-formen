@@ -351,9 +351,11 @@ export default function Home() {
   //   }
   // }, []);
 
-  const handleSendWhatsappMessage = () => {
-    const imageUrl = 'https://placehold.co/200x270?text=Produto+Sem+Imagem'; // Substitua 'URL_DA_IMAGEM' pelo URL da imagem que você deseja compartilhar.
-    const message = 'Sua mensagem aqui' + ' ' + imageUrl;
+  const handleSendWhatsappMessage = (imageUrl: string) => {
+    const image = imageUrl
+      ? imageUrl
+      : 'https://placehold.co/200x270?text=Produto+Sem+Imagem';
+    const message = 'Sua mensagem aqui' + ' ' + image;
 
     // Construa o link do WhatsApp com a mensagem e a imagem
     const whatsappLink = `https://api.whatsapp.com/send?phone=+5598991741075&text=${encodeURIComponent(
@@ -705,7 +707,13 @@ export default function Home() {
                         </Box>
 
                         <Box mt={2}>
-                          <Button onClick={() => handleSendWhatsappMessage()}>
+                          <Button
+                            onClick={() =>
+                              handleSendWhatsappMessage(
+                                data.attributes.imagem.data?.attributes.url,
+                              )
+                            }
+                          >
                             Verificar Disponibilidade
                           </Button>
                         </Box>
