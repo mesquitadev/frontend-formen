@@ -12,6 +12,7 @@ import {
   Skeleton,
   SkeletonText,
   Text,
+  Button,
   useColorModeValue,
   useToast,
 } from '@chakra-ui/react';
@@ -19,6 +20,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import Hero from '@/Components/hero';
 import { client } from '@/service';
 import { gql } from '@apollo/client';
+import Link from 'next/link';
 import {
   Pagination,
   PaginationContainer,
@@ -29,95 +31,6 @@ import {
   PaginationSeparator,
   usePagination,
 } from '@ajna/pagination';
-
-function ProductCard({ data }: any) {
-  return (
-    <Flex
-      key={data.id}
-      p={50}
-      w="full"
-      alignItems="center"
-      justifyContent="center"
-    >
-      <Box
-        bg={useColorModeValue('white', 'gray.800')}
-        maxW="sm"
-        borderWidth="1px"
-        rounded="lg"
-        shadow="lg"
-        position="relative"
-      >
-        <Image
-          src={
-            data.attributes.imagem.data?.attributes.url
-              ? data.attributes.imagem.data?.attributes.url
-              : 'https://placehold.co/200x270?text=Produto+Sem+Imagem'
-          }
-          alt={`Imagem do produto ${data?.attributes?.nome}`}
-          roundedTop="lg"
-          minWidth={200}
-        />
-
-        <Box px="3" py="2">
-          <Flex mt="1" justifyContent="space-between" alignContent="center">
-            <Box
-              fontSize="2xl"
-              fontWeight="semibold"
-              as="h4"
-              lineHeight="tight"
-              isTruncated
-            >
-              {data?.attributes.nome}
-            </Box>
-          </Flex>
-          <Box mt={2}>
-            <Badge colorScheme="red" color="white">
-              {data?.attributes.marca_fabricante?.data?.attributes?.nome
-                ? data?.attributes.marca_fabricante?.data?.attributes?.nome
-                : 'Não Cadastrado'}
-            </Badge>
-          </Box>
-
-          <Box mt={2}>
-            <Text>Tamanho:</Text>
-            <Badge colorScheme="red" color="white">
-              {data?.attributes.tamanho?.data?.attributes?.tamanho
-                ? data?.attributes.tamanho?.data?.attributes?.tamanho
-                : 'Não Cadastrado'}
-            </Badge>
-          </Box>
-
-          <Box mt={2}>
-            <Text>Categoria:</Text>
-            <Badge colorScheme="red" color="white">
-              {data?.attributes.categoria?.data?.attributes?.nome
-                ? data?.attributes.categoria?.data?.attributes?.nome
-                : 'Não Cadastrado'}
-            </Badge>
-          </Box>
-
-          <Box mt={2}>
-            <Text>Disponibilidade:</Text>
-            <Badge
-              colorScheme={data?.attributes.em_estoque ? 'green' : 'red'}
-              color="white"
-            >
-              {data?.attributes.em_estoque ? 'Disponível' : 'Indisponivel'}
-            </Badge>
-          </Box>
-
-          <Flex justifyContent="space-between" alignContent="center">
-            <Box fontSize="2xl" color={useColorModeValue('gray.800', 'white')}>
-              <Text fontWeight="bold">
-                R$: {data?.attributes.preco?.toFixed(2)}
-              </Text>
-            </Box>
-          </Flex>
-        </Box>
-      </Box>
-    </Flex>
-  );
-}
 
 export default function Home() {
   const [produtos, setProdutos] = useState<any>([]);
@@ -377,6 +290,86 @@ export default function Home() {
     console.log('request new data with ->', nextPage);
   };
 
+  // const handleSendWhatsappMessage = useCallback((urlDaImagem: string) => {
+  //   const numeroWhatsApp = '+5598991741075';
+  //   const mensagem = 'Olá, esse produto ainda está disponível?';
+  //   // Construa o link com a URL da imagem
+  //   const linkDaImagem = urlDaImagem
+  //     ? urlDaImagem
+  //     : 'https://placehold.co/200x270?text=Produto+Sem+Imagem';
+  //   // Concatene a mensagem com o link da imagem1
+  //   const mensagemComLink = `${mensagem}\n${linkDaImagem}`;
+  //
+  //   // Encode a mensagem para usar na URL
+  //   const mensagemEncoded = encodeURIComponent(mensagemComLink);
+  //
+  //   // Construa o link do WhatsApp
+  //   const linkDoWhatsApp = `https://api.whatsapp.com/send?phone=${numeroWhatsApp}&text=${mensagemEncoded}`;
+  //
+  //   window.open(linkDoWhatsApp, '_blank');
+  // }, []);
+
+  // useEffect(() => {
+  //   if (navigator.share === undefined) {
+  //     if (window.location.protocol === 'http:') {
+  //       window.location.replace(
+  //         window.location.href.replace(/^http:/, 'https:'),
+  //       );
+  //     }
+  //   }
+  // }, []);
+
+  // const handleOnSubmit = async () => {
+  //   const whatsappLink =
+  //     'https://api.whatsapp.com/send?text=YOUR_MESSAGE_HERE&url=URL_OF_THE_LINK_TO_SHARE';
+  //   const imageUrl = 'URL_OF_THE_IMAGE_TO_SHARE';
+  //
+  //   try {
+  //     const response = await fetch(imageUrl);
+  //     const blob = await response.blob();
+  //     const file = new File([blob], 'share.jpg', { type: blob.type });
+  //
+  //     if (navigator.canShare && navigator.canShare({ files: [file] })) {
+  //       await navigator.share({
+  //         title: 'title',
+  //         text: 'your text',
+  //         url: whatsappLink,
+  //         files: [file],
+  //       });
+  //       console.log('Successful share');
+  //     } else {
+  //       console.log('O sistema não suporta o compartilhamento de arquivos.');
+  //     }
+  //   } catch (error) {
+  //     console.error('Erro ao compartilhar', error);
+  //   }
+  // };
+  //
+  // useEffect(() => {
+  //   if (navigator.share === undefined) {
+  //     console.log('O sistema não suporta o compartilhamento.');
+  //   }
+  // }, []);
+
+  const handleSendWhatsappMessage = () => {
+    const message = 'Sua mensagem aqui';
+    const imageUrl = 'https://placehold.co/200x270?text=Produto+Sem+Imagem'; // Substitua 'URL_DA_IMAGEM' pelo URL da imagem que você deseja compartilhar.
+
+    // Construa o link do WhatsApp com a mensagem e a imagem
+    const whatsappLink = `https://api.whatsapp.com/send?phone=+5598991741075&text=${encodeURIComponent(
+      message,
+    )}&data&media=${encodeURIComponent(imageUrl)}`;
+
+    // Abre o link do WhatsApp
+    window.open(whatsappLink);
+  };
+
+  // useEffect(() => {
+  //   if (window.location.protocol === 'http:') {
+  //     window.location.replace(window.location.href.replace(/^http:/, 'https:'));
+  //   }
+  // }, []);
+
   return (
     <>
       <Head>
@@ -508,7 +501,6 @@ export default function Home() {
                       shadow="lg"
                       position="relative"
                     >
-                      {/* <SkeletonCircle size="10" /> */}
                       <Skeleton minHeight={200} minWidth={200} />
 
                       <Box p="6">
@@ -625,8 +617,113 @@ export default function Home() {
                   </Flex>
                 </>
               )}
-              {produtos.map((produto: any) => {
-                return <ProductCard key={produto.id} data={produto} />;
+              {produtos.map((data: any) => {
+                return (
+                  <Flex
+                    key={data.id}
+                    p={50}
+                    w="full"
+                    alignItems="center"
+                    justifyContent="center"
+                  >
+                    <Box
+                      maxW="sm"
+                      borderWidth="1px"
+                      rounded="lg"
+                      shadow="lg"
+                      position="relative"
+                    >
+                      <Image
+                        src={
+                          data.attributes.imagem.data?.attributes.url
+                            ? data.attributes.imagem.data?.attributes.url
+                            : 'https://placehold.co/200x270?text=Produto+Sem+Imagem'
+                        }
+                        alt={`Imagem do produto ${data?.attributes?.nome}`}
+                        roundedTop="lg"
+                        minWidth={200}
+                      />
+
+                      <Box px="3" py="2">
+                        <Flex
+                          mt="1"
+                          justifyContent="space-between"
+                          alignContent="center"
+                        >
+                          <Box
+                            fontSize="2xl"
+                            fontWeight="semibold"
+                            as="h4"
+                            lineHeight="tight"
+                            isTruncated
+                          >
+                            {data?.attributes.nome}
+                          </Box>
+                        </Flex>
+                        <Box mt={2}>
+                          <Badge colorScheme="red" color="white">
+                            {data?.attributes.marca_fabricante?.data?.attributes
+                              ?.nome
+                              ? data?.attributes.marca_fabricante?.data
+                                  ?.attributes?.nome
+                              : 'Não Cadastrado'}
+                          </Badge>
+                        </Box>
+
+                        <Box mt={2}>
+                          <Text>Tamanho:</Text>
+                          <Badge colorScheme="red" color="white">
+                            {data?.attributes.tamanho?.data?.attributes?.tamanho
+                              ? data?.attributes.tamanho?.data?.attributes
+                                  ?.tamanho
+                              : 'Não Cadastrado'}
+                          </Badge>
+                        </Box>
+
+                        <Box mt={2}>
+                          <Text>Categoria:</Text>
+                          <Badge colorScheme="red" color="white">
+                            {data?.attributes.categoria?.data?.attributes?.nome
+                              ? data?.attributes.categoria?.data?.attributes
+                                  ?.nome
+                              : 'Não Cadastrado'}
+                          </Badge>
+                        </Box>
+
+                        <Box mt={2}>
+                          <Text>Disponibilidade:</Text>
+                          <Badge
+                            colorScheme={
+                              data?.attributes.em_estoque ? 'green' : 'red'
+                            }
+                            color="white"
+                          >
+                            {data?.attributes.em_estoque
+                              ? 'Disponível'
+                              : 'Indisponivel'}
+                          </Badge>
+                        </Box>
+
+                        <Box mt={2}>
+                          <Button onClick={() => handleSendWhatsappMessage()}>
+                            Verificar Disponibilidade
+                          </Button>
+                        </Box>
+
+                        <Flex
+                          justifyContent="space-between"
+                          alignContent="center"
+                        >
+                          <Box fontSize="2xl">
+                            <Text fontWeight="bold">
+                              R$: {data?.attributes.preco?.toFixed(2)}
+                            </Text>
+                          </Box>
+                        </Flex>
+                      </Box>
+                    </Box>
+                  </Flex>
+                );
               })}
             </SimpleGrid>
           </Box>
