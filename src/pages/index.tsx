@@ -352,8 +352,8 @@ export default function Home() {
   // }, []);
 
   const handleSendWhatsappMessage = () => {
-    const message = 'Sua mensagem aqui';
     const imageUrl = 'https://placehold.co/200x270?text=Produto+Sem+Imagem'; // Substitua 'URL_DA_IMAGEM' pelo URL da imagem que você deseja compartilhar.
+    const message = 'Sua mensagem aqui' + ' ' + imageUrl;
 
     // Construa o link do WhatsApp com a mensagem e a imagem
     const whatsappLink = `https://api.whatsapp.com/send?phone=+5598991741075&text=${encodeURIComponent(
