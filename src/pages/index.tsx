@@ -1,481 +1,721 @@
 import Head from 'next/head';
 import {
+  Badge,
   Box,
-  Button,
   Container,
-  Divider,
   Flex,
-  Heading,
-  Img,
-  Link as ChakraLink,
+  FormControl,
+  FormLabel,
+  Image,
+  Select,
   SimpleGrid,
+  Skeleton,
+  SkeletonText,
   Text,
-  useColorModeValue as mode,
+  useColorModeValue,
+  useToast,
 } from '@chakra-ui/react';
-import React from 'react';
-import Link from 'next/link';
-import { BiChevronRight } from 'react-icons/bi';
+import React, { useCallback, useEffect, useState } from 'react';
 import Hero from '@/Components/hero';
-import BlogCard from '@/Components/BlogCard';
-import { BsArrowRight } from 'react-icons/bs';
-import Footer from '@/Components/Footer';
+import { client } from '@/service';
+import { gql } from '@apollo/client';
+import {
+  Pagination,
+  PaginationContainer,
+  PaginationNext,
+  PaginationPage,
+  PaginationPageGroup,
+  PaginationPrevious,
+  PaginationSeparator,
+  usePagination,
+} from '@ajna/pagination';
+
+function ProductCard({ data }: any) {
+  return (
+    <Flex
+      key={data.id}
+      p={50}
+      w="full"
+      alignItems="center"
+      justifyContent="center"
+    >
+      <Box
+        bg={useColorModeValue('white', 'gray.800')}
+        maxW="sm"
+        borderWidth="1px"
+        rounded="lg"
+        shadow="lg"
+        position="relative"
+      >
+        <Image
+          src={
+            data.attributes.imagem.data?.attributes.url
+              ? data.attributes.imagem.data?.attributes.url
+              : 'https://placehold.co/200x270?text=Produto+Sem+Imagem'
+          }
+          alt={`Imagem do produto ${data?.attributes?.nome}`}
+          roundedTop="lg"
+          minWidth={200}
+        />
+
+        <Box px="3" py="2">
+          <Flex mt="1" justifyContent="space-between" alignContent="center">
+            <Box
+              fontSize="2xl"
+              fontWeight="semibold"
+              as="h4"
+              lineHeight="tight"
+              isTruncated
+            >
+              {data?.attributes.nome}
+            </Box>
+          </Flex>
+          <Box mt={2}>
+            <Badge colorScheme="red" color="white">
+              {data?.attributes.marca_fabricante?.data?.attributes?.nome
+                ? data?.attributes.marca_fabricante?.data?.attributes?.nome
+                : 'Não Cadastrado'}
+            </Badge>
+          </Box>
+
+          <Box mt={2}>
+            <Text>Tamanho:</Text>
+            <Badge colorScheme="red" color="white">
+              {data?.attributes.tamanho?.data?.attributes?.tamanho
+                ? data?.attributes.tamanho?.data?.attributes?.tamanho
+                : 'Não Cadastrado'}
+            </Badge>
+          </Box>
+
+          <Box mt={2}>
+            <Text>Categoria:</Text>
+            <Badge colorScheme="red" color="white">
+              {data?.attributes.categoria?.data?.attributes?.nome
+                ? data?.attributes.categoria?.data?.attributes?.nome
+                : 'Não Cadastrado'}
+            </Badge>
+          </Box>
+
+          <Box mt={2}>
+            <Text>Disponibilidade:</Text>
+            <Badge
+              colorScheme={data?.attributes.em_estoque ? 'green' : 'red'}
+              color="white"
+            >
+              {data?.attributes.em_estoque ? 'Disponível' : 'Indisponivel'}
+            </Badge>
+          </Box>
+
+          <Flex justifyContent="space-between" alignContent="center">
+            <Box fontSize="2xl" color={useColorModeValue('gray.800', 'white')}>
+              <Text fontWeight="bold">
+                R$: {data?.attributes.preco?.toFixed(2)}
+              </Text>
+            </Box>
+          </Flex>
+        </Box>
+      </Box>
+    </Flex>
+  );
+}
 
 export default function Home() {
+  const [produtos, setProdutos] = useState<any>([]);
+  const [categories, setCategories] = useState<any>([]);
+  const [sizes, setSizes] = useState<any>([]);
+  const [manufacturers, setManufacturer] = useState<any>([]);
+  const [loading, setLoading] = useState(true);
+  const toast = useToast();
+
+  const handleGetProducts = useCallback(
+    (page = 1, categoryId = null, marcaId = null, tamanhoId = null) => {
+      setLoading(true);
+      let filters: any = {};
+      let shouldApplyFilters = false;
+
+      if (categoryId !== null) {
+        filters.categoria = { id: { eq: categoryId } };
+        shouldApplyFilters = true;
+      }
+
+      if (marcaId !== null) {
+        filters.marca_fabricante = { id: { eq: marcaId } };
+        shouldApplyFilters = true;
+      }
+
+      if (tamanhoId !== null) {
+        filters.tamanho = { id: { eq: tamanhoId } };
+        shouldApplyFilters = true;
+      }
+
+      if (!shouldApplyFilters) {
+        filters = null;
+      }
+
+      client
+        .query({
+          query: gql`
+            query Products(
+              $filters: ProductFiltersInput
+              $page: Int
+              $pageSize: Int
+            ) {
+              products(
+                filters: $filters
+                pagination: { page: $page, pageSize: $pageSize }
+              ) {
+                data {
+                  attributes {
+                    categoria {
+                      data {
+                        attributes {
+                          nome
+                        }
+                        id
+                      }
+                    }
+                    nome
+                    preco
+                    em_estoque
+                    imagem {
+                      data {
+                        attributes {
+                          url
+                        }
+                      }
+                    }
+                    marca_fabricante {
+                      data {
+                        attributes {
+                          nome
+                        }
+                        id
+                      }
+                    }
+                    tamanho {
+                      data {
+                        attributes {
+                          tamanho
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          `,
+          variables: {
+            filters,
+            page,
+            pageSize: 10,
+          },
+        })
+        .then(response => {
+          const products = response.data.products.data;
+          setProdutos(products);
+          setLoading(false);
+        })
+        .catch(err => {
+          console.log('err', err);
+          toast({
+            title: 'Erro ao buscar dados!',
+            description: 'err',
+            status: 'error',
+            duration: 9000,
+            isClosable: true,
+            position: 'top-right',
+          });
+          setLoading(false);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    },
+    [toast],
+  );
+
+  const handleMultipleFilters = (
+    categoryId: any,
+    marcaId: any,
+    tamanhoId: any,
+  ) => {
+    const filteredCategoryId = categoryId == 'Todos' ? null : categoryId;
+    const filteredMarcaId = marcaId == 'Todos' ? null : marcaId;
+    const filteredTamanhoId = tamanhoId == 'Todos' ? null : tamanhoId;
+    handleGetProducts(
+      1,
+      filteredCategoryId,
+      filteredMarcaId,
+      filteredTamanhoId,
+    );
+  };
+
+  function handleGetCategories() {
+    setLoading(true);
+    client
+      .query({
+        query: gql`
+          query GetCategories {
+            categories {
+              data {
+                id
+                attributes {
+                  nome
+                }
+              }
+            }
+          }
+        `,
+      })
+      .then(response => {
+        setCategories(response.data.categories.data);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.log('err', err);
+        setLoading(false);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }
+
+  function handleGetSizes() {
+    setLoading(true);
+    client
+      .query({
+        query: gql`
+          query Tamanhos {
+            tamanhos {
+              data {
+                attributes {
+                  tamanho
+                }
+              }
+            }
+          }
+        `,
+      })
+      .then(response => {
+        setSizes(response.data.tamanhos.data);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.log('err', err);
+        setLoading(false);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }
+
+  function handleGetManufacturers() {
+    setLoading(true);
+    client
+      .query({
+        query: gql`
+          query Attributes {
+            marcas {
+              data {
+                attributes {
+                  nome
+                }
+              }
+            }
+          }
+        `,
+      })
+      .then(response => {
+        setManufacturer(response.data.marcas.data);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.log('err', err);
+        setLoading(false);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }
+
+  useEffect(() => {
+    handleGetProducts();
+    handleGetCategories();
+    handleGetSizes();
+    handleGetManufacturers();
+  }, [handleGetProducts]);
+  // constants
+  const outerLimit = 2;
+  const innerLimit = 2;
+
+  const {
+    pages,
+    pagesCount,
+    offset,
+    currentPage,
+    setCurrentPage,
+    isDisabled,
+    pageSize,
+    setPageSize,
+  } = usePagination({
+    total: produtos.length,
+    limits: {
+      outer: outerLimit,
+      inner: innerLimit,
+    },
+    initialState: {
+      pageSize: 5,
+      isDisabled: false,
+      currentPage: 1,
+    },
+  });
+
+  // handlers
+  const handlePageChange = (nextPage: number) => {
+    // -> request new data using the page number
+    setCurrentPage(nextPage);
+    console.log('request new data with ->', nextPage);
+  };
+
   return (
     <>
       <Head>
-        <title>Pax União - Eternizar Memórias é um Ato de Amor!</title>
-        <meta
-          name="description"
-          content="A Funerária Pax União oferece serviços funerários completos, cuidados funerários personalizados, preparação de corpos, cerimônias fúnebres, cremação, sepultamento, translado funerário e muito mais. Nossos profissionais estão disponíveis 24 horas para prestar assistência empática e garantir que cada detalhe seja cuidado durante o momento de luto. Conte com nossa experiência e compromisso para realizar um funeral tradicional e memorializar seu ente querido de forma respeitosa. Entre em contato conosco e saiba como podemos ajudar."
-        />
-        <meta
-          name="keywords"
-          content="Funerária em São Luís, Serviços funerários em São Luís, Cuidados funerários em São Luís, Cerimônias fúnebres em São Luís, Cremação em São Luís, Sepultamento em São Luís, Jazigos em São Luís, Translado funerário em São Luís, Velório em São Luís, Luto em São Luís, Assistência funerária em São Luís, Funeral tradicional em São Luís, Urnas funerárias em São Luís, Coroas de flores em São Luís, Memorialização em São Luís, Funerária Pax União em São Luís, Serviços funerários de qualidade em São Luís"
-        />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
+        <title>Formen Ilha | Catálogo</title>
       </Head>
       <Flex direction="column" width="100%">
         <Hero />
 
         <Container maxW="container.lg">
-          <Box as="section">
-            <Box
-              mx="auto"
-              py={{
-                base: '12',
-                md: '12',
-              }}
-            >
-              <SimpleGrid
-                columns={{
-                  base: 1,
-                  md: 2,
-                }}
-                spacing="10"
-              >
-                <Img
-                  htmlWidth="500px"
-                  htmlHeight="320px"
-                  height={{
-                    md: '320px',
-                  }}
-                  objectFit="cover"
-                  src="/complexo-1.png"
-                  alt="Imagem da central de velórios da pax união do canto da fabril em são luís."
-                  borderTopLeftRadius={20}
-                  borderBottomLeftRadius={20}
-                  borderBottomRightRadius={20}
-                />
-                <Box>
-                  <Heading size="xl" mb="4" fontWeight="extrabold">
-                    Nosso Complexo
-                  </Heading>
-                  <Text
-                    fontSize={{
-                      md: 'lg',
-                    }}
-                    mb="6"
-                    maxW="md"
-                    color={mode('gray.600', 'gray.400')}
-                  >
-                    A Pax União oferece um complexo funerário completo com
-                    laboratórios, floricultura, lanchonete e central de
-                    velórios. Sua equipe trabalha junto com a família e amigos
-                    para organizar todos os detalhes da cerimônia, garantindo um
-                    serviço funerário respeitoso e tranquilo. A empresa valoriza
-                    a importância desse momento e oferece suporte completo aos
-                    enlutados.
-                  </Text>
-                  <Button
-                    as={Link}
-                    href="/central-de-velorios"
-                    bgColor="primary.dark"
-                    rightIcon={<BiChevronRight size={25} />}
-                    _hover={{
-                      bgColor: 'primary.darkest',
-                    }}
-                    color="white"
-                  >
-                    Saiba mais
-                  </Button>
-                </Box>
-              </SimpleGrid>
-            </Box>
-          </Box>
-          <Divider />
-
-          <Box as="section" id="servicos">
-            <Flex direction="column" justify="space-between" py={10}>
-              <Box>
-                <Heading size="lg" mb="4" color="black">
-                  Conheça nossos serviços
-                </Heading>
-              </Box>
-              <SimpleGrid
-                columns={{ base: 1, sm: 2, md: 3, lg: 4 }}
-                spacing={{ base: '8', sm: '16', md: '16', lg: '16' }}
-                mx="auto"
-                justifyItems="center"
-                alignItems="center"
-              >
-                <Box>
-                  <Flex
-                    as={Link}
-                    href="/central-de-velorios"
-                    _hover={{
-                      zIndex: 1,
-                      transform: 'scale(1.05)',
-                      shadow: 'dark-lg',
-                    }}
-                    borderRadius={10}
-                    bgColor="primary.dark"
-                    w={195}
-                    h={195}
-                    mb={2}
-                    justify="center"
-                    align="center"
-                  >
-                    <Img src="/pomba.svg" />
-                  </Flex>
-                  <Text fontSize="xl" fontWeight="bold" color="black">
-                    Central de Velórios
-                  </Text>
-                </Box>
-                <Box>
-                  <Flex
-                    as={Link}
-                    href="/lanchonete"
-                    _hover={{
-                      zIndex: 1,
-                      transform: 'scale(1.05)',
-                      shadow: 'dark-lg',
-                    }}
-                    borderRadius={10}
-                    bgColor="primary.dark"
-                    w={195}
-                    h={195}
-                    mb={2}
-                    justify="center"
-                    align="center"
-                  >
-                    <Img src="/lanchonete.svg" />
-                  </Flex>
-                  <Text fontSize="xl" fontWeight="bold" color="black">
-                    Lanchonete
-                  </Text>
-                </Box>
-                <Box>
-                  <Flex
-                    as={Link}
-                    href="/floricultura"
-                    _hover={{
-                      zIndex: 1,
-                      transform: 'scale(1.05)',
-                      shadow: 'dark-lg',
-                    }}
-                    borderRadius={10}
-                    bgColor="primary.dark"
-                    w={195}
-                    h={195}
-                    mb={2}
-                    justify="center"
-                    align="center"
-                  >
-                    <Img src="/floricultura.svg" />
-                  </Flex>
-                  <Text fontSize="xl" fontWeight="bold" color="black">
-                    Floricultura
-                  </Text>
-                </Box>
-                <Box>
-                  <Flex
-                    as={Link}
-                    href="/memorial"
-                    _hover={{
-                      zIndex: 1,
-                      transform: 'scale(1.05)',
-                      shadow: 'dark-lg',
-                    }}
-                    borderRadius={10}
-                    bgColor="primary.dark"
-                    w={195}
-                    h={195}
-                    mb={2}
-                    justify="center"
-                    align="center"
-                  >
-                    <Img src="/cemetery.png" />
-                  </Flex>
-                  <Text fontSize="xl" fontWeight="bold" color="black">
-                    Memorial
-                  </Text>
-                </Box>
-                <Box>
-                  <Flex
-                    as={Link}
-                    href="/crematorio"
-                    _hover={{
-                      zIndex: 1,
-                      transform: 'scale(1.05)',
-                      shadow: 'dark-lg',
-                    }}
-                    borderRadius={10}
-                    bgColor="primary.dark"
-                    w={195}
-                    h={195}
-                    mb={2}
-                    justify="center"
-                    align="center"
-                  >
-                    <Img src="/ashes.png" />
-                  </Flex>
-                  <Text fontSize="xl" fontWeight="bold" color="black">
-                    Crematório
-                  </Text>
-                </Box>
-
-                <Box>
-                  <Flex
-                    as={Link}
-                    href="/laboratorio"
-                    _hover={{
-                      zIndex: 1,
-                      transform: 'scale(1.05)',
-                      shadow: 'dark-lg',
-                    }}
-                    borderRadius={10}
-                    bgColor="primary.dark"
-                    w={195}
-                    h={195}
-                    mb={2}
-                    justify="center"
-                    align="center"
-                  >
-                    <Img src="/medical-lab.png" />
-                  </Flex>
-                  <Text fontSize="xl" fontWeight="bold" color="black">
-                    Laboratório
-                  </Text>
-                </Box>
-                <Box>
-                  <Flex
-                    as={Link}
-                    href="/translado"
-                    _hover={{
-                      zIndex: 1,
-                      transform: 'scale(1.05)',
-                      shadow: 'dark-lg',
-                    }}
-                    borderRadius={10}
-                    bgColor="primary.dark"
-                    w={195}
-                    h={195}
-                    mb={2}
-                    justify="center"
-                    align="center"
-                  >
-                    <Img src="/airplane.png " />
-                  </Flex>
-                  <Text fontSize="xl" fontWeight="bold" color="black">
-                    Translado
-                  </Text>
-                </Box>
-
-                <Box>
-                  <Flex
-                    _hover={{
-                      zIndex: 1,
-                      transform: 'scale(1.05)',
-                      shadow: 'dark-lg',
-                    }}
-                    as={Link}
-                    href="/planos"
-                    borderRadius={10}
-                    bgColor="primary.dark"
-                    w={195}
-                    h={195}
-                    mb={2}
-                    justify="center"
-                    align="center"
-                  >
-                    <Img src="/parchment.png" />
-                  </Flex>
-                  <Text
-                    fontSize="xl"
-                    fontWeight="bold"
-                    color="black"
-                    maxW="100%"
-                  >
-                    Planos
-                  </Text>
-                </Box>
-              </SimpleGrid>
-            </Flex>
-          </Box>
-          <Divider />
-
-          <Box as="section">
-            <Flex
-              direction="row"
-              justify="space-between"
-              py={{
-                base: '12',
-                md: '20',
-              }}
-            >
-              <Box>
-                <Heading size="xl" mb="4" fontWeight="extrabold">
-                  Nossa História
-                </Heading>
-                <Text
-                  fontSize={{
-                    md: 'lg',
-                  }}
-                  mb="6"
-                  maxW="md"
-                  color={mode('gray.600', 'gray.400')}
+          <Box as="section" id="palestrantes">
+            <Flex direction="column" justify="space-between" mt={10}>
+              <Box mb={10}>
+                <Text fontWeight="bold">Filtros:</Text>
+                <SimpleGrid
+                  columns={{ base: 1, sm: 2, md: 3, lg: 4 }}
+                  spacing={{ base: '8', sm: '16', md: '16', lg: '16' }}
+                  mx="auto"
+                  justifyItems="center"
+                  alignItems="center"
                 >
-                  Preservar memórias é um ato de amor e nosso compromisso é te
-                  ajudar a manter essas lembranças vivas para sempre. Conheça
-                  nossa história e nossos serviços.
-                </Text>
-                <Button
-                  as={Link}
-                  href="/"
-                  bgColor="primary.dark"
-                  rightIcon={<BiChevronRight size={25} />}
+                  <FormControl>
+                    <FormLabel>Categoria</FormLabel>
+                    <Select
+                      placeholder="Selecionar Categoria"
+                      onChange={e =>
+                        handleMultipleFilters(e.target.value, null, null)
+                      }
+                    >
+                      <option value="Todos">Todos</option>
+                      {categories.map((category: any) => {
+                        return (
+                          <option key={category.id} value={category.id}>
+                            {category.attributes.nome}
+                          </option>
+                        );
+                      })}
+                    </Select>
+                  </FormControl>
+
+                  <FormControl>
+                    <FormLabel>Tamanho</FormLabel>
+                    <Select
+                      placeholder="Selecionar Tamanho"
+                      onChange={e =>
+                        handleMultipleFilters(null, null, e.target.value)
+                      }
+                    >
+                      {sizes.map((size: any) => {
+                        return (
+                          <option key={size.id} value={size.id}>
+                            {size.attributes.tamanho}
+                          </option>
+                        );
+                      })}
+                    </Select>
+                  </FormControl>
+
+                  <FormControl>
+                    <FormLabel>Marca</FormLabel>
+                    <Select
+                      placeholder="Selecionar Marca"
+                      onChange={e =>
+                        handleMultipleFilters(null, e.target.value, null)
+                      }
+                    >
+                      {manufacturers.map((manufacturer: any) => {
+                        return (
+                          <option key={manufacturer.id} value={manufacturer.id}>
+                            {manufacturer.attributes.nome}
+                          </option>
+                        );
+                      })}
+                    </Select>
+                  </FormControl>
+                </SimpleGrid>
+              </Box>
+            </Flex>
+            <SimpleGrid
+              columns={{ base: 1, sm: 2, md: 3, lg: 4 }}
+              spacing={{ base: '8', sm: '10', md: '10', lg: '16' }}
+            >
+              {loading && (
+                <>
+                  <Flex w="full" alignItems="center" justifyContent="center">
+                    <Box
+                      maxW="sm"
+                      borderWidth="1px"
+                      rounded="lg"
+                      shadow="lg"
+                      position="relative"
+                    >
+                      <Skeleton minHeight={200} minWidth={200} />
+
+                      <Box p="6">
+                        <SkeletonText
+                          mt="4"
+                          noOfLines={4}
+                          spacing="4"
+                          skeletonHeight="2"
+                        />
+                      </Box>
+                    </Box>
+                  </Flex>
+                  <Flex w="full" alignItems="center" justifyContent="center">
+                    <Box
+                      maxW="sm"
+                      borderWidth="1px"
+                      rounded="lg"
+                      shadow="lg"
+                      position="relative"
+                    >
+                      <Skeleton minHeight={200} minWidth={200} />
+
+                      <Box p="6">
+                        <SkeletonText
+                          mt="4"
+                          noOfLines={4}
+                          spacing="4"
+                          skeletonHeight="2"
+                        />
+                      </Box>
+                    </Box>
+                  </Flex>
+                  <Flex w="full" alignItems="center" justifyContent="center">
+                    <Box
+                      maxW="sm"
+                      borderWidth="1px"
+                      rounded="lg"
+                      shadow="lg"
+                      position="relative"
+                    >
+                      {/* <SkeletonCircle size="10" /> */}
+                      <Skeleton minHeight={200} minWidth={200} />
+
+                      <Box p="6">
+                        <SkeletonText
+                          mt="4"
+                          noOfLines={4}
+                          spacing="4"
+                          skeletonHeight="2"
+                        />
+                      </Box>
+                    </Box>
+                  </Flex>
+                  <Flex w="full" alignItems="center" justifyContent="center">
+                    <Box
+                      maxW="sm"
+                      borderWidth="1px"
+                      rounded="lg"
+                      shadow="lg"
+                      position="relative"
+                    >
+                      {/* <SkeletonCircle size="10" /> */}
+                      <Skeleton minHeight={200} minWidth={200} />
+
+                      <Box p="6">
+                        <SkeletonText
+                          mt="4"
+                          noOfLines={4}
+                          spacing="4"
+                          skeletonHeight="2"
+                        />
+                      </Box>
+                    </Box>
+                  </Flex>
+                  <Flex w="full" alignItems="center" justifyContent="center">
+                    <Box
+                      maxW="sm"
+                      borderWidth="1px"
+                      rounded="lg"
+                      shadow="lg"
+                      position="relative"
+                    >
+                      {/* <SkeletonCircle size="10" /> */}
+                      <Skeleton minHeight={200} minWidth={200} />
+
+                      <Box p="6">
+                        <SkeletonText
+                          mt="4"
+                          noOfLines={4}
+                          spacing="4"
+                          skeletonHeight="2"
+                        />
+                      </Box>
+                    </Box>
+                  </Flex>
+                  <Flex w="full" alignItems="center" justifyContent="center">
+                    <Box
+                      maxW="sm"
+                      borderWidth="1px"
+                      rounded="lg"
+                      shadow="lg"
+                      position="relative"
+                    >
+                      <Skeleton minHeight={200} minWidth={200} />
+
+                      <Box p="6">
+                        <SkeletonText
+                          mt="4"
+                          noOfLines={4}
+                          spacing="4"
+                          skeletonHeight="2"
+                        />
+                      </Box>
+                    </Box>
+                  </Flex>
+                  <Flex w="full" alignItems="center" justifyContent="center">
+                    <Box
+                      maxW="sm"
+                      borderWidth="1px"
+                      rounded="lg"
+                      shadow="lg"
+                      position="relative"
+                    >
+                      <Skeleton minHeight={200} minWidth={200} />
+
+                      <Box p="6">
+                        <SkeletonText
+                          mt="4"
+                          noOfLines={4}
+                          spacing="4"
+                          skeletonHeight="2"
+                        />
+                      </Box>
+                    </Box>
+                  </Flex>
+                  <Flex w="full" alignItems="center" justifyContent="center">
+                    <Box
+                      maxW="sm"
+                      borderWidth="1px"
+                      rounded="lg"
+                      shadow="lg"
+                      position="relative"
+                    >
+                      <Skeleton minHeight={200} minWidth={200} />
+
+                      <Box p="6">
+                        <SkeletonText
+                          mt="4"
+                          noOfLines={4}
+                          spacing="4"
+                          skeletonHeight="2"
+                        />
+                      </Box>
+                    </Box>
+                  </Flex>
+                </>
+              )}
+              {produtos.map((produto: any) => {
+                return <ProductCard key={produto.id} data={produto} />;
+              })}
+            </SimpleGrid>
+          </Box>
+          <Flex py={10} justify="center" align="center">
+            <Pagination
+              pagesCount={pagesCount}
+              currentPage={currentPage}
+              isDisabled={isDisabled}
+              onPageChange={handlePageChange}
+            >
+              <PaginationContainer
+                align="center"
+                justify="space-between"
+                p={4}
+                w="full"
+              >
+                <PaginationPrevious
                   _hover={{
-                    bgColor: 'primary.darkest',
+                    bg: 'yellow.400',
                   }}
-                  color="white"
+                  bg="yellow.300"
+                  onClick={() =>
+                    console.log(
+                      'Im executing my own function along with Previous component functionality',
+                    )
+                  }
                 >
-                  Saiba mais
-                </Button>
-              </Box>
-              <Img src="/logo-pax.png" w={200} h={200} />
-            </Flex>
-          </Box>
-
-          <Divider />
-
-          <Box
-            as="section"
-            py={{
-              base: '10',
-              sm: '24',
-            }}
-          >
-            <Box
-              maxW={{
-                base: 'xl',
-                md: '7xl',
-              }}
-              mx="auto"
-              px={{
-                base: '6',
-                md: '8',
-              }}
-            >
-              <Heading size="xl" mb="8" fontWeight="extrabold">
-                Confira Nosso Blog
-              </Heading>
-              <SimpleGrid
-                columns={{
-                  base: 1,
-                  md: 3,
-                }}
-                spacing="12"
-                mb="10"
-              >
-                <BlogCard
-                  category="Luto, Comunidade"
-                  media="https://img.huffingtonpost.com/asset/5d0252652500006813e4f3f0.jpeg?ops=1778_1000"
-                  title="Supere o luto e honre a memória"
-                  description="Dicas e conselhos para honrar a memória do seu ente querido e seguir em frente."
-                  href="blog/dor-luto"
-                  author={{
-                    name: 'Pax União',
-                    href: 'dor-luto',
-                  }}
-                />
-                <BlogCard
-                  category="Dor, Luto"
-                  media="https://womenintheworld.org/wp-content/uploads/2022/02/depressed-young-woman-scaled.jpg"
-                  title="Perdi alguém, o que fazer? Como lidar com a papelada em um momento tão delicado?"
-                  description="Confira algumas dicas para ajudar nesse momento!"
-                  href="blog/perdi-alguem"
-                  author={{
-                    name: 'Pax União',
-                    href: 'perdi-alguem',
-                  }}
-                />
-                <BlogCard
-                  category="Dor, Pet"
-                  media="https://www.minstervet.com/wp-content/uploads/2018/10/mvc-001.jpg"
-                  title="Confira algumas dicas para ajudar nesse momento!"
-                  description="Confira essas dicas que podem você ajudar a lidar melhor com esse momento."
-                  href="blog/perdi-pet"
-                  author={{
-                    name: 'Pax União',
-                    href: 'perdi-pet',
-                  }}
-                />
-              </SimpleGrid>
-              {/*<ChakraLink fontSize="xl" fontWeight="bold" color="primary.dark">*/}
-              {/*  <span>Ver todos</span>*/}
-              {/*  <Box as={BsArrowRight} display="inline-block" ms="2" />*/}
-              {/*</ChakraLink>*/}
-            </Box>
-          </Box>
-
-          <Divider />
-
-          <Box
-            as="section"
-            background="linear-gradient(#027240, transparent), url('maos.jpg')"
-            backgroundBlendMode="overlay"
-            backgroundSize="cover"
-            backgroundPosition="center"
-            borderRadius={10}
-            id="plantao"
-          >
-            <Flex
-              direction="row"
-              justify="right"
-              textAlign="right"
-              py={{
-                base: '12',
-                md: '20',
-              }}
-              px={5}
-            >
-              <Box>
-                <Heading size="xl" mb="4" color="white" fontWeight="extrabold">
-                  Nossa equipe de atendimento <br /> está disponível para você
-                </Heading>
-                <Text fontSize="6xl" color="white" fontWeight="extrabold">
-                  24 HORAS
-                </Text>
-                <Button
-                  as={Link}
-                  href="tel:9832310528"
-                  bgColor="primary.dark"
+                  <Text>Anterior</Text>
+                </PaginationPrevious>
+                <PaginationPageGroup
+                  isInline
+                  align="center"
+                  separator={
+                    <PaginationSeparator
+                      onClick={() =>
+                        console.log(
+                          'Im executing my own function along with Separator component functionality',
+                        )
+                      }
+                      bg="blue.300"
+                      fontSize="sm"
+                      w={7}
+                      jumpSize={11}
+                    />
+                  }
+                >
+                  {pages.map((page: number) => (
+                    <PaginationPage
+                      w={7}
+                      bg="red.300"
+                      key={`pagination_page_${page}`}
+                      page={page}
+                      onClick={() =>
+                        console.log(
+                          'Im executing my own function along with Page component functionality',
+                        )
+                      }
+                      fontSize="sm"
+                      _hover={{
+                        bg: 'green.300',
+                      }}
+                      _current={{
+                        bg: 'green.300',
+                        fontSize: 'sm',
+                        w: 7,
+                      }}
+                    />
+                  ))}
+                </PaginationPageGroup>
+                <PaginationNext
                   _hover={{
-                    bgColor: 'primary.darkest',
+                    bg: 'yellow.400',
                   }}
-                  color="white"
+                  bg="yellow.300"
+                  onClick={() =>
+                    console.log(
+                      'Im executing my own function along with Next component functionality',
+                    )
+                  }
                 >
-                  Fale Conosco Agora!
-                </Button>
-              </Box>
-            </Flex>
-          </Box>
+                  <Text>Próximo</Text>
+                </PaginationNext>
+              </PaginationContainer>
+            </Pagination>
+          </Flex>
         </Container>
       </Flex>
 
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }
