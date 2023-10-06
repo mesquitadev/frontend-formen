@@ -5,6 +5,7 @@ import {
   Flex,
   Image,
   SimpleGrid,
+  Spinner,
   useToast,
 } from '@chakra-ui/react';
 import React, { useCallback, useEffect, useState } from 'react';
@@ -82,7 +83,20 @@ export default function Home() {
             spacing={{ base: '8', sm: '10', md: '10', lg: '16' }}
           >
             {loading ? (
-              <Loading />
+              <Flex
+                position="fixed"
+                top="0"
+                left="0"
+                width="100%"
+                height="100%"
+                backgroundColor="rgba(0, 0, 0, 0.6)" // Define um fundo escuro com opacidade
+                zIndex="9999" // Coloca o spinner acima de outros elementos
+                alignItems="center"
+                justifyContent="center"
+              >
+                <Spinner size="xl" color="white" />{' '}
+                {/* Tamanho e cor do spinner */}
+              </Flex>
             ) : (
               categories.map((data: any) => {
                 return (

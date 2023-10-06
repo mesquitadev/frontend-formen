@@ -1,7 +1,13 @@
 import { useRouter } from 'next/router';
 import Head from 'next/head';
-import { Box, Container, Flex, SimpleGrid, useToast } from '@chakra-ui/react';
-import Loading from '@/Components/Loading';
+import {
+  Box,
+  Container,
+  Flex,
+  SimpleGrid,
+  Spinner,
+  useToast,
+} from '@chakra-ui/react';
 import Link from 'next/link';
 import React, { useCallback, useEffect, useState } from 'react';
 import { client } from '@/service';
@@ -14,7 +20,7 @@ const SubCategoria = () => {
   const [loading, setLoading] = useState(true);
   const toast = useToast();
 
-  const handleGetProducts = useCallback(() => {
+  const handleGetSubCategories = useCallback(() => {
     setLoading(true);
     if (!router.isReady) return;
     client
@@ -35,12 +41,12 @@ const SubCategoria = () => {
           filters: {
             categoria: {
               id: {
-                eq: 5,
+                eq: categoriaId,
               },
             },
             tamanhos: {
               id: {
-                eq: 1,
+                eq: tamanhoId,
               },
             },
           },
@@ -65,11 +71,11 @@ const SubCategoria = () => {
       .finally(() => {
         setLoading(false);
       });
-  }, [router.isReady, toast]);
+  }, [categoriaId, router.isReady, tamanhoId, toast]);
 
   useEffect(() => {
-    handleGetProducts();
-  }, [handleGetProducts]);
+    handleGetSubCategories();
+  }, [handleGetSubCategories]);
 
   return (
     <>
@@ -83,7 +89,20 @@ const SubCategoria = () => {
             spacing={{ base: '8', sm: '10', md: '10', lg: '16' }}
           >
             {loading ? (
-              <Loading />
+              <Flex
+                position="fixed"
+                top="0"
+                left="0"
+                width="100%"
+                height="100%"
+                backgroundColor="rgba(0, 0, 0, 0.6)" // Define um fundo escuro com opacidade
+                zIndex="9999" // Coloca o spinner acima de outros elementos
+                alignItems="center"
+                justifyContent="center"
+              >
+                <Spinner size="xl" color="white" />{' '}
+                {/* Tamanho e cor do spinner */}
+              </Flex>
             ) : (
               subCategorias.map((data: any) => {
                 return (
@@ -112,7 +131,7 @@ const SubCategoria = () => {
                       justifyContent="center"
                       alignItems="center"
                     >
-                      <Flex px="3" py="2" flexDirection="column">
+                      <Flex px="3" py="2" flexDirection="column" p={20}>
                         <Flex
                           mt="1"
                           justifyContent="space-between"

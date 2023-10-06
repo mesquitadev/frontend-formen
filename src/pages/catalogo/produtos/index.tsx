@@ -7,12 +7,16 @@ import {
   Flex,
   Image,
   SimpleGrid,
+  Spinner,
   useToast,
+  Text,
 } from '@chakra-ui/react';
 import Loading from '@/Components/Loading';
 import React, { useCallback, useEffect, useState } from 'react';
 import { client } from '@/service';
 import { gql } from '@apollo/client';
+
+import { WhatsappIcon, WhatsappShareButton } from 'react-share';
 
 const Produtos = () => {
   const router = useRouter();
@@ -36,6 +40,20 @@ const Produtos = () => {
                     data {
                       attributes {
                         url
+                      }
+                    }
+                  }
+                  tamanho {
+                    data {
+                      attributes {
+                        nome
+                      }
+                    }
+                  }
+                  sub_categoria {
+                    data {
+                      attributes {
+                        nome
                       }
                     }
                   }
@@ -179,7 +197,20 @@ const Produtos = () => {
             spacing={{ base: '8', sm: '10', md: '10', lg: '16' }}
           >
             {loading ? (
-              <Loading />
+              <Flex
+                position="fixed"
+                top="0"
+                left="0"
+                width="100%"
+                height="100%"
+                backgroundColor="rgba(0, 0, 0, 0.6)" // Define um fundo escuro com opacidade
+                zIndex="9999" // Coloca o spinner acima de outros elementos
+                alignItems="center"
+                justifyContent="center"
+              >
+                <Spinner size="xl" color="white" />{' '}
+                {/* Tamanho e cor do spinner */}
+              </Flex>
             ) : (
               produtos.map((data: any) => {
                 return (
@@ -196,6 +227,7 @@ const Produtos = () => {
                       rounded="lg"
                       shadow="lg"
                       position="relative"
+                      v
                     >
                       <Image
                         src={
@@ -226,15 +258,13 @@ const Produtos = () => {
                         </Flex>
 
                         <Box mt={2}>
-                          <Button
-                          // onClick={() =>
-                          //   handleSendWhatsappMessage(
-                          //     data.attributes.imagem.data?.attributes.url,
-                          //   )
-                          // }
+                          <WhatsappShareButton
+                            url={data?.attributes.imagem.data?.attributes.url}
+                            title={`Produto ${data?.attributes?.tamanho?.data?.attributes.nome} - Tamanho ${data?.attributes.sub_categoria?.data.attributes.nome}`}
+                            separator=":: "
                           >
-                            Verificar Disponibilidade
-                          </Button>
+                            <Button>Verificar Disponibilidade</Button>
+                          </WhatsappShareButton>
                         </Box>
                       </Box>
                     </Box>
