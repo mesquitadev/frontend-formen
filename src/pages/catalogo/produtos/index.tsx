@@ -8,6 +8,7 @@ import {
   Image,
   SimpleGrid,
   Spinner,
+  Text,
   useToast,
 } from '@chakra-ui/react';
 import React, { useCallback, useEffect, useState } from 'react';
@@ -15,9 +16,11 @@ import { client } from '@/service';
 import { gql } from '@apollo/client';
 
 import { WhatsappShareButton } from 'react-share';
+import { IoIosArrowBack } from 'react-icons/io';
 
 const Produtos = () => {
   const router = useRouter();
+  const showBackButton = router.pathname !== '/';
   const { tamanhoId, subCategoriaId } = router.query;
   const [produtos, setProdutos] = useState<any>([]);
   const [loading, setLoading] = useState(true);
@@ -106,6 +109,36 @@ const Produtos = () => {
       <Head>
         <title>Formen Ilha | Catálogo</title>
       </Head>
+      <Flex shadow={'lg'} my={5} pb={5}>
+        <Container maxW="container.lg">
+          <Flex justifyContent="space-between" alignItems="center">
+            {showBackButton && (
+              <Box>
+                <IoIosArrowBack
+                  size={30}
+                  color="black"
+                  onClick={() => router.back()}
+                >
+                  Voltar
+                </IoIosArrowBack>
+              </Box>
+            )}
+
+            <Box>
+              <Text
+                fontSize="2xl"
+                fontWeight="semibold"
+                as="h4"
+                lineHeight="tight"
+                isTruncated
+              >
+                Produtos
+              </Text>
+            </Box>
+            <Box></Box>
+          </Flex>
+        </Container>
+      </Flex>
       <Container maxW="container.lg">
         <Box as="section" id="palestrantes">
           <SimpleGrid

@@ -6,6 +6,7 @@ import {
   Image,
   SimpleGrid,
   Spinner,
+  Text,
   useToast,
 } from '@chakra-ui/react';
 import React, { useCallback, useEffect, useState } from 'react';
@@ -13,12 +14,18 @@ import { client } from '@/service';
 import { gql } from '@apollo/client';
 import Link from 'next/link';
 import { useName } from '@/hooks/useName';
+import { IoIosArrowBack } from 'react-icons/io';
+import { useRouter } from 'next/router';
 
 export default function Home() {
   const [categories, setCategories] = useState<any>([]);
 
   const [loading, setLoading] = useState(true);
   const toast = useToast();
+
+  const router = useRouter();
+  const { setPageName } = useName();
+  const showBackButton = router.pathname !== '/';
 
   const handleGetCategories = useCallback(() => {
     setLoading(true);
@@ -66,11 +73,8 @@ export default function Home() {
       });
   }, [toast]);
 
-  const { setPageName } = useName();
-
   useEffect(() => {
     handleGetCategories();
-    setPageName('Categorias');
   }, [handleGetCategories, setPageName]);
 
   return (
@@ -78,11 +82,41 @@ export default function Home() {
       <Head>
         <title>Formen Ilha | Catálogo</title>
       </Head>
+      <Flex shadow={'lg'} my={5} pb={5}>
+        <Container maxW="container.lg">
+          <Flex justifyContent="space-between" alignItems="center">
+            {showBackButton && (
+              <Box>
+                <IoIosArrowBack
+                  size={30}
+                  color="black"
+                  onClick={() => router.back()}
+                >
+                  Voltar
+                </IoIosArrowBack>
+              </Box>
+            )}
+
+            <Box>
+              <Text
+                fontSize="2xl"
+                fontWeight="semibold"
+                as="h4"
+                lineHeight="tight"
+                isTruncated
+              >
+                Categorias
+              </Text>
+            </Box>
+            <Box></Box>
+          </Flex>
+        </Container>
+      </Flex>
       <Container maxW="container.lg">
-        <Box as="section">
+        <Box as="section" pb={10}>
           <SimpleGrid
             columns={{ base: 2, sm: 2, md: 3, lg: 4 }}
-            spacing={{ base: '8', sm: '10', md: '10', lg: '16' }}
+            spacing={{ base: '8', sm: '8', md: '8', lg: '8' }}
           >
             {loading ? (
               <Flex
@@ -111,7 +145,6 @@ export default function Home() {
                       },
                     }}
                     key={data.id}
-                    p={50}
                     w="full"
                     alignItems="center"
                     justifyContent="center"
@@ -134,7 +167,8 @@ export default function Home() {
                           }
                           alt={`Imagem do produto ${data?.attributes?.nome}`}
                           rounded="lg"
-                          minWidth={150}
+                          maxHeight={150}
+                          width="150px"
                         />
                         <Flex
                           mt="1"

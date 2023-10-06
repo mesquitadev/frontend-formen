@@ -6,15 +6,18 @@ import {
   Flex,
   SimpleGrid,
   Spinner,
+  Text,
   useToast,
 } from '@chakra-ui/react';
 import Link from 'next/link';
 import React, { useCallback, useEffect, useState } from 'react';
 import { client } from '@/service';
 import { gql } from '@apollo/client';
+import { IoIosArrowBack } from 'react-icons/io';
 
 const Categoria = () => {
   const router = useRouter();
+  const showBackButton = router.pathname !== '/';
   const { categoriaId } = router.query;
 
   const [tamanhos, setTamanhos] = useState<any>([]);
@@ -80,6 +83,36 @@ const Categoria = () => {
         <title>Formen Ilha | Tamanhos</title>
       </Head>
 
+      <Flex shadow={'lg'} my={5} pb={5}>
+        <Container maxW="container.lg">
+          <Flex justifyContent="space-between" alignItems="center">
+            {showBackButton && (
+              <Box>
+                <IoIosArrowBack
+                  size={30}
+                  color="black"
+                  onClick={() => router.back()}
+                >
+                  Voltar
+                </IoIosArrowBack>
+              </Box>
+            )}
+
+            <Box>
+              <Text
+                fontSize="2xl"
+                fontWeight="semibold"
+                as="h4"
+                lineHeight="tight"
+                isTruncated
+              >
+                Tamanhos
+              </Text>
+            </Box>
+            <Box></Box>
+          </Flex>
+        </Container>
+      </Flex>
       <Container maxW="container.lg">
         <Box as="section" id="palestrantes">
           <SimpleGrid

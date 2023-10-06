@@ -6,6 +6,7 @@ import {
   Flex,
   SimpleGrid,
   Spinner,
+  Text,
   useToast,
 } from '@chakra-ui/react';
 import Link from 'next/link';
@@ -13,9 +14,11 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { client } from '@/service';
 import { gql } from '@apollo/client';
 import { useName } from '@/hooks/useName';
+import { IoIosArrowBack } from 'react-icons/io';
 
 const Tamanho = () => {
   const router = useRouter();
+  const showBackButton = router.pathname !== '/';
   const { tamanhoId, categoriaId, subCategoriaId } = router.query;
   const [tamanhos, setTamanhos] = useState<any>([]);
   const [loading, setLoading] = useState(true);
@@ -80,8 +83,38 @@ const Tamanho = () => {
       <Head>
         <title>Formen Ilha | Tamanhos</title>
       </Head>
+      <Flex shadow={'lg'} my={5} pb={5}>
+        <Container maxW="container.lg">
+          <Flex justifyContent="space-between" alignItems="center">
+            {showBackButton && (
+              <Box>
+                <IoIosArrowBack
+                  size={30}
+                  color="black"
+                  onClick={() => router.back()}
+                >
+                  Voltar
+                </IoIosArrowBack>
+              </Box>
+            )}
+
+            <Box>
+              <Text
+                fontSize="2xl"
+                fontWeight="semibold"
+                as="h4"
+                lineHeight="tight"
+                isTruncated
+              >
+                Tamanhos
+              </Text>
+            </Box>
+            <Box></Box>
+          </Flex>
+        </Container>
+      </Flex>
       <Container maxW="container.lg">
-        <Box as="section" id="palestrantes">
+        <Box as="section">
           <SimpleGrid
             columns={{ base: 2, sm: 2, md: 3, lg: 4 }}
             spacing={{ base: '8', sm: '10', md: '10', lg: '16' }}
