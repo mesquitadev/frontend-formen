@@ -227,7 +227,6 @@ const Produtos = () => {
                       rounded="lg"
                       shadow="lg"
                       position="relative"
-                      v
                     >
                       <Image
                         src={
