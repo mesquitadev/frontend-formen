@@ -53,7 +53,6 @@ const Categoria = () => {
       })
       .then(response => {
         setTamanhos(response.data.tamanhos.data);
-        console.log(response.data.tamanhos.data);
         setLoading(false);
       })
       .catch(err => {

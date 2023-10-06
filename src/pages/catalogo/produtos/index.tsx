@@ -17,6 +17,7 @@ import { gql } from '@apollo/client';
 
 import { WhatsappShareButton } from 'react-share';
 import { IoIosArrowBack } from 'react-icons/io';
+import PageHeading from '@/Components/PageHeading';
 
 const Produtos = () => {
   const router = useRouter();
@@ -109,36 +110,7 @@ const Produtos = () => {
       <Head>
         <title>Formen Ilha | Catálogo</title>
       </Head>
-      <Flex shadow={'lg'} my={5} pb={5}>
-        <Container maxW="container.lg">
-          <Flex justifyContent="space-between" alignItems="center">
-            {showBackButton && (
-              <Box>
-                <IoIosArrowBack
-                  size={30}
-                  color="black"
-                  onClick={() => router.back()}
-                >
-                  Voltar
-                </IoIosArrowBack>
-              </Box>
-            )}
-
-            <Box>
-              <Text
-                fontSize="2xl"
-                fontWeight="semibold"
-                as="h4"
-                lineHeight="tight"
-                isTruncated
-              >
-                Produtos
-              </Text>
-            </Box>
-            <Box></Box>
-          </Flex>
-        </Container>
-      </Flex>
+      <PageHeading showBackButton={showBackButton} pageTitle="Prods" />
       <Container maxW="container.lg">
         <Box as="section" id="palestrantes">
           <SimpleGrid
@@ -152,13 +124,12 @@ const Produtos = () => {
                 left="0"
                 width="100%"
                 height="100%"
-                backgroundColor="rgba(0, 0, 0, 0.6)" // Define um fundo escuro com opacidade
-                zIndex="9999" // Coloca o spinner acima de outros elementos
+                backgroundColor="rgba(0, 0, 0, 0.6)"
+                zIndex="9999"
                 alignItems="center"
                 justifyContent="center"
               >
                 <Spinner size="xl" color="white" />{' '}
-                {/* Tamanho e cor do spinner */}
               </Flex>
             ) : (
               produtos.map((data: any) => {
@@ -196,7 +167,7 @@ const Produtos = () => {
                         <Box mt={2}>
                           <WhatsappShareButton
                             url={data?.attributes.imagem.data?.attributes.url}
-                            title={`Produto ${data?.attributes?.tamanho?.data?.attributes.nome} - Tamanho ${data?.attributes.sub_categoria?.data.attributes.nome}`}
+                            title={`Produto ${data?.attributes.sub_categoria?.data.attributes.nome}  - Tamanho - ${data?.attributes?.tamanho?.data?.attributes.nome}`}
                             separator=":: "
                           >
                             <Button>

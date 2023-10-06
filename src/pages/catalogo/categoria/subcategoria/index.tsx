@@ -15,14 +15,65 @@ import { client } from '@/service';
 import { gql } from '@apollo/client';
 import { useName } from '@/hooks/useName';
 import { IoIosArrowBack } from 'react-icons/io';
+import PageHeading from '@/Components/PageHeading';
 
 const SubCategoria = () => {
   const router = useRouter();
   const showBackButton = router.pathname !== '/';
   const { tamanhoId, categoriaId } = router.query;
   const [subCategorias, setSubCategorias] = useState<any>([]);
+  const [sizeAndName, setSizeAndName] = useState<any>([]);
   const [loading, setLoading] = useState(true);
   const toast = useToast();
+
+  const handleGetCategoryNameAndSizes = useCallback(() => {
+    setLoading(true);
+    if (!router.isReady) return;
+    client
+      .query({
+        query: gql`
+          query Categoria($categoriaId: ID, $tamanhoId: ID) {
+            categoria(id: $categoriaId) {
+              data {
+                attributes {
+                  nome
+                }
+              }
+            }
+            tamanho(id: $tamanhoId) {
+              data {
+                attributes {
+                  nome
+                }
+              }
+            }
+          }
+        `,
+        variables: {
+          categoriaId: categoriaId,
+          tamanhoId: tamanhoId,
+        },
+      })
+      .then(response => {
+        setSizeAndName(response.data);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.log('err', err);
+        toast({
+          title: 'Erro ao buscar dados!',
+          description: 'err',
+          status: 'error',
+          duration: 9000,
+          isClosable: true,
+          position: 'top-right',
+        });
+        setLoading(false);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, [categoriaId, router.isReady, tamanhoId, toast]);
 
   const handleGetSubCategories = useCallback(() => {
     setLoading(true);
@@ -77,47 +128,29 @@ const SubCategoria = () => {
       });
   }, [categoriaId, router.isReady, tamanhoId, toast]);
 
-  const { setPageName } = useName();
   useEffect(() => {
     handleGetSubCategories();
-    setPageName('Teste');
-  }, [handleGetSubCategories, setPageName]);
+    handleGetCategoryNameAndSizes();
+  }, [handleGetCategoryNameAndSizes, handleGetSubCategories, sizeAndName]);
 
   return (
     <>
       <Head>
         <title>Formen Ilha | Catálogo</title>
       </Head>
-      <Flex shadow={'lg'} my={5} pb={5}>
-        <Container maxW="container.lg">
-          <Flex justifyContent="space-between" alignItems="center">
-            {showBackButton && (
-              <Box>
-                <IoIosArrowBack
-                  size={30}
-                  color="black"
-                  onClick={() => router.back()}
-                >
-                  Voltar
-                </IoIosArrowBack>
-              </Box>
-            )}
+      <PageHeading
+        showBackButton={showBackButton}
+        pageTitle={`${
+          sizeAndName.categoria.data.attributes.nome
+            ? sizeAndName.categoria.data.attributes.nome
+            : 'Camisas'
+        } Tamanho ${
+          sizeAndName.tamanho.data.attributes.nome
+            ? sizeAndName.tamanho.data.attributes.nome
+            : 'Tamanho'
+        }`}
+      />
 
-            <Box>
-              <Text
-                fontSize="2xl"
-                fontWeight="semibold"
-                as="h4"
-                lineHeight="tight"
-                isTruncated
-              >
-                Camisas Tamanho
-              </Text>
-            </Box>
-            <Box></Box>
-          </Flex>
-        </Container>
-      </Flex>
       <Container maxW="container.lg">
         <Box as="section" id="palestrantes">
           <SimpleGrid
