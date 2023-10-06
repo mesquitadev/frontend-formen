@@ -6,14 +6,17 @@ import { theme } from '@/theme';
 import '../styles.css';
 import { client } from '@/service';
 import Layout from '@/Components/Layout';
+import { GetNameProvider } from '@/Contexts/GetNameContext';
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <ApolloProvider client={client}>
       <ChakraProvider theme={theme}>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
+        <GetNameProvider>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </GetNameProvider>
       </ChakraProvider>
     </ApolloProvider>
   );

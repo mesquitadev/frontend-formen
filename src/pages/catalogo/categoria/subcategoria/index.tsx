@@ -12,6 +12,7 @@ import Link from 'next/link';
 import React, { useCallback, useEffect, useState } from 'react';
 import { client } from '@/service';
 import { gql } from '@apollo/client';
+import { useName } from '@/hooks/useName';
 
 const SubCategoria = () => {
   const router = useRouter();
@@ -73,9 +74,11 @@ const SubCategoria = () => {
       });
   }, [categoriaId, router.isReady, tamanhoId, toast]);
 
+  const { setPageName } = useName();
   useEffect(() => {
     handleGetSubCategories();
-  }, [handleGetSubCategories]);
+    setPageName('Teste');
+  }, [handleGetSubCategories, setPageName]);
 
   return (
     <>
@@ -85,7 +88,7 @@ const SubCategoria = () => {
       <Container maxW="container.lg">
         <Box as="section" id="palestrantes">
           <SimpleGrid
-            columns={{ base: 1, sm: 2, md: 3, lg: 4 }}
+            columns={{ base: 2, sm: 2, md: 3, lg: 4 }}
             spacing={{ base: '8', sm: '10', md: '10', lg: '16' }}
           >
             {loading ? (
@@ -131,7 +134,7 @@ const SubCategoria = () => {
                       justifyContent="center"
                       alignItems="center"
                     >
-                      <Flex px="3" py="2" flexDirection="column" p={20}>
+                      <Flex px="3" py="2" flexDirection="column" p={10}>
                         <Flex
                           mt="1"
                           justifyContent="space-between"

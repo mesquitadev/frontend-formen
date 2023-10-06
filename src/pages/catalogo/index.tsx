@@ -12,8 +12,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { client } from '@/service';
 import { gql } from '@apollo/client';
 import Link from 'next/link';
-
-import Loading from '@/Components/Loading';
+import { useName } from '@/hooks/useName';
 
 export default function Home() {
   const [categories, setCategories] = useState<any>([]);
@@ -67,9 +66,12 @@ export default function Home() {
       });
   }, [toast]);
 
+  const { setPageName } = useName();
+
   useEffect(() => {
     handleGetCategories();
-  }, [handleGetCategories]);
+    setPageName('Categorias');
+  }, [handleGetCategories, setPageName]);
 
   return (
     <>
@@ -79,7 +81,7 @@ export default function Home() {
       <Container maxW="container.lg">
         <Box as="section">
           <SimpleGrid
-            columns={{ base: 1, sm: 2, md: 3, lg: 4 }}
+            columns={{ base: 2, sm: 2, md: 3, lg: 4 }}
             spacing={{ base: '8', sm: '10', md: '10', lg: '16' }}
           >
             {loading ? (

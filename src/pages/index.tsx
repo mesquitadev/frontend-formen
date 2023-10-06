@@ -14,7 +14,7 @@ import { SiWhatsapp } from 'react-icons/si';
 import { BiWorld } from 'react-icons/bi';
 import { GrCatalog } from 'react-icons/gr';
 import Link from 'next/link';
-import { A11y, Navigation, Pagination, Scrollbar } from 'swiper/modules';
+import { A11y, Navigation, Pagination } from 'swiper/modules';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 // Import Swiper styles

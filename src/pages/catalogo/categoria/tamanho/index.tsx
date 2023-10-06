@@ -8,11 +8,11 @@ import {
   Spinner,
   useToast,
 } from '@chakra-ui/react';
-import Loading from '@/Components/Loading';
 import Link from 'next/link';
 import React, { useCallback, useEffect, useState } from 'react';
 import { client } from '@/service';
 import { gql } from '@apollo/client';
+import { useName } from '@/hooks/useName';
 
 const Tamanho = () => {
   const router = useRouter();
@@ -69,9 +69,11 @@ const Tamanho = () => {
       });
   }, [categoriaId, router.isReady, toast]);
 
+  const { setPageName } = useName();
   useEffect(() => {
     handleGetTamanhos();
-  }, [handleGetTamanhos]);
+    setPageName('Tamanhos');
+  }, [setPageName, handleGetTamanhos]);
 
   return (
     <>
@@ -81,7 +83,7 @@ const Tamanho = () => {
       <Container maxW="container.lg">
         <Box as="section" id="palestrantes">
           <SimpleGrid
-            columns={{ base: 1, sm: 2, md: 3, lg: 4 }}
+            columns={{ base: 2, sm: 2, md: 3, lg: 4 }}
             spacing={{ base: '8', sm: '10', md: '10', lg: '16' }}
           >
             {loading ? (
