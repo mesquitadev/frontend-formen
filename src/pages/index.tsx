@@ -23,6 +23,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
+import { AiOutlineClockCircle } from 'react-icons/ai';
 
 function Carousel() {
   const cards = [
@@ -83,7 +84,7 @@ export default function Home() {
               <Button
                 w={'full'}
                 colorScheme={'yellow'}
-                leftIcon={<BiWorld />}
+                leftIcon={<AiOutlineClockCircle />}
                 as={Link}
                 href="https://res.cloudinary.com/dxin0mfj4/image/upload/v1696695954/formen_multimarcas/ht2b2jxy5myhq7zigklv.jpg"
                 target="_blank"
@@ -102,7 +103,7 @@ export default function Home() {
                 target="_blank"
               >
                 <Center>
-                  <Text>Whatsapp</Text>
+                  <Text>Whatsapp Loja</Text>
                 </Center>
               </Button>
 
