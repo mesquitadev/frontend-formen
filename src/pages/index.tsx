@@ -24,6 +24,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import { AiOutlineClockCircle } from 'react-icons/ai';
+import { BsTruck } from 'react-icons/bs';
 
 function Carousel() {
   const cards = [
@@ -135,8 +136,8 @@ export default function Home() {
 
               <Button
                 w={'full'}
-                colorScheme={'whatsapp'}
-                leftIcon={<SiWhatsapp />}
+                colorScheme={'facebook'}
+                leftIcon={<BsTruck />}
                 as={Link}
                 href="https://wa.me/5598991526700"
                 target="_blank"
