@@ -19,7 +19,6 @@ import { useRouter } from 'next/router';
 
 export default function Home() {
   const [categories, setCategories] = useState<any>([]);
-  const [sizeName, setSizeName] = useState<any>('');
 
   const [loading, setLoading] = useState(true);
   const toast = useToast();
@@ -49,19 +48,11 @@ export default function Home() {
                 }
               }
             }
-            tamanho(id: $tamanhoId) {
-              data {
-                attributes {
-                  nome
-                }
-              }
-            }
           }
         `,
       })
       .then(response => {
         setCategories(response.data.categorias.data);
-        setSizeName(response.data.attributes.nome);
         setLoading(false);
       })
       .catch(err => {
