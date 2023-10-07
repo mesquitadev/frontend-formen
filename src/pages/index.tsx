@@ -25,7 +25,16 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 
 function Carousel() {
-  const cards = ['/delivery.jpg', '/funcionamento.jpg'];
+  const cards = [
+    '/1.jpg',
+    '/2.jpg',
+    '/3.jpg',
+    '/4.jpg',
+    '/5.jpg',
+    '/6.jpg',
+    '/7.jpg',
+    '/8.jpg',
+  ];
   return (
     <Swiper
       spaceBetween={50}
@@ -120,6 +129,19 @@ export default function Home() {
               >
                 <Center>
                   <Text>Instagram</Text>
+                </Center>
+              </Button>
+
+              <Button
+                w={'full'}
+                colorScheme={'whatsapp'}
+                leftIcon={<SiWhatsapp />}
+                as={Link}
+                href="https://wa.me/5598991526700"
+                target="_blank"
+              >
+                <Center>
+                  <Text>Delivery</Text>
                 </Center>
               </Button>
               {/*<Button*/}
