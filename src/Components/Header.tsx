@@ -12,16 +12,16 @@ const Hero = () => {
           <Box mt="10" mb="10">
             <Center>
               <VStack>
-                <Image src="/logo.jpeg" alt="Logo" width={200} height={200} />
-                <Text
-                  bgClip="text"
-                  fontSize="3xl"
-                  fontWeight="extrabold"
-                  color="white"
-                  textAlign="center"
-                >
-                  Formen Multimarcas
-                </Text>
+                <Image src="/formen.jpg" alt="Logo" width={300} height={300} />
+                {/*<Text*/}
+                {/*  bgClip="text"*/}
+                {/*  fontSize="3xl"*/}
+                {/*  fontWeight="extrabold"*/}
+                {/*  color="white"*/}
+                {/*  textAlign="center"*/}
+                {/*>*/}
+                {/*  Formen Multimarcas*/}
+                {/*</Text>*/}
               </VStack>
             </Center>
           </Box>
