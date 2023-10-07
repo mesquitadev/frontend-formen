@@ -5,6 +5,7 @@ import {
   Center,
   Container,
   Flex,
+  Image,
   Stack,
   Text,
 } from '@chakra-ui/react';
@@ -114,30 +115,17 @@ export default function Home() {
                   <Text>Instagram</Text>
                 </Center>
               </Button>
-              {/*<Button*/}
-              {/*  w={'full'}*/}
-              {/*  colorScheme={'pink'}*/}
-              {/*  leftIcon={<FaInstagram />}*/}
-              {/*  as={Link}*/}
-              {/*  href="https://ul.waze.com/ul?ll=-2.52740871%2C-44.25437808&navigate=yes&zoom=17&utm_campaign=default&utm_source=waze_website&utm_medium=lm_share_location"*/}
-              {/*  target="_blank"*/}
-              {/*>*/}
-              {/*  <Center>*/}
-              {/*    <Text>Localização Waze</Text>*/}
-              {/*  </Center>*/}
-              {/*</Button>*/}
               <Button
                 w={'full'}
                 colorScheme={'cyan'}
                 leftIcon={<FaLocationArrow />}
-                as={Link}
-                href="https://maps.app.goo.gl/gbMqHCo5c258Uq8QA"
-                target="_blank"
               >
                 <Center>
-                  <Text>Localização</Text>
+                  <Text>Endereço</Text>
                 </Center>
               </Button>
+
+              <Image alt="Localização" src="/localizacao.jpg" />
             </Stack>
           </Center>
           <Box py={20}>
