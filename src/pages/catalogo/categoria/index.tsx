@@ -20,6 +20,7 @@ const Categoria = () => {
   const { categoriaId } = router.query;
 
   const [tamanhos, setTamanhos] = useState<any>([]);
+  const [categoriaText, setCategoriaText] = useState<any>('');
   const [loading, setLoading] = useState(true);
   const toast = useToast();
 
@@ -71,9 +72,51 @@ const Categoria = () => {
       });
   }, [router.isReady, categoriaId, toast]);
 
+  const handleGetCategory = useCallback(() => {
+    setLoading(true);
+    if (!router.isReady) return;
+    client
+      .query({
+        query: gql`
+          query Categoria($categoriaId: ID) {
+            categoria(id: $categoriaId) {
+              data {
+                attributes {
+                  nome
+                }
+              }
+            }
+          }
+        `,
+        variables: {
+          categoriaId: categoriaId,
+        },
+      })
+      .then(response => {
+        setCategoriaText(response.data.categoria.data.attributes.nome);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.log('err', err);
+        toast({
+          title: 'Erro ao buscar dados!',
+          description: 'err',
+          status: 'error',
+          duration: 9000,
+          isClosable: true,
+          position: 'top-right',
+        });
+        setLoading(false);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, [categoriaId, router.isReady, toast]);
+
   useEffect(() => {
     handleGetTamanhos();
-  }, [handleGetTamanhos]);
+    handleGetCategory();
+  }, [handleGetCategory, handleGetTamanhos]);
 
   return (
     <>
@@ -81,7 +124,10 @@ const Categoria = () => {
         <title>Formen Ilha | Tamanhos</title>
       </Head>
 
-      <PageHeading showBackButton={showBackButton} pageTitle="Tamanhos" />
+      <PageHeading
+        showBackButton={showBackButton}
+        pageTitle={categoriaText ? categoriaText : 'Tamanhos'}
+      />
       <Container maxW="container.lg">
         <Box as="section" id="palestrantes">
           <SimpleGrid
