@@ -6,14 +6,13 @@ import {
   Flex,
   SimpleGrid,
   Spinner,
-  Text,
   useToast,
 } from '@chakra-ui/react';
 import Link from 'next/link';
 import React, { useCallback, useEffect, useState } from 'react';
 import { client } from '@/service';
 import { gql } from '@apollo/client';
-import { IoIosArrowBack } from 'react-icons/io';
+import PageHeading from '@/Components/PageHeading';
 
 const Categoria = () => {
   const router = useRouter();
@@ -82,36 +81,7 @@ const Categoria = () => {
         <title>Formen Ilha | Tamanhos</title>
       </Head>
 
-      <Flex shadow={'lg'} my={5} pb={5}>
-        <Container maxW="container.lg">
-          <Flex justifyContent="space-between" alignItems="center">
-            {showBackButton && (
-              <Box>
-                <IoIosArrowBack
-                  size={30}
-                  color="black"
-                  onClick={() => router.back()}
-                >
-                  Voltar
-                </IoIosArrowBack>
-              </Box>
-            )}
-
-            <Box>
-              <Text
-                fontSize="2xl"
-                fontWeight="semibold"
-                as="h4"
-                lineHeight="tight"
-                isTruncated
-              >
-                Tamanhos
-              </Text>
-            </Box>
-            <Box></Box>
-          </Flex>
-        </Container>
-      </Flex>
+      <PageHeading showBackButton={showBackButton} pageTitle="Tamanhos" />
       <Container maxW="container.lg">
         <Box as="section" id="palestrantes">
           <SimpleGrid
@@ -125,13 +95,12 @@ const Categoria = () => {
                 left="0"
                 width="100%"
                 height="100%"
-                backgroundColor="rgba(0, 0, 0, 0.6)" // Define um fundo escuro com opacidade
-                zIndex="9999" // Coloca o spinner acima de outros elementos
+                backgroundColor="rgba(0, 0, 0, 0.6)"
+                zIndex="9999"
                 alignItems="center"
                 justifyContent="center"
               >
-                <Spinner size="xl" color="white" />{' '}
-                {/* Tamanho e cor do spinner */}
+                <Spinner size="xl" color="white" />
               </Flex>
             ) : (
               tamanhos.map((data: any) => {
@@ -160,7 +129,7 @@ const Categoria = () => {
                       justifyContent="center"
                       alignItems="center"
                     >
-                      <Flex px="3" py="2" flexDirection="column" p={10}>
+                      <Flex px="3" py="2" flexDirection="column" p={5}>
                         <Flex
                           mt="1"
                           justifyContent="space-between"

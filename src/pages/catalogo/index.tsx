@@ -111,11 +111,11 @@ export default function Home() {
           </Flex>
         </Container>
       </Flex>
-      <Container maxW="container.lg">
+      <Container>
         <Box as="section" pb={10}>
           <SimpleGrid
             columns={{ base: 2, sm: 2, md: 3, lg: 4 }}
-            spacing={{ base: '8', sm: '8', md: '8', lg: '8' }}
+            spacing={{ base: '8', sm: '10', md: '10', lg: '16' }}
           >
             {loading ? (
               <Flex
@@ -124,13 +124,12 @@ export default function Home() {
                 left="0"
                 width="100%"
                 height="100%"
-                backgroundColor="rgba(0, 0, 0, 0.6)" // Define um fundo escuro com opacidade
-                zIndex="9999" // Coloca o spinner acima de outros elementos
+                backgroundColor="rgba(0, 0, 0, 0.6)"
+                zIndex="9999"
                 alignItems="center"
                 justifyContent="center"
               >
                 <Spinner size="xl" color="white" />{' '}
-                {/* Tamanho e cor do spinner */}
               </Flex>
             ) : (
               categories.map((data: any) => {

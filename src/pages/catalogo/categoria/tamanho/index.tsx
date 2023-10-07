@@ -19,7 +19,7 @@ import { IoIosArrowBack } from 'react-icons/io';
 const Tamanho = () => {
   const router = useRouter();
   const showBackButton = router.pathname !== '/';
-  const { tamanhoId, categoriaId, subCategoriaId } = router.query;
+  const { tamanhoId, categoriaId } = router.query;
   const [tamanhos, setTamanhos] = useState<any>([]);
   const [loading, setLoading] = useState(true);
   const toast = useToast();
@@ -75,7 +75,6 @@ const Tamanho = () => {
   const { setPageName } = useName();
   useEffect(() => {
     handleGetTamanhos();
-    setPageName('Tamanhos');
   }, [setPageName, handleGetTamanhos]);
 
   return (
@@ -161,7 +160,7 @@ const Tamanho = () => {
                       justifyContent="center"
                       alignItems="center"
                     >
-                      <Flex px="3" py="2" flexDirection="column" p={20}>
+                      <Flex px="3" py="2" flexDirection="column" p={10}>
                         <Flex
                           mt="1"
                           justifyContent="space-between"

@@ -6,15 +6,12 @@ import {
   Flex,
   SimpleGrid,
   Spinner,
-  Text,
   useToast,
 } from '@chakra-ui/react';
 import Link from 'next/link';
 import React, { useCallback, useEffect, useState } from 'react';
 import { client } from '@/service';
 import { gql } from '@apollo/client';
-import { useName } from '@/hooks/useName';
-import { IoIosArrowBack } from 'react-icons/io';
 import PageHeading from '@/Components/PageHeading';
 
 const SubCategoria = () => {
@@ -140,11 +137,7 @@ const SubCategoria = () => {
       </Head>
       <PageHeading
         showBackButton={showBackButton}
-        pageTitle={`${
-          sizeAndName.categoria?.data.attributes.nome
-            ? sizeAndName.categoria.data.attributes.nome
-            : 'Camisas'
-        } Tamanho ${
+        pageTitle={`Tamanho ${
           sizeAndName.tamanho?.data.attributes.nome
             ? sizeAndName.tamanho.data.attributes.nome
             : 'Tamanho'
@@ -164,13 +157,12 @@ const SubCategoria = () => {
                 left="0"
                 width="100%"
                 height="100%"
-                backgroundColor="rgba(0, 0, 0, 0.6)" // Define um fundo escuro com opacidade
-                zIndex="9999" // Coloca o spinner acima de outros elementos
+                backgroundColor="rgba(0, 0, 0, 0.6)"
+                zIndex="9999"
                 alignItems="center"
                 justifyContent="center"
               >
                 <Spinner size="xl" color="white" />{' '}
-                {/* Tamanho e cor do spinner */}
               </Flex>
             ) : (
               subCategorias.map((data: any) => {

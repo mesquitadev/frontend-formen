@@ -16,6 +16,7 @@ import { gql } from '@apollo/client';
 
 import { WhatsappShareButton } from 'react-share';
 import PageHeading from '@/Components/PageHeading';
+import { formatPrice } from '@/Utils/format';
 
 const Produtos = () => {
   const router = useRouter();
@@ -32,11 +33,13 @@ const Produtos = () => {
     client
       .query({
         query: gql`
-          query Attributes($filters: ProdutoFiltersInput) {
+          query Produtos($filters: ProdutoFiltersInput) {
             produtos(filters: $filters) {
               data {
                 attributes {
                   nome
+                  mostrar_preco
+                  preco
                   imagem {
                     data {
                       attributes {
@@ -143,7 +146,7 @@ const Produtos = () => {
   useEffect(() => {
     handleGetProducts();
     handleGetSubCategories();
-  }, [handleGetProducts, produtos]);
+  }, [handleGetProducts, handleGetSubCategories, produtos]);
 
   return (
     <>
@@ -195,6 +198,17 @@ const Produtos = () => {
                         alignItems="center"
                         flexDirection="column"
                       >
+                        {data?.attributes.mostrar_preco && (
+                          <Box
+                            fontSize="2xl"
+                            fontWeight="semibold"
+                            as="h1"
+                            lineHeight="tight"
+                            isTruncated
+                          >
+                            {formatPrice(data?.attributes.preco)}
+                          </Box>
+                        )}
                         <Box mt={2}>
                           <WhatsappShareButton
                             url={data?.attributes.imagem.data?.attributes.url}
