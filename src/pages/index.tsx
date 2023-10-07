@@ -25,7 +25,7 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 
 function Carousel() {
-  const cards = ['/banner-1.png', '/banner-2.png'];
+  const cards = ['/delivery.jpg', '/funcionamento.jpg'];
   return (
     <Swiper
       spaceBetween={50}
@@ -42,7 +42,7 @@ function Carousel() {
         <SwiperSlide key={index}>
           <Box
             key={index}
-            height="250px"
+            height="500px"
             position="relative"
             backgroundPosition="center"
             backgroundRepeat="no-repeat"
@@ -148,9 +148,9 @@ export default function Home() {
               </Button>
             </Stack>
           </Center>
-          {/*<Box py={20}>*/}
-          {/*  <Carousel />*/}
-          {/*</Box>*/}
+          <Box py={20}>
+            <Carousel />
+          </Box>
         </Flex>
       </Container>
     </>
