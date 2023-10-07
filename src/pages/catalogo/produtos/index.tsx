@@ -8,7 +8,6 @@ import {
   Image,
   SimpleGrid,
   Spinner,
-  Text,
   useToast,
 } from '@chakra-ui/react';
 import React, { useCallback, useEffect, useState } from 'react';
@@ -16,7 +15,6 @@ import { client } from '@/service';
 import { gql } from '@apollo/client';
 
 import { WhatsappShareButton } from 'react-share';
-import { IoIosArrowBack } from 'react-icons/io';
 import PageHeading from '@/Components/PageHeading';
 
 const Produtos = () => {
@@ -24,6 +22,7 @@ const Produtos = () => {
   const showBackButton = router.pathname !== '/';
   const { tamanhoId, subCategoriaId } = router.query;
   const [produtos, setProdutos] = useState<any>([]);
+  const [subCategoriaText, setSubCategoriaText] = useState<any>('');
   const [loading, setLoading] = useState(true);
   const toast = useToast();
 
@@ -100,9 +99,50 @@ const Produtos = () => {
         setLoading(false);
       });
   }, [router.isReady, subCategoriaId, tamanhoId, toast]);
+  const handleGetSubCategories = useCallback(() => {
+    setLoading(true);
+    if (!router.isReady) return;
+    client
+      .query({
+        query: gql`
+          query SubCategoria($subCategoriaId: ID) {
+            subCategoria(id: $subCategoriaId) {
+              data {
+                attributes {
+                  nome
+                }
+              }
+            }
+          }
+        `,
+        variables: {
+          subCategoriaId: subCategoriaId,
+        },
+      })
+      .then(response => {
+        setSubCategoriaText(response.data.subCategoria.data.attributes.nome);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.log('err', err);
+        toast({
+          title: 'Erro ao buscar dados!',
+          description: 'err',
+          status: 'error',
+          duration: 9000,
+          isClosable: true,
+          position: 'top-right',
+        });
+        setLoading(false);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, [router.isReady, subCategoriaId, toast]);
 
   useEffect(() => {
     handleGetProducts();
+    handleGetSubCategories();
   }, [handleGetProducts, produtos]);
 
   return (
@@ -110,7 +150,10 @@ const Produtos = () => {
       <Head>
         <title>Formen Ilha | Catálogo</title>
       </Head>
-      <PageHeading showBackButton={showBackButton} pageTitle="Prods" />
+      <PageHeading
+        showBackButton={showBackButton}
+        pageTitle={subCategoriaText}
+      />
       <Container maxW="container.lg">
         <Box as="section" id="palestrantes">
           <SimpleGrid
@@ -152,18 +195,6 @@ const Produtos = () => {
                         alignItems="center"
                         flexDirection="column"
                       >
-                        <Flex mt="1" justifyContent="center">
-                          <Box
-                            fontSize="2xl"
-                            fontWeight="semibold"
-                            as="h4"
-                            lineHeight="tight"
-                            isTruncated
-                          >
-                            {data?.attributes.nome}
-                          </Box>
-                        </Flex>
-
                         <Box mt={2}>
                           <WhatsappShareButton
                             url={data?.attributes.imagem.data?.attributes.url}

@@ -141,11 +141,11 @@ const SubCategoria = () => {
       <PageHeading
         showBackButton={showBackButton}
         pageTitle={`${
-          sizeAndName.categoria.data.attributes.nome
+          sizeAndName.categoria?.data.attributes.nome
             ? sizeAndName.categoria.data.attributes.nome
             : 'Camisas'
         } Tamanho ${
-          sizeAndName.tamanho.data.attributes.nome
+          sizeAndName.tamanho?.data.attributes.nome
             ? sizeAndName.tamanho.data.attributes.nome
             : 'Tamanho'
         }`}
