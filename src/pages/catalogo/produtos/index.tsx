@@ -17,6 +17,7 @@ import { gql } from '@apollo/client';
 import { WhatsappShareButton } from 'react-share';
 import PageHeading from '@/Components/PageHeading';
 import { formatPrice } from '@/Utils/format';
+import ModalImage from 'react-modal-image';
 
 const Produtos = () => {
   const router = useRouter();
@@ -183,13 +184,21 @@ const Produtos = () => {
                   <Flex key={data.id} py={10}>
                     <Box borderWidth="1px" rounded="lg" shadow="lg">
                       <Image
-                        src={
+                        as={ModalImage}
+                        small={
                           data.attributes.imagem.data?.attributes?.url
                             ? data.attributes.imagem.data?.attributes.url
                             : 'https://placehold.co/200x270?text=Produto+Sem+Imagem'
                         }
-                        alt={`Imagem do produto ${data?.attributes?.nome}`}
+                        large={
+                          data.attributes.imagem.data?.attributes?.url
+                            ? data.attributes.imagem.data?.attributes.url
+                            : 'https://placehold.co/200x270?text=Produto+Sem+Imagem'
+                        }
+                        alt={`${data?.attributes?.nome}`}
                         roundedTop="lg"
+                        hideDownload
+                        hideZoom
                       />
 
                       <Flex

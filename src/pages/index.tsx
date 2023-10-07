@@ -76,7 +76,6 @@ export default function Home() {
                 </Center>
               </Button>
 
-              {/* Facebook */}
               <Button
                 w={'full'}
                 colorScheme={'whatsapp'}
@@ -90,14 +89,12 @@ export default function Home() {
                 </Center>
               </Button>
 
-              {/* LinkedIn */}
               <Button
                 w={'full'}
                 colorScheme={'teal'}
                 leftIcon={<GrCatalog />}
                 as={Link}
                 href="/catalogo"
-                target="_blank"
               >
                 <Center>
                   <Text>Catálogo</Text>
