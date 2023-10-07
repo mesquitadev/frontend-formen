@@ -71,9 +71,16 @@ export default function Home() {
           </Flex>
           <Center p={8}>
             <Stack spacing={2} align={'center'} maxW={'md'} w={'full'}>
-              <Button w={'full'} colorScheme={'yellow'} leftIcon={<BiWorld />}>
+              <Button
+                w={'full'}
+                colorScheme={'yellow'}
+                leftIcon={<BiWorld />}
+                as={Link}
+                href="https://res.cloudinary.com/dxin0mfj4/image/upload/v1696695954/formen_multimarcas/ht2b2jxy5myhq7zigklv.jpg"
+                target="_blank"
+              >
                 <Center>
-                  <Text>www.formenilha.com</Text>
+                  <Text>Horário de Funcionamento</Text>
                 </Center>
               </Button>
 
@@ -115,22 +122,35 @@ export default function Home() {
                   <Text>Instagram</Text>
                 </Center>
               </Button>
+              {/*<Button*/}
+              {/*  w={'full'}*/}
+              {/*  colorScheme={'pink'}*/}
+              {/*  leftIcon={<FaInstagram />}*/}
+              {/*  as={Link}*/}
+              {/*  href="https://ul.waze.com/ul?ll=-2.52740871%2C-44.25437808&navigate=yes&zoom=17&utm_campaign=default&utm_source=waze_website&utm_medium=lm_share_location"*/}
+              {/*  target="_blank"*/}
+              {/*>*/}
+              {/*  <Center>*/}
+              {/*    <Text>Localização Waze</Text>*/}
+              {/*  </Center>*/}
+              {/*</Button>*/}
               <Button
                 w={'full'}
                 colorScheme={'cyan'}
                 leftIcon={<FaLocationArrow />}
+                as={Link}
+                href="https://res.cloudinary.com/dxin0mfj4/image/upload/v1696695608/formen_multimarcas/iv5sk5vhwe1ge6jxk3uy.jpg"
+                target="_blank"
               >
                 <Center>
-                  <Text>Endereço</Text>
+                  <Text>Endereço Loja</Text>
                 </Center>
               </Button>
-
-              <Image alt="Localização" src="/localizacao.jpg" />
             </Stack>
           </Center>
-          <Box py={20}>
-            <Carousel />
-          </Box>
+          {/*<Box py={20}>*/}
+          {/*  <Carousel />*/}
+          {/*</Box>*/}
         </Flex>
       </Container>
     </>
