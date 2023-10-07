@@ -94,7 +94,7 @@ export default function Home() {
                 colorScheme={'teal'}
                 leftIcon={<GrCatalog />}
                 as={Link}
-                href="/catalogo"
+                href="https://drive.google.com/drive/folders/1l8nba8xkwMhLFdFFyayIMkMjhLiEV-_j"
               >
                 <Center>
                   <Text>Catálogo</Text>
