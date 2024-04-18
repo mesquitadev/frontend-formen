@@ -10,7 +10,7 @@ import {
   Text,
 } from '@chakra-ui/react';
 import React from 'react';
-import { FaInstagram, FaLocationArrow } from 'react-icons/fa';
+import { FaInstagram, FaLocationArrow, FaWhatsapp } from 'react-icons/fa';
 import { SiWhatsapp } from 'react-icons/si';
 import { BiWorld } from 'react-icons/bi';
 import { GrCatalog } from 'react-icons/gr';
@@ -146,18 +146,19 @@ export default function Home() {
                   <Text>Delivery</Text>
                 </Center>
               </Button>
-              {/*<Button*/}
-              {/*  w={'full'}*/}
-              {/*  colorScheme={'pink'}*/}
-              {/*  leftIcon={<FaInstagram />}*/}
-              {/*  as={Link}*/}
-              {/*  href="https://ul.waze.com/ul?ll=-2.52740871%2C-44.25437808&navigate=yes&zoom=17&utm_campaign=default&utm_source=waze_website&utm_medium=lm_share_location"*/}
-              {/*  target="_blank"*/}
-              {/*>*/}
-              {/*  <Center>*/}
-              {/*    <Text>Localização Waze</Text>*/}
-              {/*  </Center>*/}
-              {/*</Button>*/}
+              <Button
+                w={'full'}
+                colorScheme={'whatsapp'}
+                leftIcon={<FaWhatsapp />}
+                as={Link}
+                href="https://wa.me/5598987689843"
+                target="_blank"
+              >
+                <Center>
+                  <Text>Venda Atacado</Text>
+                </Center>
+              </Button>
+
               <Button
                 w={'full'}
                 colorScheme={'cyan'}
