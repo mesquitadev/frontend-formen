@@ -146,7 +146,7 @@ export default function Home() {
                   <Text>Delivery</Text>
                 </Center>
               </Button>
-              <Button
+              {/* <Button
                 w={'full'}
                 colorScheme={'whatsapp'}
                 leftIcon={<FaWhatsapp />}
@@ -157,7 +157,7 @@ export default function Home() {
                 <Center>
                   <Text>Venda Atacado</Text>
                 </Center>
-              </Button>
+              </Button> */}
 
               <Button
                 w={'full'}
