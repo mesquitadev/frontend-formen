@@ -164,7 +164,7 @@ export default function Home() {
                 colorScheme={'cyan'}
                 leftIcon={<FaLocationArrow />}
                 as={Link}
-                href="https://www.google.com/maps?q=MAC+Center+-+R.+Euclides+Farias,+N%C2%B0,Loja+38+-+Cohama,+S%C3%A3o+Lu%C3%ADs+-+MA,+65047-380&ftid=0x7f68f0023405727:0xe8b6fa513cdc4223&entry=gps&lucs=,47071704,47069508,94218641,94203019,47084304,94208458,94208447&g_ep=CAISDTYuMTE0LjMuNTkxOTAYACDXggMqPyw0NzA3MTcwNCw0NzA2OTUwOCw5NDIxODY0MSw5NDIwMzAxOSw0NzA4NDMwNCw5NDIwODQ1OCw5NDIwODQ0N0ICQlI%3D&g_st=iw"
+                href="https://www.instagram.com/s/aGlnaGxpZ2h0OjE3ODc0NzExNjU4Mzk3OTU2?story_media_id=3368555387442417485&igsh=enBjN3BuMjU0NXJm"
                 target="_blank"
               >
                 <Center>
