@@ -164,7 +164,7 @@ export default function Home() {
                 colorScheme={'cyan'}
                 leftIcon={<FaLocationArrow />}
                 as={Link}
-                href="https://www.instagram.com/s/aGlnaGxpZ2h0OjE3ODc0NzExNjU4Mzk3OTU2?story_media_id=3368555387442417485&igsh=enBjN3BuMjU0NXJm"
+                href="https://drive.google.com/file/d/1sNNgFRYKqP665homg0WFJtON6PSVHkk6/view?usp=sharing"
                 target="_blank"
               >
                 <Center>
