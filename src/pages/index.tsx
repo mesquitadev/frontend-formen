@@ -87,7 +87,7 @@ export default function Home() {
                 colorScheme={'yellow'}
                 leftIcon={<AiOutlineClockCircle />}
                 as={Link}
-                href="https://res.cloudinary.com/dxin0mfj4/image/upload/v1696695954/formen_multimarcas/ht2b2jxy5myhq7zigklv.jpg"
+                href="https://res.cloudinary.com/dxin0mfj4/image/upload/v1718800594/FLYER_HORARIO_DE_FUNCIONAMENTO_FORMEN_02_jlar2e.png"
                 target="_blank"
               >
                 <Center>
@@ -164,11 +164,11 @@ export default function Home() {
                 colorScheme={'cyan'}
                 leftIcon={<FaLocationArrow />}
                 as={Link}
-                href="https://drive.google.com/file/d/1sNNgFRYKqP665homg0WFJtON6PSVHkk6/view?usp=sharing"
+                href="https://res.cloudinary.com/dxin0mfj4/image/upload/v1718800594/FLYER_-_ENDEREC%CC%A7OS_FORMEN_dh1dpg.png"
                 target="_blank"
               >
                 <Center>
-                  <Text>Endereço Loja</Text>
+                  <Text>Endereço Lojas</Text>
                 </Center>
               </Button>
             </Stack>
