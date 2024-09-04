@@ -126,7 +126,7 @@ export default function Home() {
                 colorScheme={'pink'}
                 leftIcon={<FaInstagram />}
                 as={Link}
-                href="https://www.instagram.com/formen_mutimarcas?igsh=MWV1eWsyNHZod2Fmcg=="
+                href="https://www.instagram.com/formen_mulltimarcas?igsh=MTcxNDB0bTNpNm5uZA=="
                 target="_blank"
               >
                 <Center>
