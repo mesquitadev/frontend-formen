@@ -146,18 +146,18 @@ export default function Home() {
                   <Text>Delivery</Text>
                 </Center>
               </Button>
-              {/* <Button
+              <Button
                 w={'full'}
                 colorScheme={'whatsapp'}
                 leftIcon={<FaWhatsapp />}
                 as={Link}
-                href="https://wa.me/5598987689843"
+                href="https://chat.whatsapp.com/HBO5UnpLmOALQRtmiX65Vb"
                 target="_blank"
               >
                 <Center>
-                  <Text>Venda Atacado</Text>
+                  <Text>GRUPO WHATSAPP NOVIDADES E PROMOÇÕES</Text>
                 </Center>
-              </Button> */}
+              </Button>
 
               <Button
                 w={'full'}
