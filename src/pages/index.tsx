@@ -151,11 +151,11 @@ export default function Home() {
                 colorScheme={'whatsapp'}
                 leftIcon={<FaWhatsapp />}
                 as={Link}
-                href="https://chat.whatsapp.com/HBO5UnpLmOALQRtmiX65Vb"
+                href="https://chat.whatsapp.com/JB1Cu5tawwl5wbGe4YVdj8"
                 target="_blank"
               >
                 <Center>
-                  <Text>GRUPO WHATSAPP NOVIDADES E PROMOÇÕES</Text>
+                  <Text>GRUPO de NOVIDADES E PROMOÇÕES</Text>
                 </Center>
               </Button>
 
