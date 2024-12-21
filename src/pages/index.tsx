@@ -151,7 +151,7 @@ export default function Home() {
                 colorScheme={'whatsapp'}
                 leftIcon={<FaWhatsapp />}
                 as={Link}
-                href="https://chat.whatsapp.com/JB1Cu5tawwl5wbGe4YVdj8"
+                href="https://chat.whatsapp.com/LmP05eTl07x69ogya8Vtw5"
                 target="_blank"
               >
                 <Center>
