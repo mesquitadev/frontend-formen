@@ -5,7 +5,7 @@ import {
   Container,
   Flex,
   Stack,
-  Text
+  Text,
 } from '@chakra-ui/react';
 import Head from 'next/head';
 import Link from 'next/link';
