@@ -1,30 +1,27 @@
-import Head from 'next/head';
 import {
   Box,
   Button,
   Center,
   Container,
   Flex,
-  Image,
   Stack,
-  Text,
+  Text
 } from '@chakra-ui/react';
-import React from 'react';
-import { FaInstagram, FaLocationArrow, FaWhatsapp } from 'react-icons/fa';
-import { SiWhatsapp } from 'react-icons/si';
-import { BiWorld } from 'react-icons/bi';
-import { GrCatalog } from 'react-icons/gr';
+import Head from 'next/head';
 import Link from 'next/link';
+import { FaInstagram, FaLocationArrow, FaWhatsapp } from 'react-icons/fa';
+import { GrCatalog } from 'react-icons/gr';
+import { SiWhatsapp } from 'react-icons/si';
 import { A11y, Navigation, Pagination } from 'swiper/modules';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 // Import Swiper styles
+import { AiOutlineClockCircle } from 'react-icons/ai';
+import { BsTruck } from 'react-icons/bs';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
-import { AiOutlineClockCircle } from 'react-icons/ai';
-import { BsTruck } from 'react-icons/bs';
 
 function Carousel() {
   const cards = [
@@ -87,7 +84,7 @@ export default function Home() {
                 colorScheme={'yellow'}
                 leftIcon={<AiOutlineClockCircle />}
                 as={Link}
-                href="https://res.cloudinary.com/dxin0mfj4/image/upload/v1718800594/FLYER_HORARIO_DE_FUNCIONAMENTO_FORMEN_02_jlar2e.png"
+                href="https://asset.cloudinary.com/dxin0mfj4/822890d626ae6a144f88f401ce9b4359"
                 target="_blank"
               >
                 <Center>
@@ -164,7 +161,7 @@ export default function Home() {
                 colorScheme={'cyan'}
                 leftIcon={<FaLocationArrow />}
                 as={Link}
-                href="https://res.cloudinary.com/dxin0mfj4/image/upload/v1718800594/FLYER_-_ENDEREC%CC%A7OS_FORMEN_dh1dpg.png"
+                href="https://asset.cloudinary.com/dxin0mfj4/e495cb3adb90157ca44220b7acbbdfa9"
                 target="_blank"
               >
                 <Center>
