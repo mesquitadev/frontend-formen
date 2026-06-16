@@ -22,6 +22,9 @@ export default function Document() {
           sizes="180x180"
           href="/apple-touch-icon.png"
         />
+        <link rel="manifest" href="/site.webmanifest" />
+        <meta name="theme-color" content="#0b0a09" />
+        <meta name="msapplication-TileColor" content="#0b0a09" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           rel="preconnect"

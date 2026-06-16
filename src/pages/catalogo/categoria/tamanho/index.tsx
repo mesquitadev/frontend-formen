@@ -1,5 +1,4 @@
 import { useRouter } from 'next/router';
-import Head from 'next/head';
 import Link from 'next/link';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useSnackbar } from 'notistack';
@@ -8,6 +7,7 @@ import { gql } from '@apollo/client';
 import { useName } from '@/hooks/useName';
 import PageHeading from '@/Components/PageHeading';
 import Loading from '@/Components/Loading';
+import Seo from '@/Components/Seo';
 
 const Tamanho = () => {
   const router = useRouter();
@@ -53,9 +53,7 @@ const Tamanho = () => {
 
   return (
     <>
-      <Head>
-        <title>Formen Multimarcas — Tamanhos</title>
-      </Head>
+      <Seo title="Tamanhos" path="/catalogo/categoria/tamanho" noindex />
 
       <PageHeading showBackButton={showBackButton} pageTitle="Tamanhos" />
 

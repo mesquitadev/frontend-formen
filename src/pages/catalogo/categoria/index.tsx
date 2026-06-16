@@ -1,5 +1,4 @@
 import { useRouter } from 'next/router';
-import Head from 'next/head';
 import Link from 'next/link';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useSnackbar } from 'notistack';
@@ -7,6 +6,7 @@ import { client } from '@/service';
 import { gql } from '@apollo/client';
 import PageHeading from '@/Components/PageHeading';
 import Loading from '@/Components/Loading';
+import Seo from '@/Components/Seo';
 
 const Categoria = () => {
   const router = useRouter();
@@ -78,9 +78,11 @@ const Categoria = () => {
 
   return (
     <>
-      <Head>
-        <title>Formen Multimarcas — Tamanhos</title>
-      </Head>
+      <Seo
+        title={categoriaText || 'Tamanhos'}
+        path="/catalogo/categoria"
+        noindex
+      />
 
       <PageHeading
         showBackButton={showBackButton}

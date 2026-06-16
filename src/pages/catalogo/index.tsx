@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import Link from 'next/link';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useSnackbar } from 'notistack';
@@ -7,6 +6,7 @@ import { client } from '@/service';
 import { useName } from '@/hooks/useName';
 import PageHeading from '@/Components/PageHeading';
 import Loading from '@/Components/Loading';
+import Seo from '@/Components/Seo';
 
 const PLACEHOLDER =
   'https://placehold.co/400x540/0f3325/f2e9d8?text=Sem+imagem';
@@ -61,9 +61,11 @@ export default function Categorias() {
 
   return (
     <>
-      <Head>
-        <title>Formen Multimarcas — Catálogo</title>
-      </Head>
+      <Seo
+        title="Catálogo"
+        path="/catalogo"
+        description="Catálogo da Formen Multimarcas: navegue por categorias, tamanhos e preços. Moda masculina das melhores marcas em São Luís."
+      />
 
       <PageHeading showBackButton pageTitle="Categorias" />
 

@@ -1,7 +1,8 @@
-import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
+import Seo from '@/Components/Seo';
+import StoreJsonLd from '@/Components/StoreJsonLd';
 import {
   FaArrowRight,
   FaBoxOpen,
@@ -166,13 +167,8 @@ export default function Home() {
 
   return (
     <>
-      <Head>
-        <title>Formen Multimarcas — moda masculina em São Luís</title>
-        <meta
-          name="description"
-          content="Multimarcas masculina em São Luís. Curadoria das melhores marcas, pedidos pelo WhatsApp e delivery."
-        />
-      </Head>
+      <Seo title="Moda masculina em São Luís" path="/" />
+      <StoreJsonLd />
 
       {/* HERO */}
       <section className="relative flex min-h-[92vh] flex-col justify-center overflow-clip px-5 py-28 md:px-10">

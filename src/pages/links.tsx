@@ -1,7 +1,8 @@
-import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ReactElement, useState } from 'react';
+import Seo from '@/Components/Seo';
+import StoreJsonLd from '@/Components/StoreJsonLd';
 import {
   FaArrowRight,
   FaBoxOpen,
@@ -140,13 +141,12 @@ export default function LinksPage() {
 
   return (
     <>
-      <Head>
-        <title>Formen Multimarcas — Links</title>
-        <meta
-          name="description"
-          content="Todos os links da Formen Multimarcas: catálogo, WhatsApp, delivery, Instagram e mais."
-        />
-      </Head>
+      <Seo
+        title="Links"
+        path="/links"
+        description="Todos os links da Formen Multimarcas: catálogo, WhatsApp, delivery, Instagram, horário e endereços das lojas em São Luís."
+      />
+      <StoreJsonLd />
 
       <main className="relative z-[1] flex min-h-screen flex-col items-center px-5 py-14">
         {/* brilho dourado atrás do avatar */}

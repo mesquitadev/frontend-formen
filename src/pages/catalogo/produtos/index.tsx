@@ -1,5 +1,4 @@
 import { useRouter } from 'next/router';
-import Head from 'next/head';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useSnackbar } from 'notistack';
 import { client } from '@/service';
@@ -9,6 +8,7 @@ import { FaWhatsapp } from 'react-icons/fa';
 import ModalImage from 'react-modal-image';
 import PageHeading from '@/Components/PageHeading';
 import Loading from '@/Components/Loading';
+import Seo from '@/Components/Seo';
 import { formatPrice } from '@/Utils/format';
 
 const PLACEHOLDER =
@@ -111,9 +111,11 @@ const Produtos = () => {
 
   return (
     <>
-      <Head>
-        <title>Formen Multimarcas — Catálogo</title>
-      </Head>
+      <Seo
+        title={subCategoriaText || 'Produtos'}
+        path="/catalogo/produtos"
+        noindex
+      />
 
       <PageHeading
         showBackButton={showBackButton}
