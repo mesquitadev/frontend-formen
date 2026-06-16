@@ -1,17 +1,13 @@
-import { Box, Container, Flex, Text } from '@chakra-ui/react';
 import React from 'react';
 import Footer from './Footer';
 import Header from '@/Components/Header';
-import { IoIosArrowBack } from 'react-icons/io';
-import { useRouter } from 'next/router';
-import { useName } from '@/hooks/useName';
 
-export default function Layout({ children }: any) {
+export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <Box minH="100vh" display="flex" flexDirection="column">
+    <div className="relative z-[1] flex min-h-screen flex-col bg-canvas text-ink">
       <Header />
-      <Box flex="1">{children}</Box>
+      <main className="flex-1">{children}</main>
       <Footer />
-    </Box>
+    </div>
   );
 }

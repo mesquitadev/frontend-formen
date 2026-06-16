@@ -1,30 +1,30 @@
 import { useRouter } from 'next/router';
 import Head from 'next/head';
-import {
-  Box,
-  Container,
-  Flex,
-  SimpleGrid,
-  Spinner,
-  useToast,
-} from '@chakra-ui/react';
 import Link from 'next/link';
 import React, { useCallback, useEffect, useState } from 'react';
+import { useSnackbar } from 'notistack';
 import { client } from '@/service';
 import { gql } from '@apollo/client';
+import { FaArrowRight } from 'react-icons/fa';
 import PageHeading from '@/Components/PageHeading';
+import Loading from '@/Components/Loading';
 
 const SubCategoria = () => {
   const router = useRouter();
   const showBackButton = router.pathname !== '/';
   const { tamanhoId, categoriaId } = router.query;
   const [subCategorias, setSubCategorias] = useState<any>([]);
-  const [sizeAndName, setSizeAndName] = useState<any>([]);
+  const [sizeAndName, setSizeAndName] = useState<any>({});
   const [loading, setLoading] = useState(true);
-  const toast = useToast();
+  const { enqueueSnackbar } = useSnackbar();
+
+  const fail = useCallback(() => {
+    enqueueSnackbar('Não foi possível carregar os dados. Tente novamente.', {
+      variant: 'error',
+    });
+  }, [enqueueSnackbar]);
 
   const handleGetCategoryNameAndSizes = useCallback(() => {
-    setLoading(true);
     if (!router.isReady) return;
     client
       .query({
@@ -46,35 +46,15 @@ const SubCategoria = () => {
             }
           }
         `,
-        variables: {
-          categoriaId: categoriaId,
-          tamanhoId: tamanhoId,
-        },
+        variables: { categoriaId, tamanhoId },
       })
-      .then(response => {
-        setSizeAndName(response.data);
-        setLoading(false);
-      })
-      .catch(err => {
-        console.log('err', err);
-        toast({
-          title: 'Erro ao buscar dados!',
-          description: 'err',
-          status: 'error',
-          duration: 9000,
-          isClosable: true,
-          position: 'top-right',
-        });
-        setLoading(false);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, [categoriaId, router.isReady, tamanhoId, toast]);
+      .then(response => setSizeAndName(response.data))
+      .catch(fail);
+  }, [categoriaId, router.isReady, tamanhoId, fail]);
 
   const handleGetSubCategories = useCallback(() => {
-    setLoading(true);
     if (!router.isReady) return;
+    setLoading(true);
     client
       .query({
         query: gql`
@@ -91,132 +71,62 @@ const SubCategoria = () => {
         `,
         variables: {
           filters: {
-            categoria: {
-              id: {
-                eq: categoriaId,
-              },
-            },
-            tamanhos: {
-              id: {
-                eq: tamanhoId,
-              },
-            },
+            categoria: { id: { eq: categoriaId } },
+            tamanhos: { id: { eq: tamanhoId } },
           },
         },
       })
-      .then(response => {
-        setSubCategorias(response.data.subCategorias.data);
-        setLoading(false);
-      })
-      .catch(err => {
-        console.log('err', err);
-        toast({
-          title: 'Erro ao buscar dados!',
-          description: 'err',
-          status: 'error',
-          duration: 9000,
-          isClosable: true,
-          position: 'top-right',
-        });
-        setLoading(false);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, [categoriaId, router.isReady, tamanhoId, toast]);
+      .then(response => setSubCategorias(response.data.subCategorias.data))
+      .catch(fail)
+      .finally(() => setLoading(false));
+  }, [categoriaId, router.isReady, tamanhoId, fail]);
 
   useEffect(() => {
     handleGetSubCategories();
     handleGetCategoryNameAndSizes();
-  }, [handleGetCategoryNameAndSizes, handleGetSubCategories, sizeAndName]);
+  }, [handleGetCategoryNameAndSizes, handleGetSubCategories]);
+
+  const tamanhoNome = sizeAndName?.tamanho?.data?.attributes?.nome;
 
   return (
     <>
       <Head>
-        <title>Formen Ilha | Catálogo</title>
+        <title>Formen Multimarcas — Catálogo</title>
       </Head>
+
       <PageHeading
         showBackButton={showBackButton}
-        pageTitle={`Tamanho ${
-          sizeAndName.tamanho?.data.attributes.nome
-            ? sizeAndName.tamanho.data.attributes.nome
-            : 'Tamanho'
-        }`}
+        pageTitle={tamanhoNome ? `Tamanho ${tamanhoNome}` : 'Subcategorias'}
       />
 
-      <Container maxW="container.lg">
-        <Box as="section" id="palestrantes">
-          <SimpleGrid
-            columns={{ base: 2, sm: 2, md: 3, lg: 4 }}
-            spacing={{ base: '8', sm: '10', md: '10', lg: '16' }}
-          >
-            {loading ? (
-              <Flex
-                position="fixed"
-                top="0"
-                left="0"
-                width="100%"
-                height="100%"
-                backgroundColor="rgba(0, 0, 0, 0.6)"
-                zIndex="9999"
-                alignItems="center"
-                justifyContent="center"
-              >
-                <Spinner size="xl" color="white" />{' '}
-              </Flex>
-            ) : (
-              subCategorias.map((data: any) => {
-                return (
-                  <Flex
-                    as={Link}
-                    href={{
-                      pathname: `/catalogo/produtos`,
-                      query: {
-                        tamanhoId: tamanhoId,
-                        categoriaId: categoriaId,
-                        subCategoriaId: data.id,
-                      },
-                    }}
-                    key={data.id}
-                    p={50}
-                    w="full"
-                    alignItems="center"
-                    justifyContent="center"
-                  >
-                    <Box
-                      maxW="sm"
-                      borderWidth="1px"
-                      rounded="lg"
-                      shadow="lg"
-                      position="relative"
-                      justifyContent="center"
-                      alignItems="center"
-                    >
-                      <Flex px="3" py="2" flexDirection="column" p={10}>
-                        <Flex
-                          mt="1"
-                          justifyContent="space-between"
-                          alignContent="center"
-                        >
-                          <Box
-                            fontSize="2xl"
-                            fontWeight="semibold"
-                            as="h4"
-                            lineHeight="tight"
-                            isTruncated
-                          >
-                            {data?.attributes.nome}
-                          </Box>
-                        </Flex>
-                      </Flex>
-                    </Box>
-                  </Flex>
-                );
-              })
-            )}
-          </SimpleGrid>
-        </Box>
-      </Container>
+      <section className="mx-auto max-w-shell px-5 py-12 md:px-10">
+        {loading ? (
+          <Loading />
+        ) : (
+          <ul className="list-none">
+            {subCategorias.map((data: any) => (
+              <li key={data.id}>
+                <Link
+                  href={{
+                    pathname: '/catalogo/produtos',
+                    query: {
+                      tamanhoId,
+                      categoriaId,
+                      subCategoriaId: data.id,
+                    },
+                  }}
+                  className="group flex items-center gap-4 border-b border-ink/10 py-5 pl-1 transition-[padding,color] duration-300 hover:pl-4 hover:text-accent"
+                >
+                  <span className="font-display text-2xl font-bold uppercase tracking-tight md:text-3xl">
+                    {data?.attributes.nome}
+                  </span>
+                  <FaArrowRight className="ml-auto -translate-x-2 text-inkDim opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:text-accent group-hover:opacity-100" />
+                </Link>
+              </li>
+            ))}
+          </ul>
+        )}
+      </section>
     </>
   );
 };

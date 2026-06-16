@@ -1,18 +1,12 @@
 import { useRouter } from 'next/router';
 import Head from 'next/head';
-import {
-  Box,
-  Container,
-  Flex,
-  SimpleGrid,
-  Spinner,
-  useToast,
-} from '@chakra-ui/react';
 import Link from 'next/link';
 import React, { useCallback, useEffect, useState } from 'react';
+import { useSnackbar } from 'notistack';
 import { client } from '@/service';
 import { gql } from '@apollo/client';
 import PageHeading from '@/Components/PageHeading';
+import Loading from '@/Components/Loading';
 
 const Categoria = () => {
   const router = useRouter();
@@ -20,13 +14,19 @@ const Categoria = () => {
   const { categoriaId } = router.query;
 
   const [tamanhos, setTamanhos] = useState<any>([]);
-  const [categoriaText, setCategoriaText] = useState<any>('');
+  const [categoriaText, setCategoriaText] = useState<string>('');
   const [loading, setLoading] = useState(true);
-  const toast = useToast();
+  const { enqueueSnackbar } = useSnackbar();
+
+  const fail = useCallback(() => {
+    enqueueSnackbar('Não foi possível carregar os dados. Tente novamente.', {
+      variant: 'error',
+    });
+  }, [enqueueSnackbar]);
 
   const handleGetTamanhos = useCallback(() => {
-    setLoading(true);
     if (!router.isReady) return;
+    setLoading(true);
     client
       .query({
         query: gql`
@@ -41,39 +41,14 @@ const Categoria = () => {
             }
           }
         `,
-        variables: {
-          filters: {
-            categoria: {
-              id: {
-                eq: categoriaId,
-              },
-            },
-          },
-        },
+        variables: { filters: { categoria: { id: { eq: categoriaId } } } },
       })
-      .then(response => {
-        setTamanhos(response.data.tamanhos.data);
-        setLoading(false);
-      })
-      .catch(err => {
-        console.log('err', err);
-        toast({
-          title: 'Erro ao buscar dados!',
-          description: 'err',
-          status: 'error',
-          duration: 9000,
-          isClosable: true,
-          position: 'top-right',
-        });
-        setLoading(false);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, [router.isReady, categoriaId, toast]);
+      .then(response => setTamanhos(response.data.tamanhos.data))
+      .catch(fail)
+      .finally(() => setLoading(false));
+  }, [router.isReady, categoriaId, fail]);
 
   const handleGetCategory = useCallback(() => {
-    setLoading(true);
     if (!router.isReady) return;
     client
       .query({
@@ -88,30 +63,13 @@ const Categoria = () => {
             }
           }
         `,
-        variables: {
-          categoriaId: categoriaId,
-        },
+        variables: { categoriaId },
       })
-      .then(response => {
-        setCategoriaText(response.data.categoria.data.attributes.nome);
-        setLoading(false);
-      })
-      .catch(err => {
-        console.log('err', err);
-        toast({
-          title: 'Erro ao buscar dados!',
-          description: 'err',
-          status: 'error',
-          duration: 9000,
-          isClosable: true,
-          position: 'top-right',
-        });
-        setLoading(false);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, [categoriaId, router.isReady, toast]);
+      .then(response =>
+        setCategoriaText(response.data.categoria.data.attributes.nome),
+      )
+      .catch(fail);
+  }, [categoriaId, router.isReady, fail]);
 
   useEffect(() => {
     handleGetTamanhos();
@@ -121,85 +79,36 @@ const Categoria = () => {
   return (
     <>
       <Head>
-        <title>Formen Ilha | Tamanhos</title>
+        <title>Formen Multimarcas — Tamanhos</title>
       </Head>
 
       <PageHeading
         showBackButton={showBackButton}
-        pageTitle={categoriaText ? categoriaText : 'Tamanhos'}
+        pageTitle={categoriaText || 'Tamanhos'}
       />
-      <Container maxW="container.lg">
-        <Box as="section" id="palestrantes">
-          <SimpleGrid
-            columns={{ base: 2, sm: 2, md: 3, lg: 4 }}
-            spacing={{ base: '8', sm: '10', md: '10', lg: '16' }}
-          >
-            {loading ? (
-              <Flex
-                position="fixed"
-                top="0"
-                left="0"
-                width="100%"
-                height="100%"
-                backgroundColor="rgba(0, 0, 0, 0.6)"
-                zIndex="9999"
-                alignItems="center"
-                justifyContent="center"
+
+      <section className="mx-auto max-w-shell px-5 py-12 md:px-10">
+        {loading ? (
+          <Loading />
+        ) : (
+          <div className="grid grid-cols-2 gap-5 md:grid-cols-3 lg:grid-cols-4">
+            {tamanhos.map((data: any) => (
+              <Link
+                key={data.id}
+                href={{
+                  pathname: '/catalogo/categoria/subcategoria',
+                  query: { tamanhoId: data.id, categoriaId },
+                }}
+                className="group grid aspect-square place-items-center rounded border border-ink/10 bg-surface transition-colors duration-300 hover:border-accent hover:bg-surfaceHi"
               >
-                <Spinner size="xl" color="white" />
-              </Flex>
-            ) : (
-              tamanhos.map((data: any) => {
-                return (
-                  <Flex
-                    as={Link}
-                    href={{
-                      pathname: `/catalogo/categoria/subcategoria`,
-                      query: {
-                        tamanhoId: data.id,
-                        categoriaId: categoriaId,
-                      },
-                    }}
-                    key={data.id}
-                    w="full"
-                    alignItems="center"
-                    justifyContent="center"
-                    my={10}
-                  >
-                    <Box
-                      maxW="sm"
-                      borderWidth="1px"
-                      rounded="lg"
-                      shadow="lg"
-                      position="relative"
-                      justifyContent="center"
-                      alignItems="center"
-                    >
-                      <Flex px="3" py="2" flexDirection="column" p={5}>
-                        <Flex
-                          mt="1"
-                          justifyContent="space-between"
-                          alignContent="center"
-                        >
-                          <Box
-                            fontSize="5xl"
-                            fontWeight="semibold"
-                            as="h1"
-                            lineHeight="tight"
-                            isTruncated
-                          >
-                            {data?.attributes.nome}
-                          </Box>
-                        </Flex>
-                      </Flex>
-                    </Box>
-                  </Flex>
-                );
-              })
-            )}
-          </SimpleGrid>
-        </Box>
-      </Container>
+                <span className="font-display text-5xl font-extrabold uppercase tracking-tight transition-colors group-hover:text-accent md:text-6xl">
+                  {data?.attributes.nome}
+                </span>
+              </Link>
+            ))}
+          </div>
+        )}
+      </section>
     </>
   );
 };
