@@ -9,7 +9,6 @@ import {
   FaInstagram,
   FaMapMarkerAlt,
   FaRegClock,
-  FaRegFilePdf,
   FaTruck,
   FaUsers,
   FaWhatsapp,
@@ -41,11 +40,6 @@ const links: LinkItem[] = [
     label: 'Grupo de novidades',
     href: 'https://chat.whatsapp.com/LmP05eTl07x69ogya8Vtw5',
     icon: <FaUsers />,
-  },
-  {
-    label: 'Catálogo em PDF',
-    href: 'https://drive.google.com/drive/folders/1l8nba8xkwMhLFdFFyayIMkMjhLiEV-_j',
-    icon: <FaRegFilePdf />,
   },
   {
     label: 'Instagram',

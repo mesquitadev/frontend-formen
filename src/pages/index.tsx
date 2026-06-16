@@ -43,7 +43,7 @@ type LinkItem = {
 const links: LinkItem[] = [
   {
     label: 'Catálogo da loja',
-    desc: 'Navegue por categorias, tamanhos e preços',
+    desc: 'Veja todas as peças disponíveis',
     href: '/catalogo',
     icon: <FaBoxOpen />,
     internal: true,

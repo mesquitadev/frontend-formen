@@ -17,6 +17,8 @@ export const SITE = {
   phoneDisplay: '(98) 99152-6700',
   whatsapp: 'https://wa.me/5598991526700',
   instagram: 'https://www.instagram.com/formen_mulltimarcas',
+  catalog:
+    'https://drive.google.com/drive/folders/1l8nba8xkwMhLFdFFyayIMkMjhLiEV-_j',
   city: 'São Luís',
   region: 'MA',
   country: 'BR',
