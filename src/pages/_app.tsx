@@ -13,7 +13,7 @@ type AppPropsWithLayout = AppProps & {
 };
 
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
-  // Páginas podem optar por um layout próprio (ex.: /links é standalone).
+  // Páginas podem optar por um layout próprio (ex.: a home/linktree é standalone).
   const getLayout = Component.getLayout ?? (page => <Layout>{page}</Layout>);
 
   return getLayout(<Component {...pageProps} />);

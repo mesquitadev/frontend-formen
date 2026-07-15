@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
+import { ReactElement, useState } from 'react';
 import Seo from '@/Components/Seo';
 import StoreJsonLd from '@/Components/StoreJsonLd';
 import {
@@ -13,72 +13,41 @@ import {
   FaUsers,
   FaWhatsapp,
 } from 'react-icons/fa';
-import { A11y, Autoplay, Pagination } from 'swiper/modules';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import 'swiper/css/pagination';
 import Lightbox, { LightboxImage } from '@/Components/Lightbox';
-
-const shots = [
-  '/1.jpg',
-  '/2.jpg',
-  '/3.jpg',
-  '/4.jpg',
-  '/5.jpg',
-  '/6.jpg',
-  '/7.jpg',
-  '/8.jpg',
-];
+import { SITE } from '@/lib/site';
 
 type LinkItem = {
   label: string;
-  desc: string;
-  icon: JSX.Element;
+  icon: ReactElement;
   href?: string;
   internal?: boolean;
-  external?: boolean;
   image?: LightboxImage;
 };
 
 const links: LinkItem[] = [
   {
     label: 'Catálogo da loja',
-    desc: 'Veja todas as peças disponíveis',
-    href: '/catalogo',
+    href: SITE.catalog,
     icon: <FaBoxOpen />,
-    internal: true,
   },
   {
     label: 'WhatsApp da loja',
-    desc: 'Tire dúvidas e faça seu pedido',
     href: 'https://wa.me/5598991526700',
     icon: <FaWhatsapp />,
-    external: true,
   },
-  {
-    label: 'Delivery',
-    desc: 'Receba a sua compra em casa',
-    href: 'https://wa.me/5598991526700',
-    icon: <FaTruck />,
-    external: true,
-  },
+  { label: 'Delivery', href: 'https://wa.me/5598991526700', icon: <FaTruck /> },
   {
     label: 'Grupo de novidades',
-    desc: 'Drops e promoções em primeira mão',
     href: 'https://chat.whatsapp.com/LmP05eTl07x69ogya8Vtw5',
     icon: <FaUsers />,
-    external: true,
   },
   {
     label: 'Instagram',
-    desc: '@formen_mulltimarcas',
     href: 'https://www.instagram.com/formen_mulltimarcas?igsh=MTcxNDB0bTNpNm5uZA==',
     icon: <FaInstagram />,
-    external: true,
   },
   {
     label: 'Horário de funcionamento',
-    desc: 'Confira os dias e horários',
     icon: <FaRegClock />,
     image: {
       src: '/funcionamento.jpg',
@@ -87,7 +56,6 @@ const links: LinkItem[] = [
   },
   {
     label: 'Como chegar',
-    desc: 'Endereço das lojas',
     icon: <FaMapMarkerAlt />,
     image: {
       src: '/enderecos.jpg',
@@ -96,7 +64,24 @@ const links: LinkItem[] = [
   },
 ];
 
-function LinkRow({
+const ROW_CLS =
+  'group flex w-full items-center gap-3 rounded-xl border border-accent/30 bg-surface/70 px-4 py-4 text-left text-ink backdrop-blur transition-all duration-300 hover:-translate-y-0.5 hover:border-accent hover:bg-accent hover:text-canvas';
+
+function RowInner({ item }: { item: LinkItem }) {
+  return (
+    <>
+      <span className="grid h-9 w-9 flex-none place-items-center rounded-full bg-accent/10 text-base text-accent transition-colors duration-300 group-hover:bg-canvas/15 group-hover:text-canvas">
+        {item.icon}
+      </span>
+      <span className="font-display text-lg font-bold uppercase tracking-wide">
+        {item.label}
+      </span>
+      <FaArrowRight className="ml-auto text-sm opacity-0 transition-all duration-300 group-hover:translate-x-1 group-hover:opacity-100" />
+    </>
+  );
+}
+
+function LinkButton({
   item,
   index,
   onOpenImage,
@@ -105,41 +90,24 @@ function LinkRow({
   index: number;
   onOpenImage: (img: LightboxImage) => void;
 }) {
-  const inner = (
-    <>
-      <span className="grid h-11 w-11 flex-none place-items-center rounded-full border border-ink/15 text-lg transition-colors duration-300 group-hover:border-accent group-hover:bg-accent group-hover:text-canvas">
-        {item.icon}
-      </span>
-      <span className="min-w-0">
-        <span className="block font-display text-2xl font-bold uppercase leading-none tracking-tight md:text-3xl">
-          {item.label}
-        </span>
-        <span className="mt-1 block text-sm text-inkDim">{item.desc}</span>
-      </span>
-      <FaArrowRight className="ml-auto flex-none -translate-x-2 text-lg text-inkDim opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:text-accent group-hover:opacity-100" />
-    </>
-  );
+  const style = { animationDelay: `${0.06 * index}s` };
 
-  const className =
-    'group flex w-full items-center gap-5 border-b border-ink/10 py-5 pl-1 text-left text-ink transition-[padding,color] duration-300 hover:pl-4 hover:text-accent';
-  const style = { animationDelay: `${0.05 * index}s` } as const;
-
-  let control: JSX.Element;
+  let control: ReactElement;
   if (item.image) {
     const img = item.image;
     control = (
       <button
         type="button"
         onClick={() => onOpenImage(img)}
-        className={className}
+        className={ROW_CLS}
       >
-        {inner}
+        <RowInner item={item} />
       </button>
     );
   } else if (item.internal && item.href) {
     control = (
-      <Link href={item.href} className={className}>
-        {inner}
+      <Link href={item.href} className={ROW_CLS}>
+        <RowInner item={item} />
       </Link>
     );
   } else {
@@ -148,9 +116,9 @@ function LinkRow({
         href={item.href}
         target="_blank"
         rel="noopener noreferrer"
-        className={className}
+        className={ROW_CLS}
       >
-        {inner}
+        <RowInner item={item} />
       </a>
     );
   }
@@ -167,141 +135,78 @@ export default function Home() {
 
   return (
     <>
-      <Seo title="Moda masculina em São Luís" path="/" />
+      <Seo
+        title="Moda masculina em São Luís"
+        path="/"
+        description="Todos os links da Formen Multimarcas: catálogo, WhatsApp, delivery, Instagram, horário e endereços das lojas em São Luís."
+      />
       <StoreJsonLd />
 
-      {/* HERO */}
-      <section className="relative flex min-h-[92vh] flex-col justify-center overflow-clip px-5 py-28 md:px-10">
-        <span
-          aria-hidden
-          className="pointer-events-none absolute right-[-4vw] top-1/2 -translate-y-1/2 rotate-90 select-none font-display text-[clamp(8rem,22vw,22rem)] font-black leading-[0.8] tracking-tight text-accent/[0.07]"
-        >
-          FORMEN
-        </span>
-
-        <p className="animate-rise text-[0.74rem] font-semibold uppercase tracking-[0.42em] text-accent">
-          Multimarcas masculina · São Luís — MA
-        </p>
-
-        <h1
-          className="animate-rise mt-6 max-w-[14ch] font-display text-[clamp(4.5rem,18vw,16rem)] font-black uppercase leading-[0.82] tracking-tight"
-          style={{ animationDelay: '0.08s' }}
-        >
-          Vista a sua <em className="not-italic text-accent">marca</em>.
-        </h1>
-
-        <p
-          className="animate-rise mt-8 max-w-[36ch] text-lg text-inkDim md:text-xl"
-          style={{ animationDelay: '0.16s' }}
-        >
-          Curadoria das melhores marcas masculinas. Escolha pelo catálogo, peça
-          no WhatsApp e receba em casa.
-        </p>
-
+      <main className="relative z-[1] flex min-h-screen flex-col items-center px-5 py-14">
+        {/* brilho dourado atrás do avatar */}
         <div
-          className="animate-rise mt-10 flex flex-wrap gap-3"
-          style={{ animationDelay: '0.24s' }}
-        >
-          <Link
-            href="/catalogo"
-            className="inline-flex items-center gap-2 rounded-sm bg-accent px-7 py-4 font-display text-base font-bold uppercase tracking-wide text-canvas transition-all duration-300 hover:-translate-y-1 hover:bg-accent-hi"
-          >
-            Ver catálogo <FaArrowRight />
-          </Link>
-          <a
-            href="https://wa.me/5598991526700"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-sm border border-ink/20 px-7 py-4 font-display text-base font-bold uppercase tracking-wide text-ink transition-all duration-300 hover:-translate-y-1 hover:border-ink"
-          >
-            <FaWhatsapp /> Chamar no WhatsApp
-          </a>
-        </div>
-      </section>
+          aria-hidden
+          className="pointer-events-none absolute left-1/2 top-0 h-72 w-72 -translate-x-1/2 rounded-full bg-accent/20 blur-[90px]"
+        />
 
-      {/* MARQUEE */}
-      <div className="overflow-hidden whitespace-nowrap border-y border-ink/10 bg-accent py-3 text-canvas">
-        <div className="inline-block animate-marquee font-display text-lg font-extrabold uppercase tracking-wide md:text-2xl">
-          {Array.from({ length: 2 }).map((_, i) => (
-            <span key={i}>
-              <span className="px-6">Entrega para toda São Luís</span>
-              <span className="px-6">✦</span>
-              <span className="px-6">Novos drops toda semana</span>
-              <span className="px-6">✦</span>
-              <span className="px-6">Pedidos pelo WhatsApp</span>
-              <span className="px-6">✦</span>
-            </span>
-          ))}
-        </div>
-      </div>
+        <div className="relative w-full max-w-md">
+          <header className="flex flex-col items-center text-center">
+            <div className="animate-rise overflow-hidden rounded-full shadow-[0_0_50px_-12px_rgba(232,168,46,0.7)] ring-2 ring-accent">
+              <Image
+                src="/logo.jpeg"
+                alt="Logo Formen Multimarcas"
+                width={112}
+                height={112}
+                priority
+                className="h-28 w-28 object-cover"
+              />
+            </div>
 
-      {/* DIRECT LINKS */}
-      <section className="mx-auto max-w-shell px-5 py-20 md:px-10 md:py-28">
-        <div className="mb-10 flex items-baseline justify-between gap-4 border-b border-ink/10 pb-5">
-          <h2 className="font-display text-4xl font-extrabold uppercase leading-none tracking-tight md:text-6xl">
-            Atalhos
-          </h2>
-          <span className="text-xs uppercase tracking-[0.2em] text-inkDim">
-            Tudo a um toque
-          </span>
-        </div>
-        <ul className="list-none">
-          {links.map((item, i) => (
-            <LinkRow
-              key={item.label}
-              item={item}
-              index={i}
-              onOpenImage={setLightbox}
-            />
-          ))}
-        </ul>
-      </section>
+            <h1
+              className="animate-rise mt-5 font-display text-4xl font-extrabold uppercase leading-none tracking-tight"
+              style={{ animationDelay: '0.05s' }}
+            >
+              For<span className="text-accent">men</span> Multimarcas
+            </h1>
 
-      {/* LOOKBOOK */}
-      <section className="mx-auto max-w-shell px-5 pb-24 md:px-10">
-        <div className="mb-10 flex items-baseline justify-between gap-4 border-b border-ink/10 pb-5">
-          <h2 className="font-display text-4xl font-extrabold uppercase leading-none tracking-tight md:text-6xl">
-            Lookbook
-          </h2>
-          <span className="text-xs uppercase tracking-[0.2em] text-inkDim">
-            Direto da loja
-          </span>
-        </div>
+            <p
+              className="animate-rise mt-3 text-sm uppercase tracking-[0.25em] text-inkDim"
+              style={{ animationDelay: '0.1s' }}
+            >
+              São Luís — MA
+            </p>
+            <a
+              href="https://www.instagram.com/formen_mulltimarcas?igsh=MTcxNDB0bTNpNm5uZA=="
+              target="_blank"
+              rel="noopener noreferrer"
+              className="animate-rise mt-1 text-sm text-accent transition-colors hover:text-accent-hi"
+              style={{ animationDelay: '0.14s' }}
+            >
+              @formen_mulltimarcas
+            </a>
+          </header>
 
-        <Swiper
-          className="fm-swiper"
-          modules={[Pagination, A11y, Autoplay]}
-          spaceBetween={20}
-          pagination={{ clickable: true }}
-          autoplay={{ delay: 3500, disableOnInteraction: false }}
-          loop
-          breakpoints={{
-            0: { slidesPerView: 1.15 },
-            640: { slidesPerView: 2.2 },
-            1024: { slidesPerView: 3.2 },
-          }}
-        >
-          {shots.map((url, index) => (
-            <SwiperSlide key={url}>
-              <div className="relative aspect-[3/4] overflow-hidden rounded bg-surface">
-                <Image
-                  src={url}
-                  alt={`Look ${index + 1} da Formen Multimarcas`}
-                  fill
-                  sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 30vw"
-                  className="object-cover transition-transform duration-700 hover:scale-105"
-                  priority={index === 0}
-                />
-                <span className="absolute bottom-3 left-3 bg-canvas/70 px-3 py-1 font-display text-xs font-bold uppercase tracking-[0.18em] backdrop-blur">
-                  Look {String(index + 1).padStart(2, '0')}
-                </span>
-              </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </section>
+          <ul className="mt-10 flex list-none flex-col gap-3">
+            {links.map((item, i) => (
+              <LinkButton
+                key={item.label}
+                item={item}
+                index={i}
+                onOpenImage={setLightbox}
+              />
+            ))}
+          </ul>
+
+          <footer className="mt-12 text-center text-xs uppercase tracking-[0.2em] text-inkDim">
+            © {new Date().getFullYear()} Formen Multimarcas
+          </footer>
+        </div>
+      </main>
 
       <Lightbox image={lightbox} onClose={() => setLightbox(null)} />
     </>
   );
 }
+
+// Página standalone (linktree): sem header/footer do site.
+Home.getLayout = (page: ReactElement) => page;

@@ -7,7 +7,7 @@ export default function NotFound() {
   return (
     <>
       <Head>
-        <title>Página não encontrada | {SITE.name}</title>
+        <title>{`Página não encontrada | ${SITE.name}`}</title>
         <meta name="robots" content="noindex, follow" />
       </Head>
 
