@@ -1,38 +1,52 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Formen Multimarcas
 
-## Getting Started
+Site institucional da **Formen Multimarcas**, loja de moda masculina em São Luís (MA).
+A página inicial funciona como um _linktree_ (WhatsApp, delivery, Instagram, horário,
+endereços e catálogo) e o catálogo é servido a partir de uma pasta pública do Google Drive.
 
-First, run the development server:
+## Stack
+
+- [Next.js 13](https://nextjs.org/) (Pages Router)
+- [React 18](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [react-icons](https://react-icons.github.io/react-icons/)
+- Tipografia: Big Shoulders Display + Hanken Grotesk (Google Fonts)
+
+## Começando
 
 ```bash
-npm run dev
-# or
+yarn install
 yarn dev
-# or
-pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abra [http://localhost:3000](http://localhost:3000) no navegador.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## Scripts
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+| Comando      | Descrição                          |
+| ------------ | ---------------------------------- |
+| `yarn dev`   | Ambiente de desenvolvimento        |
+| `yarn build` | Build de produção                  |
+| `yarn start` | Sobe o build de produção           |
+| `yarn lint`  | ESLint                             |
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## Variáveis de ambiente
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Defina em `.env.local` (e no ambiente de produção):
 
-## Learn More
+```bash
+# URL pública do site — usada em canonical, Open Graph e sitemap.
+NEXT_PUBLIC_SITE_URL=https://www.formenmultimarcas.com.br
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Estrutura
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+src/
+├── Components/   # Header, Footer, Layout, Lightbox, PageHeading, Seo, StoreJsonLd
+├── lib/          # site.ts — configuração central (SEO, contatos, lojas)
+├── pages/        # / (linktree), /catalogo (embed do Drive), 404
+└── styles.css    # estilos globais + Tailwind
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Configurações de identidade, SEO e contatos ficam centralizadas em `src/lib/site.ts`.
